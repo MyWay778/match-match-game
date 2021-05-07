@@ -1,0 +1,18 @@
+%flx {
+    display: flex;
+}
+
+%flx-fdc {
+    @extend %flx;
+    flex-direction: column;
+}
+
+%flx-fdc-jcc {
+    @extend %flx-fdc;
+    justify-content: center;
+}
+
+%flx-fdc-jcc-aic {
+    @extend %flx-fdc-jcc;
+    align-items: center;
+}

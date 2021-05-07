@@ -1,31 +1,20 @@
 import logo from './components/Logo';
-import s from './style.scss';
 import { IComponent } from '../../typing/interfaces';
+import ContentLeaf from '../common/ContentLeaf';
+import { THeaderClasses } from '../../typing/types';
 
-class Header {
-  className: string;
+import s from './Header.scss';
 
-  header: HTMLElement;
+class Header extends ContentLeaf {
+  constructor(tag: string, classNames: THeaderClasses) {
+    super(tag);
 
-  constructor(className = 'header') {
-    this.className = className;
-    this.header = document.createElement('header');
-    this.header.classList.add(this.className);
-  }
-
-  addContent(content: IComponent, containerClassName = 'container') {
-    const contentElement = content.render();
-    const headerContainer = document.createElement('div');
-    headerContainer.classList.add(containerClassName);
-    this.header.appendChild(headerContainer);
-    headerContainer.appendChild(contentElement);
-  }
-
-  render() {
-    return this.header;
+    super.addClass(classNames.header);
+    super.createContainer(classNames.container);
   }
 }
-const header = new Header(s.header);
-header.addContent(logo);
+
+const header = new Header('header', {header: s.header, container: s.container});
+header.addContent(logo.getElement());
 
 export default header;

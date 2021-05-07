@@ -1,31 +1,32 @@
-class Logo {
-  title: string;
+import { TLogoClasses } from "../../../typing/types";
+import Leaf from "../../common/Leaf";
 
-  constructor() {
-    this.title = 'Match';
+import s from './Logo.scss';
+
+class Logo extends Leaf {
+  constructor(tag: string, className: string) {
+    super(tag);
+    super.addClass(className);
   }
 
-  render() {
-    const element = document.createElement('div');
-    element.classList.add('logo');
+  addTitle(title: string, classNames: TLogoClasses) {
+    const firstLine = new Leaf('span');
+    firstLine.addClass(classNames.firstLine);
 
-    const text = document.createTextNode(this.title);
+    const secondLine = new Leaf('span');
+    secondLine.addClass(classNames.secondLine);
 
-    const firstLine = document.createElement('span');
-    firstLine.classList.add('logo__firstLine');
-    firstLine.appendChild(text.cloneNode());
+    const text = document.createTextNode(title);
 
-    const secondLine = document.createElement('span');
-    secondLine.classList.add('logo__secondLine');
-    secondLine.appendChild(text.cloneNode());
+    firstLine.addChild(text.cloneNode());
+    secondLine.addChild(text.cloneNode())
 
-    element.appendChild(firstLine);
-    element.appendChild(secondLine);
-
-    return element;
+    this.addChild(firstLine.getElement());
+    this.addChild(secondLine.getElement());
   }
 }
 
-const logo = new Logo();
+const logo = new Logo('div', s.logo);
+logo.addTitle('Match', {firstLine: s.firstLine, secondLine: s.secondLine});
 
 export default logo;
