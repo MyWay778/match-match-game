@@ -1,5 +1,5 @@
 import { container } from "webpack";
-import Card, { cardTemplate } from "./Card/Card";
+import Card from "./Card/Card";
 import frontImage from "../../assets/images/front-card-image.jpg";
 import backImage from "../../assets/images/back-card-image.png";
 
@@ -22,9 +22,9 @@ class Game {
     }
 }
 
-const game = new Game('game');
-const card = new Card(cardTemplate, frontImage, backImage);
+// const game = new Game('game');
+// // const card = new Card(cardTemplate, frontImage, backImage);
 
-game.addCards(card);
+// game.addCards(card);
 
-export default game;
+// export default game;

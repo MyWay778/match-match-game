@@ -1,46 +1,32 @@
+import GeneralComponent from '../../common/GeneralComponent';
+import imageBack from '../../../assets/images/back-card-image.jpg';
 import s from './Card.scss';
 
-interface ICardClassNames {
-    card: string;
-    container: string;
-    front: string;
-    back: string;
-}
 
-interface ITemplateProps {
-    frontImage: string;
-    backImage: string;
-    classNames: ICardClassNames;
-}
+class Card extends GeneralComponent{
+    constructor(frontImage: string) {
+        super('div');
+        super.addClassName(s.card);
+        this.element.innerHTML = this._createCard(frontImage);   
+    }
 
-type TTemplate = (frontImage: string, backImage: string) => string;
-
-export const cardTemplate = (frontImage: string, backImage: string): string => {
-    return `<div class=${s.container}>
+    _createCard(frontImage: string) {
+        return `
             <div class=${s.front}>
-                <img src=${frontImage} alt="Front side">
+                <img src=${frontImage}>
             </div>
             <div class=${s.back}>
-                <img src=${backImage} alt="Back side">
-            </div>
-        </div>
-    </div>`
-}
-
-
-class Card {
-    card: HTMLElement;
-
-    constructor(template: TTemplate, frontImage: string, backImage: string) {
-        this.card = document.createElement('div');
-        this.card.classList.add(s.card);
-        this.card.innerHTML = template(frontImage, backImage)
+                <img src=${imageBack}>
+            </div>`
     }
 
-    render() {
-        return this.card;
+    flip() {
+        super.addClassName(s.flipped);
+    }
+
+    set onclick(handler: (e: MouseEvent) => void ) {
+        this.element.addEventListener('click', handler);
     }
 }
-
 
 export default Card;

@@ -1,5 +1,6 @@
 @use "variables" as *;
 @use "fonts";
+@use "classes";
 
 html {
     box-sizing: border-box;
@@ -15,4 +16,8 @@ body {
     font-family: $primary-font;
     font-size: 14px;
 }
-
+//temp 
+main {
+    @extend %flx-jcc;
+    margin-top: 30px;
+}
