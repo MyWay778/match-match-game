@@ -1,9 +1,9 @@
-import { ILeaf } from '../../typing/interfaces';
+import { ILeaf } from 'Typing/interfaces';
 
 class Leaf implements ILeaf {
   element: HTMLElement;
 
-  constructor(tag: string = 'div') {
+  constructor(tag = 'div') {
     this.element = document.createElement(tag);
   }
 

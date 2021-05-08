@@ -1,10 +1,15 @@
-@use '../../styles/global.scss' as global;
+@use 'variables' as *;
+@use 'classes';
 
 .header {
+    @extend %flx-jcc;
     height: 64px;
-    background-color: global.$primary-color;
+    background-color: $primary-color;
+
 }
 
 .container {
-
+    @extend %flx-aic;
+    width: 100%;
+    max-width: 1400px;
 }

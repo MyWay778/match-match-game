@@ -1,5 +1,5 @@
-import { TLogoClasses } from "../../../typing/types";
-import Leaf from "../../common/Leaf";
+import { TLogoClasses } from '../../../typing/types';
+import Leaf from '../../common/Leaf';
 
 import s from './Logo.scss';
 
@@ -19,7 +19,7 @@ class Logo extends Leaf {
     const text = document.createTextNode(title);
 
     firstLine.addChild(text.cloneNode());
-    secondLine.addChild(text.cloneNode())
+    secondLine.addChild(text.cloneNode());
 
     this.addChild(firstLine.getElement());
     this.addChild(secondLine.getElement());
@@ -27,6 +27,6 @@ class Logo extends Leaf {
 }
 
 const logo = new Logo('div', s.logo);
-logo.addTitle('Match', {firstLine: s.firstLine, secondLine: s.secondLine});
+logo.addTitle('Match', { firstLine: s.firstLine, secondLine: s.secondLine });
 
 export default logo;

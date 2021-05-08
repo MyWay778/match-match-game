@@ -14,7 +14,7 @@ class Header extends ContentLeaf {
   }
 }
 
-const header = new Header('header', {header: s.header, container: s.container});
+const header = new Header('header', { header: s.header, container: s.container });
 header.addContent(logo.getElement());
 
 export default header;

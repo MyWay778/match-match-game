@@ -31,6 +31,15 @@ module.exports = ({ development }) => ({
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'assets/[hash][ext]',
   },
+  resolve: {
+    alias: {
+      Source: path.resolve(__dirname, 'src'),
+      Components: path.resolve(__dirname, 'src/components'),
+      Styles: path.resolve(__dirname, 'src/styles'),
+      Typing: path.resolve(__dirname, 'src/typing'),
+      Assets: path.resolve(__dirname, 'src/assets'),
+    },
+  },
   module: {
     rules: [
       {
@@ -53,9 +62,18 @@ module.exports = ({ development }) => ({
       {
         test: /\.s[ac]ss$/i,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
-          { loader: 'css-loader', options: { modules: true } },
-          { loader: 'sass-loader' },
+          MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { modules: {
+            localIdentName: "[local]--[hash:base64:5]",
+          } } },
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                includePaths: [path.resolve(__dirname, 'src/styles')],
+              },
+            },
+          },
         ],
       },
     ],

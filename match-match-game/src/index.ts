@@ -1,13 +1,8 @@
+import './styles/global.scss';
 import header from './components/Header/Header';
+import App from './App';
 
-class DomManager {
-  static render(element: HTMLElement, rootElement: HTMLElement) {
-    rootElement.appendChild(element);
-  }
-}
+const app = new App('#app');
 
-const root = document.getElementById('root');
+app.render(header.getElement());
 
-if (root !== null) {
-  DomManager.render(header.getElement(), root);
-}

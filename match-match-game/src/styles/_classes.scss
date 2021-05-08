@@ -16,3 +16,17 @@
     @extend %flx-fdc-jcc;
     align-items: center;
 }
+
+%flx-jcc {
+    @extend %flx;
+    justify-content: center;
+}
+%flx-jcsb {
+    @extend %flx;
+    justify-content: space-between;
+}
+
+%flx-aic {
+    @extend %flx;
+    align-items: center; 
+}
