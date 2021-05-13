@@ -31,15 +31,6 @@ module.exports = ({ development }) => ({
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'assets/[hash][ext]',
   },
-  resolve: {
-    alias: {
-      // Source: path.resolve(__dirname, 'src'),
-      Components: path.resolve(__dirname, 'src/components'),
-      Styles: path.resolve(__dirname, 'src/styles'),
-      Typing: path.resolve(__dirname, 'src/typing'),
-      Assets: path.resolve(__dirname, 'src/assets'),
-    },
-  },
   module: {
     rules: [
       {
@@ -86,7 +77,7 @@ module.exports = ({ development }) => ({
       template: 'public/index.html',
     }),
     // new CopyPlugin({
-    //   patterns: [{ from: 'public' }],
+    //   patterns: [{ from: 'public/assets', to: 'assets' }],
     // }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
   ],

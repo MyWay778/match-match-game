@@ -1,20 +1,26 @@
-import logo from './components/Logo';
-import { IComponent } from '../../typing/interfaces';
-import ContentLeaf from '../common/ContentLeaf';
-import { THeaderClasses } from '../../typing/types';
-
 import s from './Header.scss';
+import Logo from './logo/Logo';
+import NavMenu from './nav-menu/NavMenu';
 
-class Header extends ContentLeaf {
-  constructor(tag: string, classNames: THeaderClasses) {
-    super(tag);
+class Header {
+  public element: HTMLElement;
 
-    super.addClass(classNames.header);
-    super.createContainer(classNames.container);
+  constructor() {
+    this.element = document.createElement('header');
+    this.element.classList.add(s.header);
+
+    const container = document.createElement('div');
+    container.classList.add(s.container);
+
+    const logo = new Logo();
+    const navMenu = new NavMenu();
+
+    container.appendChild(logo.element);
+    container.appendChild(navMenu.element);
+
+    this.element.appendChild(container);
   }
 }
 
-const header = new Header('header', { header: s.header, container: s.container });
-header.addContent(logo.getElement());
 
-export default header;
+export default Header;
