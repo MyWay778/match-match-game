@@ -1,7 +1,9 @@
 @use "../../../styles/variables" as *;
 
 .nav {
-
+    display: flex;
+    justify-content: center;
+    flex-grow: 0.4;
 }
 
 .list {
