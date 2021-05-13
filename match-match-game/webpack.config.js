@@ -33,7 +33,7 @@ module.exports = ({ development }) => ({
   },
   resolve: {
     alias: {
-      Source: path.resolve(__dirname, 'src'),
+      // Source: path.resolve(__dirname, 'src'),
       Components: path.resolve(__dirname, 'src/components'),
       Styles: path.resolve(__dirname, 'src/styles'),
       Typing: path.resolve(__dirname, 'src/typing'),

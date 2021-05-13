@@ -1,17 +1,17 @@
 class GeneralComponent {
-    element: HTMLElement;
+  element: HTMLElement;
 
-    constructor(tag: keyof HTMLElementTagNameMap) {
-        this.element = document.createElement(tag);
-    }
+  constructor(tag: keyof HTMLElementTagNameMap) {
+    this.element = document.createElement(tag);
+  }
 
-    addClassName(className: string) {
-        this.element.classList.add(className);
-    }
+  addClassName(className: string) {
+    this.element.classList.add(className);
+  }
 
-    getElement() {
-        return this.element;
-    }
+  getElement() {
+    return this.element;
+  }
 }
 
 export default GeneralComponent;

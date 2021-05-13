@@ -1,17 +1,14 @@
 class App {
-    appRoot: Element;
+  private element: HTMLElement;
 
-    constructor(appRootSelector: string) {
-        const appRoot = document.querySelector(appRootSelector);
-        if (!appRoot) {
-            throw "app root is not found";
-        }
-        this.appRoot = appRoot;
-    }
+  constructor() {
+    this.element = document.createElement('div');
+    this.element.innerHTML= "hello";
+  }
 
-    render(component: Element) {
-        this.appRoot.appendChild(component);
-    }
+  render() {
+    return this.element;
+  }
 }
 
 export default App;
