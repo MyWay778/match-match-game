@@ -1,0 +1,18 @@
+@use '../../../styles/variables' as *;
+
+.timer {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 255px;
+  height: 65px;
+  background-color: $white-color;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24);
+  color:rgba(0, 0, 0, 0.4);
+}
+
+.number {
+  font-size: 36px;
+  font-weight: 500;
+}

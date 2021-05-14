@@ -13,6 +13,6 @@ const about = new About();
 
 const {body} = document;
 body.appendChild(header.element);
-body.appendChild(about.element);
+body.appendChild(game.element);
 
 
