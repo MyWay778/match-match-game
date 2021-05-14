@@ -1,8 +1,17 @@
 import Helper from "../../common/Helper"
 import s from './form.scss';
 import defaultAvatar from '../../../assets/images/avatar.webp';
-import FirstName from "./input/input";
 import Input from "./input/input";
+
+// declare const s: {
+//   form: string,
+//   firstContainer: string,
+//   secondContainer: string,
+//   btnContainer: string,
+//   button: string,
+//   addBtn: string,
+//   button: string
+// }
 
 class Form { 
   element: HTMLFormElement
@@ -21,14 +30,8 @@ class Form {
     const firstContainer = Helper.createElement('div', s.firstContainer);
     const secondContainer = Helper.createElement('div', s.secondContainer);
 
-    //firstName
     this.firstName = new Input('First Name');
-
-    //lastName
     this.lastName = new Input('LastName');
-
-
-    //email
     this.email = new Input('E-mail', 'email');
     
     //assembling first container
@@ -39,14 +42,18 @@ class Form {
     this.avatar.src = defaultAvatar;
     
     //buttons
+    const btnContainer = Helper.createElement('div', s.btnContainer);
     this.addBtn = document.createElement('button');
+    this.addBtn.classList.add(s.button, s.addBtn);
     this.addBtn.innerText = "Add";
 
     this.cancelBtn = document.createElement('button');
+    this.cancelBtn.classList.add(s.button, s.cancelBtn);
     this.cancelBtn.innerText = 'Cancel'
+    btnContainer.append(this.addBtn, this.cancelBtn);
 
     //assembling second container
-    secondContainer.append(this.avatar, this.addBtn, this.cancelBtn);
+    secondContainer.append(this.avatar, btnContainer);
     this.element.append(firstContainer, secondContainer);
   }
 }
