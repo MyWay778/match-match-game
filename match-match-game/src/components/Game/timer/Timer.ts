@@ -22,11 +22,12 @@ class Timer {
 
     this.tick = this.tick.bind(this);
   }
-  start() {
+
+  start(): void {
     setInterval(this.tick, 1000);
   }
 
-  private tick() {
+  private tick(): void {
     this.seconds += 1;
     if (this.seconds >= 60) {
       this.seconds = 0;
@@ -35,7 +36,7 @@ class Timer {
     this.passValue();
   }
 
-  private passValue() {
+  private passValue(): void {
     this.secondsElement.innerText = this.seconds < 10 ? `0${this.seconds}`: `${this.seconds}`;
     this.minutesElement.innerText = this.minutes < 10 ? `0${this.minutes}`: `${this.minutes}`;
   }

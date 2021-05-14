@@ -17,7 +17,7 @@ class Card {
         </div>`
   }
 
-  flip() {
+  flip(): void {
     this.element.classList.add(s.flipped);
   }
 

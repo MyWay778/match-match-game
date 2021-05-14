@@ -22,7 +22,7 @@ class Game {
     this.startGame();
   }
 
-  async startGame() {
+  async startGame(): Promise<void> {
     const response = await (await fetch('./assets/images/card-images.json')).json();
     this.cardField = new CardField(response.animal);
     this.container.appendChild(this.cardField.element);

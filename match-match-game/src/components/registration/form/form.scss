@@ -1,0 +1,19 @@
+@use '../../../styles/variables' as *;
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  background-color: $form-background;
+  padding: 33px 21px;
+}
+
+.firstContainer {
+  display: flex;
+  width: 100%;
+  max-width: 328px;
+  flex-direction: column;
+}
+
+.firstContainer > div:nth-child(n+2) {
+  margin-top: 16px;
+}

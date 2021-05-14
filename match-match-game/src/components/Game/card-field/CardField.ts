@@ -22,17 +22,17 @@ class CardField {
     this.addCards();
   }
 
-  fillCards() {
+  fillCards(): void {
     for (let i = 0; i < this.images.length; i++) {
       this.cards.push(new Card(this.images[i]), new Card(this.images[i]));
     }
   }
 
-  shuffle () {
+  shuffle (): void {
     this.cards.sort(() => Math.random() - 0.5);
   }
 
-  addCards() {
+  addCards(): void {
     this.cards.forEach(card => {
       this.element.appendChild(card.element);
     })
