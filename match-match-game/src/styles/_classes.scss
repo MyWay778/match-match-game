@@ -30,3 +30,9 @@
     @extend %flx;
     align-items: center; 
 }
+
+%h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+}

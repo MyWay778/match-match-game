@@ -1,4 +1,4 @@
-import Helper from "../common/Element";
+import Helper from "../common/Helper";
 import CardField from "./card-field/CardField";
 
 class Game {

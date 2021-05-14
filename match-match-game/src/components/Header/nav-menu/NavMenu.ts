@@ -1,4 +1,4 @@
-import Helper from "../../common/Element";
+import Helper from "../../common/Helper";
 import AboutIcon from "./about-icon/AboutIcon";
 import s from "./nav-menu.scss";
 import ScoreIcon from "./score-icon/ScoreIcon";

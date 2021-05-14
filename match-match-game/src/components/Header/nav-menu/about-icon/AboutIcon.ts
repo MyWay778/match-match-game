@@ -1,4 +1,4 @@
-import Helper from "../../../common/Element";
+import Helper from "../../../common/Helper";
 import s from "./about-icon.scss";
 
 class AboutIcon {

@@ -1,4 +1,4 @@
-import Helper from '../../common/Element';
+import Helper from '../../common/Helper';
 import Card from '../card/Card';
 import s from './card-field.scss';
 
