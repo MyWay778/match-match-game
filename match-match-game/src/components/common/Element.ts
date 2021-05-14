@@ -1,10 +1,10 @@
 class Helper {
-    static createElement(tag: keyof HTMLElementTagNameMap, className: string) {
-        const element = document.createElement(tag);
-        element.classList.add(className);
+  static createElement(tag: keyof HTMLElementTagNameMap, className: string) {
+    const element = document.createElement(tag);
+    element.classList.add(className);
 
-        return element
-    }
+    return element
+  }
 }
 
 export default Helper;

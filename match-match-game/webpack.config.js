@@ -76,9 +76,9 @@ module.exports = ({ development }) => ({
       filename: 'index.html',
       template: 'public/index.html',
     }),
-    // new CopyPlugin({
-    //   patterns: [{ from: 'public/assets', to: 'assets' }],
-    // }),
+    new CopyPlugin({
+      patterns: [{ from: 'public/assets', to: 'assets' }],
+    }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
   ],
   resolve: {

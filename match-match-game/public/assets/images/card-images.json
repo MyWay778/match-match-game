@@ -1,0 +1,10 @@
+{
+  "animal": [
+    "./assets/images/animal/0.jpg",
+    "./assets/images/animal/1.jpg",
+    "./assets/images/animal/2.jpg",
+    "./assets/images/animal/3.jpg",
+    "./assets/images/animal/4.jpg",
+    "./assets/images/animal/5.jpg"
+  ]
+}

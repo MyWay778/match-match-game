@@ -1,31 +1,27 @@
-// import { container } from "webpack";
-// import Card from "./Card/Card";
-// import frontImage from "../../assets/images/front-card-image.jpg";
-// import backImage from "../../assets/images/back-card-image.png";
+import Helper from "../common/Element";
+import CardField from "./card-field/CardField";
 
-// class Game {
-//   container: HTMLElement;
+class Game {
+  element: HTMLElement;
+  container: HTMLElement;
+  cardField: CardField | null;
 
-//   cards: any;
+  constructor() {
+    this.element = Helper.createElement('main', 'game');
+    this.container = Helper.createElement('div', 'container');
 
-//   constructor(className: string) {
-//     this.container = document.createElement('div');
-//     this.container.classList.add(className);
-//   }
+    this.element.appendChild(this.container);
+    this.cardField = null;
 
-//   addCards(cards: any) {
-//     this.cards = cards;
-//   }
+    this.startGame();
+  }
 
-//   render() {
-//     this.container.appendChild(this.cards);
-//     return this.container;
-//   }
-// }
+  async startGame() {
+    const response = await (await fetch('./assets/images/card-images.json')).json();
+    this.cardField = new CardField(response.animal);
+    
+    this.container.appendChild(this.cardField.element);
+  }
+}
 
-// // const game = new Game('game');
-// // // const card = new Card(cardTemplate, frontImage, backImage);
-
-// // game.addCards(card);
-
-// // export default game;
+export default Game;

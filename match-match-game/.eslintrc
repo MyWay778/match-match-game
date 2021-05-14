@@ -29,6 +29,15 @@
     "import/prefer-default-export": "off",
     "no-param-reassign": ["error", {
       "props": false
-    }]
+    }],
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ],
+    "@typescript-eslint/lines-between-class-members": ["error", {
+      "fields": "never",
+      "methods": "always"
+    }],
   }
 }

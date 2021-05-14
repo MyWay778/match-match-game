@@ -1,32 +1,29 @@
-// import GeneralComponent from '../../common/GeneralComponent';
-// import imageBack from '../../../assets/images/back-card-image.jpg';
-// import s from './Card.scss';
+import imageBack from '../../../assets/images/back-card-image.jpg';
+import Helper from '../../common/Element';
+import s from './Card.scss';
 
 
-// class Card extends GeneralComponent{
-//   constructor(frontImage: string) {
-//     super('div');
-//     super.addClassName(s.card);
-//     this.element.innerHTML = this._createCard(frontImage);   
-//   }
+class Card {
+  element: HTMLElement;
 
-//   _createCard(frontImage: string) {
-//     return `
-//             <div class=${s.front}>
-//                 <img src=${frontImage}>
-//             </div>
-//             <div class=${s.back}>
-//                 <img src=${imageBack}>
-//             </div>`
-//   }
+  constructor(frontImage: string) {
+    this.element = Helper.createElement('figure', s.card);
+    this.element.innerHTML = `
+        <div class=${s.front}>
+            <img src=${frontImage}>
+        </div>
+            <div class=${s.back}>
+            <img src=${imageBack}>
+        </div>`
+  }
 
-//   flip() {
-//     super.addClassName(s.flipped);
-//   }
+  flip() {
+    this.element.classList.add(s.flipped);
+  }
 
-//   set onclick(handler: (e: MouseEvent) => void ) {
-//     this.element.addEventListener('click', handler);
-//   }
-// }
+  set onclick(handler: (e: MouseEvent) => void ) {
+    this.element.addEventListener('click', handler);
+  }
+}
 
-// export default Card;
+export default Card;
