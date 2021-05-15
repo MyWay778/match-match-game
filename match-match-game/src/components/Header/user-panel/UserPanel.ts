@@ -19,6 +19,7 @@ class UserPanel {
     this.registerLink.textContent = 'Register new player';
     this.registerLink.classList.add(s.register_link);
     this.registerLink.href = '#registration';
+    // this.registerLink.onclick = handler.register;
 
     this.container = Helper.createElement('div', s.container);
     this.startGameLink = document.createElement('a');

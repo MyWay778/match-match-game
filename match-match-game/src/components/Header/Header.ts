@@ -3,6 +3,11 @@ import Logo from './logo/Logo';
 import NavMenu from './nav-menu/NavMenu';
 import UserPanel from './user-panel/UserPanel';
 
+const user = {
+  registered: true,
+  unregistered: false
+}
+
 class Header {
   public element: HTMLElement;
 
@@ -15,13 +20,17 @@ class Header {
 
     const logo = new Logo();
     const navMenu = new NavMenu();
-    const userPanel = new UserPanel(true);
+    const userPanel = new UserPanel(user.unregistered);
 
     container.appendChild(logo.element);
     container.appendChild(navMenu.element);
     container.appendChild(userPanel.element);
 
     this.element.appendChild(container);
+  }
+
+  registerUser() {
+    
   }
 }
 
