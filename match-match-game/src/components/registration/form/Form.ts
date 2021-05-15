@@ -3,16 +3,6 @@ import s from './form.scss';
 import defaultAvatar from '../../../assets/images/avatar.webp';
 import Input from "./input/input";
 
-// declare const s: {
-//   form: string,
-//   firstContainer: string,
-//   secondContainer: string,
-//   btnContainer: string,
-//   button: string,
-//   addBtn: string,
-//   button: string
-// }
-
 class Form { 
   element: HTMLFormElement
   firstName: Input

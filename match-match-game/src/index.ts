@@ -17,5 +17,5 @@ const {body} = document;
 body.appendChild(header.element);
 body.appendChild(game.element);
 
-game.element.after(registration.element);
+// game.element.after(registration.element);
 

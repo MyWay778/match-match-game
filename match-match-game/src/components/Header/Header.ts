@@ -15,7 +15,7 @@ class Header {
 
     const logo = new Logo();
     const navMenu = new NavMenu();
-    const userPanel = new UserPanel();
+    const userPanel = new UserPanel(true);
 
     container.appendChild(logo.element);
     container.appendChild(navMenu.element);
