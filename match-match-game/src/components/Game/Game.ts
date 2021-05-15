@@ -18,15 +18,26 @@ class Game {
     
     this.timer = new Timer();
     this.container.appendChild(this.timer.element);
-
-    this.startGame();
   }
 
-  async startGame(): Promise<void> {
+  async initGame(): Promise<void> {
     const response = await (await fetch('./assets/images/card-images.json')).json();
     this.cardField = new CardField(response.animal);
     this.container.appendChild(this.cardField.element);
-    // this.timer.start();
+
+    let preparing = () => {
+      if (this.cardField) {
+        this.cardField.flipAll();
+        this.timer.countdown(5, this.startGame);
+      }
+    }
+    window.setTimeout(preparing ,1000)
+  }
+
+  startGame = () => {
+    this.cardField?.flipAll(false);
+    this.timer.start();
+    this.cardField?.makeInteractive();
   }
 }
 

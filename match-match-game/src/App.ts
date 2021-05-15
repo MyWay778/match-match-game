@@ -5,6 +5,12 @@ import ComponentManager from "./ComponentManager";
 import Header from "./components/header/Header";
 import About from "./components/about/About";
 import Registration from "./components/registration/Registration";
+import Game from "./components/game/Game";
+
+export interface IUserData {
+  userImage: string | null
+}
+
 
 const routes:IRoute[] = [
   {name: 'about', hash: '#about'},
@@ -19,8 +25,10 @@ class App {
   headerController:any;
   renderList: any;
   controller:any
+
   header: Header;
   about: About;
+  game: null | Game;
   registration: null | Registration;
 
   constructor(private root:HTMLElement) {
@@ -31,6 +39,7 @@ class App {
     this.header = new Header();
     this.about = new About();
     this.registration = null;
+    this.game = null;
 
     this.renderList = [this.header.element, this.about.element];
   }
@@ -48,6 +57,23 @@ class App {
     if (this.registration) {
       this.registration.element.remove();
       this.registration = null;
+    }
+  }
+  provideToHeaderNewUser(userData: IUserData) {
+    this.header.registerUser(userData);
+  }
+
+  showGame() {
+    this.game = new Game();
+    this.about.element.replaceWith(this.game.element);
+    this.header.setIsGame();
+    this.game.initGame();
+  }
+
+  showAbout() {
+    if (this.root.children[1] !== this.about.element) {
+      this.root.children[1].replaceWith(this.about.element);
+      this.header.setIsGame(false);
     }
   }
 }

@@ -2,7 +2,7 @@
 .user_panel{
     margin-left: auto;
 }
-.register_link {
+.button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,8 +27,4 @@
 .userImage {
     background-color: $white-color;
     border-radius: 50%;
-}
-
-.startBtn {
-    @extend .register_link;
 }

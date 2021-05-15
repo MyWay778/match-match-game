@@ -2,14 +2,19 @@ import Helper from "../../common/Helper";
 import s from './timer.scss';
 
 class Timer {
-  element: HTMLElement
-  private secondsElement: HTMLElement
-  private minutesElement: HTMLElement
-  private seconds: number
-  private minutes: number
+  element:HTMLElement
+  private secondsElement:HTMLElement
+  private minutesElement:HTMLElement
+  private seconds:number
+  private minutes:number
 
-  constructor() {
+  private interval:number
+  private callback: null | ( () => void )
+
+  constructor(countdown: number = 30) {
     this.element = Helper.createElement('section', s.timer);
+    this.interval = 0;
+    this.callback = null;
     this.minutes = 0;
     this.seconds = 0;
 
@@ -25,6 +30,32 @@ class Timer {
 
   start(): void {
     setInterval(this.tick, 1000);
+  }
+
+  countdown(seconds:number = 30, callback?: ()=> void) {
+    this.seconds = seconds;
+
+    if (callback) {
+      this.callback = callback;
+    }
+
+    this.interval = window.setInterval(this.reverseTick, 1000);
+  }
+
+  private stopInterval() {
+    window.clearInterval(this.interval);
+    if (this.callback) {
+      this.callback();
+    }
+  }
+
+  private reverseTick = () => {
+    if (this.seconds === 0) {
+      this.stopInterval();
+    }else {
+      this.seconds -= 1;
+    }
+    this.passValue();
   }
 
   private tick(): void {

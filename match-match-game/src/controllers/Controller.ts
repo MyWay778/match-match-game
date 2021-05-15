@@ -22,22 +22,24 @@ class Controller {
   
   updateRoute = (newRoute:string):void => {
     if (newRoute === 'about') {
-      console.log('about');
+      this.app.showAbout();
 
     } else if (newRoute === 'registration') {
-      console.log('show reg');
       this.app.showRegistration();
+
+    } else if (newRoute === 'game') {
+      this.app.showGame();
     }
   }
 
   closeRegistration = ():void => {
     this.app.closeRegistration();
-    window.history.pushState(null, 'about', '#about');
+    window.location.hash = '#about';
   }
 
   registerUser = (newUser: IUser ):void => {
-    console.log(newUser);
     this.closeRegistration();
+    this.app.provideToHeaderNewUser({userImage: null});
   }
 }
 

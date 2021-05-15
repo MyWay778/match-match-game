@@ -1,3 +1,4 @@
+import { IUserData } from '../../App';
 import s from './Header.scss';
 import Logo from './logo/Logo';
 import NavMenu from './nav-menu/NavMenu';
@@ -10,6 +11,7 @@ const user = {
 
 class Header {
   public element: HTMLElement;
+  private userPanel: UserPanel;
 
   constructor() {
     this.element = document.createElement('header');
@@ -20,17 +22,21 @@ class Header {
 
     const logo = new Logo();
     const navMenu = new NavMenu();
-    const userPanel = new UserPanel(user.unregistered);
+    this.userPanel = new UserPanel(user.unregistered);
 
     container.appendChild(logo.element);
     container.appendChild(navMenu.element);
-    container.appendChild(userPanel.element);
+    container.appendChild(this.userPanel.element);
 
     this.element.appendChild(container);
   }
 
-  registerUser() {
-    
+  registerUser(userData: IUserData) {
+    this.userPanel.registerUser(userData);
+  }
+  
+  setIsGame(isGame: boolean = true) {
+    this.userPanel.setIsGame(isGame);
   }
 }
 

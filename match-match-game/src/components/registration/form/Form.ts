@@ -57,7 +57,6 @@ class Form {
   addNewUserHandler(handler:(newUser: IUser) => void) {
 
     this.element.addEventListener('submit', ()=> {
-      console.log('submit');
       const newUser: IUser = {
         firstName: this.firstName.getValue(),
         lastName: this.lastName.getValue(),

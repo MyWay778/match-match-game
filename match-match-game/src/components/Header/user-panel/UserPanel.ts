@@ -1,34 +1,37 @@
+import { IUserData } from './../../../App';
 import Helper from '../../common/Helper';
 import s from './user-panel.scss';
 import defaultUserImage from '../../../assets/images/avatar.webp';
 
 class UserPanel {
   element: HTMLElement;
-  private registerLink: HTMLAnchorElement;
-  private isRegistered: boolean;
-  private container: HTMLElement;
-  private startGameLink: HTMLAnchorElement;
-  private stopGameLink: HTMLAnchorElement;
-  private avatar: HTMLImageElement;
+  private registerLink:HTMLAnchorElement;
+  private isRegistered:boolean;
+  private isGame:boolean;
+  private container:HTMLElement;
+  private startGameLink:HTMLAnchorElement;
+  private stopGameLink:HTMLAnchorElement;
+  private avatar:HTMLImageElement;
 
   constructor(isRegistered: boolean = false) {
     this.element = Helper.createElement('section', s.user_panel);
     this.isRegistered = isRegistered;
+    this.isGame = false;
 
     this.registerLink = document.createElement('a');
     this.registerLink.textContent = 'Register new player';
-    this.registerLink.classList.add(s.register_link);
+    this.registerLink.classList.add(s.button);
     this.registerLink.href = '#registration';
     // this.registerLink.onclick = handler.register;
 
     this.container = Helper.createElement('div', s.container);
     this.startGameLink = document.createElement('a');
-    this.startGameLink.classList.add(s.startBtn);
+    this.startGameLink.classList.add(s.button);
     this.startGameLink.textContent = 'Start game';
     this.startGameLink.href = '#game';
 
     this.stopGameLink = document.createElement('a');
-    this.stopGameLink.classList.add(s.stopBtn);
+    this.stopGameLink.classList.add(s.button);
     this.stopGameLink.textContent = 'Stop game';
     this.stopGameLink.href = '#about';
 
@@ -51,6 +54,22 @@ class UserPanel {
       this.element.children.length
         ? this.element.children[0].replaceWith(this.registerLink)
         : this.element.appendChild(this.registerLink);
+    }
+  }
+
+  registerUser(userData:IUserData) {
+    if(userData.userImage) {
+      this.avatar.src = userData.userImage;
+    }
+    this.isRegistered = true;
+    this.checkRegistration();
+  }
+
+  setIsGame(isGame:boolean = true) {
+    if (isGame) {
+      this.container.children[0].replaceWith(this.stopGameLink);
+    } else {
+      this.container.children[0].replaceWith(this.startGameLink);
     }
   }
 }
