@@ -51,8 +51,19 @@ class Card {
   }
 
 
-  noMatch() {
-    this.element.classList.add(s.noMatch);
+  noMatch(isNoMatch: boolean = true): Promise<void> {
+    if (isNoMatch) {
+      this.element.classList.add(s.noMatch);
+    } else {
+      this.element.classList.remove(s.noMatch);
+    }
+    
+
+    return new Promise<void>((resolve)=> {
+      this.element.addEventListener('animationend', ()=> {
+        resolve()
+      })
+    })
   }
 
 

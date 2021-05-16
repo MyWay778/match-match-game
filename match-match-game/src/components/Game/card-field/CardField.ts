@@ -22,48 +22,51 @@ class CardField {
   }
 
   clickCardHandler = (card: any) => {
-    if (this.currentCard) {
+    const {currentCard} = this;
 
-      const {currentCard} = this;
+    if (!currentCard) {
+      return;
+    }
+    if (currentCard.element === card.element) {
+      return;
+    }
 
-      if (this.currentCard.element.dataset.id === card.element.dataset.id) {
-        setTimeout(() => {
+    if (currentCard.element.dataset.id === card.element.dataset.id) {
+      currentCard.match();
+      card.match();
+      
+      currentCard.disableOnclick();
+      card.disableOnclick();
 
-          currentCard.match();
-          card.match();
-          this.isMatching = false;
-
-        },1000)
-      }else {
-
-          currentCard?.noMatch();
-          card.noMatch();
-          setInterval(()=> {
-            currentCard.flip(false);
-            card.flip(false);
-            this.isMatching = false;
-          },1000)
-      }
-      this.currentCard = null;
-    } 
+    } else {
+      currentCard.noMatch().then(() => currentCard.flip(false).then(() => currentCard.noMatch(false)));
+      card.noMatch().then(() => card.flip(false).then(() => card.noMatch(false)));
+    }
+    this.currentCard = null;
   }
 
   addClickListeners() {
     this.cards.forEach((card) => {
       card.onclick = () => {
-        if (!this.isMatching) {
-
-          card.flip()
-
-          if (!this.currentCard) {
-            this.currentCard = card;
-          } else {
-            this.isMatching = true;
-
-            this.clickCardHandler(card);
-          }
-          
+        if (this.isMatching){
+          return;
         }
+       
+       if(!this.currentCard) {
+        card.flip();
+        this.currentCard = card;
+        
+       } else {
+         if (this.currentCard.element  === card.element) {
+           return;
+         }
+
+        this.isMatching = true;
+        card.flip().then(()=>{
+          this.clickCardHandler(card);
+          this.isMatching = false;
+        })
+       }
       };
     });
   }
