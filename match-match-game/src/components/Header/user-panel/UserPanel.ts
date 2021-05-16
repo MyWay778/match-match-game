@@ -1,7 +1,7 @@
-import { IUserData } from './../../../App';
 import Helper from '../../common/Helper';
 import s from './user-panel.scss';
 import defaultUserImage from '../../../assets/images/avatar.webp';
+import { IUserData } from '../../../typing/interfaces';
 
 class UserPanel {
   element: HTMLElement;
@@ -13,7 +13,7 @@ class UserPanel {
   private stopGameLink:HTMLAnchorElement;
   private avatar:HTMLImageElement;
 
-  constructor(isRegistered: boolean = false) {
+  constructor(isRegistered = false) {
     this.element = Helper.createElement('section', s.user_panel);
     this.isRegistered = isRegistered;
     this.isGame = false;
@@ -65,7 +65,7 @@ class UserPanel {
     this.checkRegistration();
   }
 
-  setIsGame(isGame:boolean = true) {
+  setIsGame(isGame = true) {
     if (isGame) {
       this.container.children[0].replaceWith(this.stopGameLink);
     } else {

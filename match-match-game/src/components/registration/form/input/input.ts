@@ -11,7 +11,7 @@ class Input {
   element: HTMLElement
   private input: HTMLInputElement
 
-  constructor(labelText: string = 'name', type: string = 'text', validate?: IValidate) {
+  constructor(labelText = 'name', type = 'text', validate?: IValidate) {
     
     this.element = Helper.createElement('div', s.inputContainer);
 

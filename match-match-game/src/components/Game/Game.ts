@@ -25,7 +25,7 @@ class Game {
     this.cardField = new CardField(response.animal);
     this.container.appendChild(this.cardField.element);
 
-    let preparing = () => {
+    const preparing = () => {
       if (this.cardField) {
         this.cardField.flipAll();
         this.timer.countdown(5, this.startGame);
@@ -37,7 +37,7 @@ class Game {
   startGame = () => {
     this.cardField?.flipAll(false);
     this.timer.start();
-    this.cardField?.makeInteractive();
+    this.cardField?.addClickListeners();
   }
 }
 

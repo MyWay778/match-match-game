@@ -11,7 +11,7 @@ class Timer {
   private interval:number
   private callback: null | ( () => void )
 
-  constructor(countdown: number = 30) {
+  constructor(countdown = 30) {
     this.element = Helper.createElement('section', s.timer);
     this.interval = 0;
     this.callback = null;
@@ -32,7 +32,7 @@ class Timer {
     setInterval(this.tick, 1000);
   }
 
-  countdown(seconds:number = 30, callback?: ()=> void) {
+  countdown(seconds = 30, callback?: ()=> void) {
     this.seconds = seconds;
 
     if (callback) {

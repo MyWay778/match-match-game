@@ -1,9 +1,9 @@
+import { sharing } from "webpack";
 import Helper from "../../common/Helper"
 import s from './form.scss';
 import defaultAvatar from '../../../assets/images/avatar.webp';
 import Input from "./input/input";
 import { IUser } from "../../../controllers/Controller";
-import { sharing } from "webpack";
 
 class Form { 
   element: HTMLFormElement
@@ -18,7 +18,7 @@ class Form {
     this.element = document.createElement('form');
     this.element.classList.add(s.form);
 
-    //containers
+    // containers
     const firstContainer = Helper.createElement('div', s.firstContainer);
     const secondContainer = Helper.createElement('div', s.secondContainer);
 
@@ -26,14 +26,14 @@ class Form {
     this.lastName = new Input('LastName', 'text', {required: true});
     this.email = new Input('E-mail', 'email', {required: true});
     
-    //assembling first container
+    // assembling first container
     firstContainer.append(this.firstName.element, this.lastName.element, this.email.element);
     
-    //avatar
+    // avatar
     this.avatar = new Image();
     this.avatar.src = defaultAvatar;
     
-    //buttons
+    // buttons
     const btnContainer = Helper.createElement('div', s.btnContainer);
     this.addBtn = document.createElement('button');
     this.addBtn.classList.add(s.button, s.addBtn);
@@ -45,7 +45,7 @@ class Form {
     this.cancelBtn.innerText = 'Cancel'
     btnContainer.append(this.addBtn, this.cancelBtn);
 
-    //assembling second container
+    // assembling second container
     secondContainer.append(this.avatar, btnContainer);
     this.element.append(firstContainer, secondContainer);
   }

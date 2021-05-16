@@ -1,15 +1,11 @@
 import Router, { IRoute } from "./lib/Router";
 
 import Controller from "./controllers/Controller";
-import ComponentManager from "./ComponentManager";
 import Header from "./components/header/Header";
 import About from "./components/about/About";
 import Registration from "./components/registration/Registration";
 import Game from "./components/game/Game";
-
-export interface IUserData {
-  userImage: string | null
-}
+import { IUserData } from "./typing/interfaces";
 
 
 const routes:IRoute[] = [
@@ -59,6 +55,7 @@ class App {
       this.registration = null;
     }
   }
+
   provideToHeaderNewUser(userData: IUserData) {
     this.header.registerUser(userData);
   }

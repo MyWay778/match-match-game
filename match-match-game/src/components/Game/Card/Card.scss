@@ -1,41 +1,81 @@
+@use '../../../styles/variables' as *;
+
 .card {
-    width: 168px;
-    height: 168px;
-    position: relative;
-    // transform: rotateY(180deg) translateZ(100px);
-    transform-style: preserve-3d;
-    transition: transform 0.5s ease-out;
-    box-shadow: 0px 4px 5px 0px rgb(0 0 0 / 25%);
-    cursor: pointer;
+  width: 168px;
+  height: 168px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-out;
+  box-shadow: 0px 4px 5px 0px rgb(0 0 0 / 25%);
+  cursor: pointer;
 }
 
 .card img {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 %cardSides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.back {
+  @extend %cardSides;
+}
+
+.front {
+  @extend %cardSides;
+  transform: rotateY(180deg) translateZ(1px);
+}
+
+.flipped {
+  transform: rotateY(-180deg) translateZ(-50px);
+}
+
+.match > [class^="front"]::after {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: rgba(10, 207, 131, 0.5);
+    transform: translateZ(0px);
+    animation: appear 1s;
+    background-image: url('../../../assets/images/match.svg');
+    background-repeat: no-repeat;
+    background-position: 90% 10%;
+    cursor: default;
 }
 
-.back {    
-    @extend %cardSides;
+.noMatch > [class^="front"]::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(242, 78, 30, 0.5);
+    transform: translateZ(0px);
+    animation: appear 0.5s;
+    background-image: url('../../../assets/images/nomatch.svg');
+    background-repeat: no-repeat;
+    background-position: 90% 10%;
+    cursor: default;
 }
 
-.front {
-    @extend %cardSides;
-    transform: rotateY(180deg) translateZ(1px);
-}
 
-.flipped {
-    transform: rotateY(-180deg) translateZ(-50px);
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
 }
-// Container 
-//perspective: 500px
-//perspective-origin: left;

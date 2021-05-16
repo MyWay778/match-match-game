@@ -1,4 +1,4 @@
-import { IUserData } from '../../App';
+import { IUserData } from '../../typing/interfaces';
 import s from './Header.scss';
 import Logo from './logo/Logo';
 import NavMenu from './nav-menu/NavMenu';
@@ -35,7 +35,7 @@ class Header {
     this.userPanel.registerUser(userData);
   }
   
-  setIsGame(isGame: boolean = true) {
+  setIsGame(isGame = true) {
     this.userPanel.setIsGame(isGame);
   }
 }

@@ -7,14 +7,14 @@ class CardField {
   cards: Card[];
   images: string[];
   currentCard: null | Card;
-  isAnimated: boolean;
+  isMatching: boolean;
 
   constructor(images: string[]) {
     this.element = Helper.createElement('section', s.cardField);
     this.cards = [];
     this.images = images;
     this.currentCard = null;
-    this.isAnimated = false;
+    this.isMatching = false;
 
     this.fillCards();
     this.shuffle();
@@ -23,35 +23,52 @@ class CardField {
 
   clickCardHandler = (card: any) => {
     if (this.currentCard) {
-      if (this.currentCard.element.dataset.id === card.element.dataset.id) {
 
+      const {currentCard} = this;
+
+      if (this.currentCard.element.dataset.id === card.element.dataset.id) {
+        setTimeout(() => {
+
+          currentCard.match();
+          card.match();
+          this.isMatching = false;
+
+        },1000)
       }else {
-        this.currentCard.flip(false);
-        card.flip(false);
+
+          currentCard?.noMatch();
+          card.noMatch();
+          setInterval(()=> {
+            currentCard.flip(false);
+            card.flip(false);
+            this.isMatching = false;
+          },1000)
       }
       this.currentCard = null;
-    } else {
-      this.currentCard = card;
-    }
+    } 
   }
 
-  makeInteractive() {
+  addClickListeners() {
     this.cards.forEach((card) => {
       card.onclick = () => {
-        if (!this.isAnimated) {
+        if (!this.isMatching) {
 
-          this.isAnimated = true; 
-          window.setTimeout(()=> {this.isAnimated = false}, 200);
+          card.flip()
 
-          card.flip().then(()=> {
-            this.clickCardHandler(card); 
-          });
+          if (!this.currentCard) {
+            this.currentCard = card;
+          } else {
+            this.isMatching = true;
+
+            this.clickCardHandler(card);
+          }
+          
         }
       };
     });
   }
 
-  flipAll(isFlipped: boolean = true) {
+  flipAll(isFlipped = true) {
     this.cards.forEach(card => card.flip(isFlipped));
   }
 

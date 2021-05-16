@@ -1,6 +1,3 @@
-import App from "../App";
-
-
 export interface IUser {
   firstName: string,
   lastName: string,
@@ -10,7 +7,7 @@ export interface IUser {
 class Controller {
   connector: any
 
-  constructor(private app: App) {
+  constructor(private app: any) {
     this.connector = {
       update: this.updateRoute,
       registration: {
