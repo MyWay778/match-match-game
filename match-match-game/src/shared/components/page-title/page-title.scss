@@ -1,0 +1,6 @@
+@use "../../../styles/variables" as *;
+.h2 {
+  font-size: 20px;
+  font-weight: 500;
+  color: $modal-text;
+}

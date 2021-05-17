@@ -29,9 +29,14 @@ class Timer {
   }
 
   start(): void {
-    setInterval(this.tick, 1000);
+   this.interval = window.setInterval(this.tick, 1000);
   }
 
+  stop():number {
+    clearInterval(this.interval);
+    return (this.minutes * 60) + this.seconds;
+  }
+ 
   countdown(seconds = 30, callback?: ()=> void) {
     this.seconds = seconds;
 

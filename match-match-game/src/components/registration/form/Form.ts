@@ -3,7 +3,7 @@ import Helper from "../../common/Helper"
 import s from './form.scss';
 import defaultAvatar from '../../../assets/images/avatar.webp';
 import Input from "./input/input";
-import { IUser } from "../../../controllers/Controller";
+import { IUser } from "../../../typing/interfaces";
 
 class Form { 
   element: HTMLFormElement
@@ -60,7 +60,8 @@ class Form {
       const newUser: IUser = {
         firstName: this.firstName.getValue(),
         lastName: this.lastName.getValue(),
-        email: this.email.getValue()
+        email: this.email.getValue(),
+        image: null
       }
       handler(newUser);
     });

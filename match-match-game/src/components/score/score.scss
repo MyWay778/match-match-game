@@ -1,0 +1,12 @@
+.score {
+  display: flex;
+  justify-content: center;
+}
+
+.score > div[class^="container"] {
+  margin-top: 47px;
+}
+
+.playerList {
+  margin-top: 25px;
+}

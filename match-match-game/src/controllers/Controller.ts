@@ -1,19 +1,23 @@
-export interface IUser {
-  firstName: string,
-  lastName: string,
-  email: string
-}
+import App from '../App';
+import Store from '../store/Store';
+import { IGameResult, IUser } from './../typing/interfaces';
 
 class Controller {
-  connector: any
+  connector: unknown
 
-  constructor(private app: any) {
+  constructor(private readonly app: App, private readonly store: Store) {
     this.connector = {
       update: this.updateRoute,
       registration: {
         closeHandler: this.closeRegistration,
         registerUser: this.registerUser
-      }
+      },
+      game: {
+        gameEndHandler: this.gameEndHandler
+      },
+      score: {
+        getData: this.getBestScore
+      } 
     };
   }
   
@@ -26,6 +30,8 @@ class Controller {
 
     } else if (newRoute === 'game') {
       this.app.showGame();
+    } else if (newRoute === 'score') {
+      this.app.showScore();
     }
   }
 
@@ -37,6 +43,15 @@ class Controller {
   registerUser = (newUser: IUser ):void => {
     this.closeRegistration();
     this.app.provideToHeaderNewUser({userImage: null});
+    this.store.saveUser(newUser);
+  }
+
+  gameEndHandler = (result: IGameResult):void => {
+    this.store.saveResult(result);
+  }
+
+  getBestScore = (): Promise<any> => {
+    return this.store.getBestScore();
   }
 }
 

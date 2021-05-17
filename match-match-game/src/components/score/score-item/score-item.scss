@@ -1,0 +1,42 @@
+@use "../../../styles/variables" as *;
+
+.item {
+  width: 100%;
+  max-width: 846px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftPart {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.userBlock {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+}
+
+.userName {
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.userEmail {
+  font-size: 12px;
+  letter-spacing: 0.4px;
+}
+.rightPart {
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15px;
+  font-weight: 500;
+}
+.score{
+  margin-right: 5px;
+}
+.scoreValue {
+  color: $primary-color;
+}

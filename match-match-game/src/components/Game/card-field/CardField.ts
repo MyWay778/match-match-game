@@ -8,13 +8,19 @@ class CardField {
   images: string[];
   currentCard: null | Card;
   isMatching: boolean;
+  mistakeCounter: number;
+  matchedCardAmount: number;
+  gameEndSubscriber: Function;
 
-  constructor(images: string[]) {
+  constructor(images: string[], gameEndSubscriber: Function) {
     this.element = Helper.createElement('section', s.cardField);
     this.cards = [];
     this.images = images;
     this.currentCard = null;
     this.isMatching = false;
+    this.mistakeCounter = 0;
+    this.matchedCardAmount = 0;
+    this.gameEndSubscriber = gameEndSubscriber;
 
     this.fillCards();
     this.shuffle();
@@ -22,7 +28,7 @@ class CardField {
   }
 
   clickCardHandler = (card: any) => {
-    const {currentCard} = this;
+    const { currentCard } = this;
 
     if (!currentCard) {
       return;
@@ -32,47 +38,57 @@ class CardField {
     }
 
     if (currentCard.element.dataset.id === card.element.dataset.id) {
-      currentCard.match();
-      card.match();
-      
+      Promise.all([currentCard.match(), card.match()]).then(() => {
+        this.matchedCardAmount += 1;
+        if (this.matchedCardAmount >= 6) {
+          this.gameEndSubscriber(this.mistakeCounter);
+        }
+      });
+
       currentCard.disableOnclick();
       card.disableOnclick();
-
     } else {
-      currentCard.noMatch().then(() => currentCard.flip(false).then(() => currentCard.noMatch(false)));
-      card.noMatch().then(() => card.flip(false).then(() => card.noMatch(false)));
+      this.mistakeCounter += 1;
+      currentCard
+        .noMatch()
+        .then(() =>
+          currentCard.flip(false).then(() => currentCard.noMatch(false))
+        );
+      card
+        .noMatch()
+        .then(() => card.flip(false).then(() => card.noMatch(false)));
     }
+
     this.currentCard = null;
-  }
+  };
 
   addClickListeners() {
     this.cards.forEach((card) => {
       card.onclick = () => {
-        if (this.isMatching){
+        if (this.isMatching) {
           return;
         }
-       
-       if(!this.currentCard) {
-        card.flip();
-        this.currentCard = card;
-        
-       } else {
-         if (this.currentCard.element  === card.element) {
-           return;
-         }
 
-        this.isMatching = true;
-        card.flip().then(()=>{
-          this.clickCardHandler(card);
-          this.isMatching = false;
-        })
-       }
+        if (!this.currentCard) {
+          card.flip();
+          this.currentCard = card;
+        } else {
+          if (this.currentCard.element === card.element) {
+            return;
+          }
+
+          this.isMatching = true;
+          card.flip().then(() => {
+            this.clickCardHandler(card);
+            this.isMatching = false;
+          });
+        }
       };
     });
   }
 
   flipAll(isFlipped = true) {
-    this.cards.forEach(card => card.flip(isFlipped));
+    this.cards.forEach((card) => card.flip(isFlipped));
   }
 
   private fillCards(): void {
