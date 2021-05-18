@@ -1,10 +1,11 @@
 import { IGameConnector, IGameResult } from './../../typing/interfaces';
 import Helper from "../common/Helper";
-import CardField from "./card-field/CardField";
 import GameModal from "./game-modal/GameModal";
 import s from './game.scss';
 import Timer from "./timer/Timer";
 import ConnectorComponent from '../../shared/components/base-component/ConnectorComponent';
+import CardField from './card-field/CardField';
+
 
 class Game extends ConnectorComponent {
   container: HTMLElement;
