@@ -1,43 +1,47 @@
 import Helper from "../../common/Helper";
-import AboutIcon from "./about-icon/AboutIcon";
 import s from "./nav-menu.scss";
-import ScoreIcon from "./score-icon/ScoreIcon";
-import SettingIcon from "./settings-icon/SettingsIcon";
+
+import aboutIcon from "../../../assets/icons/about.svg";
+import scoreIcon from "../../../assets/icons/score.svg";
+import settingIcon from "../../../assets/icons/settings.svg";
 
 class NavMenu {
   element: HTMLElement;
-        
+  list: HTMLElement;
+  currentActive: null | HTMLElement;
+
   constructor() {
     this.element = Helper.createElement('section', s.nav);
-        
-    const list = Helper.createElement('ul', s.list);
-
+    this.list = Helper.createElement('ul', s.list);
+    this.currentActive = null;
 
     const data = [
-      {icon: new AboutIcon(), title: 'About Game', url: '#about'},
-      {icon: new ScoreIcon(), title: 'Best Score', url: '#score'},
-      {icon: new SettingIcon(), title: 'Game Settings', url: '#settings'},
+      {icon: aboutIcon, title: 'About Game', url: '#about'},
+      {icon: scoreIcon, title: 'Best Score', url: '#score'},
+      {icon: settingIcon, title: 'Game Settings', url: '#settings'},
     ]
 
     data.forEach(dataPart => {
       const item = Helper.createElement('li', s.item);
+      item.innerHTML = `
+      <a class="${s.link}" href="${dataPart.url}">
+         <img class="${s.icon}" src="${dataPart.icon}" alt="${dataPart.title}">
+        <span class="${s.title}">${dataPart.title}</span>
+      </a>`
 
-      const link = document.createElement('a');
-      link.classList.add(s.link);
-      link.href = dataPart.url;
-
-      const icon = dataPart.icon.element;
-            
-      const title = Helper.createElement('span', s.title);
-      title.innerText = dataPart.title;
-
-      link.appendChild(icon);
-      link.appendChild(title);
-      item.appendChild(link);
-      list.appendChild(item);
+      this.list.append(item);
     })
-    this.element.appendChild(list)
+    this.element.appendChild(this.list);
+    this.list.children[0].classList.add(s.active);
   }   
+
+  makeActive(itemNumber: number) {
+    const target = this.list.children[itemNumber];
+    if (this.currentActive || this.currentActive === target) {
+      return;
+    }
+    target.classList.add(s.active);
+  }
 }
 
 export default NavMenu;
