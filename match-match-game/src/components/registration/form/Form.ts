@@ -22,9 +22,9 @@ class Form {
     const firstContainer = Helper.createElement('div', s.firstContainer);
     const secondContainer = Helper.createElement('div', s.secondContainer);
 
-    this.firstName = new Input('First Name', 'text', {required: true});
-    this.lastName = new Input('LastName', 'text', {required: true});
-    this.email = new Input('E-mail', 'email', {required: true});
+    this.firstName = new Input('First Name', 'text', {required: true, pattern: "^[a-zA-Z,'.\\-\\s]*$", maxLength: 30});
+    this.lastName = new Input('LastName', 'text', {required: true, pattern: "^[a-zA-Z,'.\\-\\s]*$", maxLength: 30});
+    this.email = new Input('E-mail', 'email', {required: true, pattern: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", maxLength: 30});
     
     // assembling first container
     firstContainer.append(this.firstName.element, this.lastName.element, this.email.element);

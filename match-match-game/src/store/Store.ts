@@ -1,9 +1,14 @@
 import { IGameResult, IUser } from "../typing/interfaces";
 
+interface IScoreEntry {
+  user:  null | IUser;
+  score: number;
+}
+
 interface IState {
   user: null | IUser
   score: null | number
-  bestScores: null | []
+  bestScores: IScoreEntry[]
   gameSettings: {
     difficult: string
   }
@@ -17,7 +22,7 @@ class Store {
    this.state = {
     user: null,
     score: null,
-    bestScores: null,
+    bestScores: [],
     gameSettings: {
       difficult: '3x4'
     }
@@ -37,15 +42,23 @@ class Store {
     console.log('Store',this.state);
   }
 
+  isUserRegister(): boolean {
+    return !!this.state.user;
+  }
+
   saveResult(result: IGameResult): void {
    const score = ((6 - result.mistakes) * 100) - (result.time * 10);
    this.state.score = score;
+
+   const scoreBestEntry: IScoreEntry = {user: this.state.user, score: this.state.score};
+   this.state.bestScores?.push(scoreBestEntry);
    console.log('Store',this.state);
   }
 
   getBestScore() {
     return new Promise<any>((resolve, reject) => {
-      resolve([{user: this.state.user, score: this.state.score}]);
+      const sortedBestScore = this.state.bestScores.sort((a, b) => b.score - a.score);
+      resolve(sortedBestScore);
     }) 
   }
 }

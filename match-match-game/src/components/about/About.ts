@@ -4,6 +4,7 @@ import s from './about.scss';
 import firstImg from '../../assets/images/first-item.webp';
 import secondImg from '../../assets/images/second-item.webp';
 import thirdImg from '../../assets/images/third-item.webp';
+import BaseComponent from "../../shared/components/base-component/BaseComponent";
 
 function createCard(itemNumber: string, cardText: string) {
   const card = Helper.createElement('section', s.card);
@@ -14,12 +15,12 @@ function createCard(itemNumber: string, cardText: string) {
 }
 
 
-class About {
-  element: HTMLElement;
+class About extends BaseComponent {
   card: HTMLElement | null;
 
-  constructor() {
-    this.element = Helper.createElement('main', s.about);
+  constructor(root: HTMLElement) {
+    super('main', s.about, root)
+
     this.card = null;
     const container = Helper.createElement('div', s.container);
     const title = Helper.createTextElement('h2', '', 'How to play?');

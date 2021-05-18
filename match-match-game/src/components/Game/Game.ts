@@ -4,17 +4,18 @@ import CardField from "./card-field/CardField";
 import GameModal from "./game-modal/GameModal";
 import s from './game.scss';
 import Timer from "./timer/Timer";
+import ConnectorComponent from '../../shared/components/base-component/ConnectorComponent';
 
-class Game {
-  element: HTMLElement;
+class Game extends ConnectorComponent {
   container: HTMLElement;
   cardField: CardField | null;
   timer: Timer;
   gameModal: null | GameModal;
+  connector: null | IGameConnector = null;
 
-  constructor(private readonly connector: IGameConnector) {
-    console.log(connector)
-    this.element = Helper.createElement('main', s.game);
+  constructor(root: HTMLElement) {
+    super('main', s.game, root);
+
     this.container = Helper.createElement('div', s.container);
     this.element.appendChild(this.container);
     this.cardField = null;
@@ -23,7 +24,14 @@ class Game {
     this.gameModal = null;
   }
 
-  async initGame(): Promise<void> {
+  connect = (connector: IGameConnector) => {
+    this.connector = connector;
+    this.connector.connect(this);
+  }
+
+  async initGame(config: any): Promise<void> {
+    console.log('init Game, config: ', config);
+    
     const response = await (await fetch('./assets/images/card-images.json')).json();
     this.cardField = new CardField(response.animal, this.stopGame);
     this.container.appendChild(this.cardField.element);
@@ -52,7 +60,7 @@ class Game {
     result.mistakes = mistakeCounter;
     result.time = this.timer.stop();
 
-    //From controller!!!!
+    //Move to controller!!!!
     const removeModal = () => {
       if (this.gameModal) {
         this.gameModal.element.remove();
@@ -69,8 +77,9 @@ class Game {
       this.gameModal.render();
     }
 
-    this.connector.gameEndHandler(result);
+    this.connector?.gameEndHandler(result);
   }
+
 } 
 
 export default Game;

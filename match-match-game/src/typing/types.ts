@@ -1,14 +1,11 @@
-// export type TLogoClasses = {
-//   firstLine: string,
-//   secondLine: string
-// };
+import About from "../components/about/About"
+import Registration from "../components/registration/Registration"
+import BaseComponent from "../shared/components/base-component/BaseComponent";
 
-// export type THeaderClasses = {
-//   header: string,
-//   container: string
-// };
 
 export type validate = {
   require: boolean,
   pattern: RegExp,
 }
+
+export type TComponent = Registration | About | BaseComponent;

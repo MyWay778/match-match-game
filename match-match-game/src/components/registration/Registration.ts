@@ -1,26 +1,36 @@
+import BaseComponent from '../../shared/components/base-component/BaseComponent';
+import ConnectorComponent from '../../shared/components/base-component/ConnectorComponent';
+import { IRegistrationConnector } from '../../typing/interfaces';
 import Helper from '../common/Helper';
 import Form from './form/Form';
 import s from './registration.scss';
 
-class Registration {
+class Registration extends ConnectorComponent{
   element: HTMLElement
+  background: HTMLElement
+  form: Form
 
-  constructor( private connector:any ) {
+  constructor(parent: HTMLElement) {
+    super('aside', s.registration, parent);
     this.element = Helper.createElement('aside', s.registration);
 
-    const background = Helper.createElement('div', s.background);
-    background.onclick = connector.closeHandler;
+    this.background = Helper.createElement('div', s.background);
+    
 
     const modal = Helper.createElement('div', s.modal);
     const title =  Helper.createTextElement('h2', s.title, 'Register new Player');
-    const form = new Form();
+    this.form = new Form();
 
-    form.addCancelHandler(connector.closeHandler);
-    form.addNewUserHandler(connector.registerUser);
+    
 
-    modal.append(title, form.element);
+    modal.append(title, this.form.element);
+    this.element.append(this.background, modal);
+  }
 
-    this.element.append(background, modal);
+  connect(connector: IRegistrationConnector) {
+    this.background.onclick = connector.closeHandler;
+    this.form.addCancelHandler(connector.closeHandler);
+    this.form.addNewUserHandler(connector.registerUser);
   }
 }
 

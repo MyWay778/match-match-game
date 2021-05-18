@@ -8,7 +8,7 @@ import settingIcon from "../../../assets/icons/settings.svg";
 class NavMenu {
   element: HTMLElement;
   list: HTMLElement;
-  currentActive: null | HTMLElement;
+  currentActive: null | Element;
 
   constructor() {
     this.element = Helper.createElement('section', s.nav);
@@ -32,14 +32,18 @@ class NavMenu {
       this.list.append(item);
     })
     this.element.appendChild(this.list);
-    this.list.children[0].classList.add(s.active);
   }   
 
   makeActive(itemNumber: number) {
     const target = this.list.children[itemNumber];
-    if (this.currentActive || this.currentActive === target) {
-      return;
-    }
+    if (this.currentActive) {
+      if (this.currentActive === target) {
+        return;
+      } else {
+        this.currentActive.classList.remove(s.active); 
+      }
+    } 
+    this.currentActive = target;
     target.classList.add(s.active);
   }
 }

@@ -10,3 +10,10 @@
 .playerList {
   margin-top: 25px;
 }
+.playerList > li:nth-child(n+2) {
+  margin-top: 15px;
+}
+
+.placeholder {
+  margin-top: 25px;
+}
