@@ -1,5 +1,5 @@
 import './styles/global.scss';
-import App from './App';
+import App from './app';
 
 
 const {body} = document;

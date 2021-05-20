@@ -1,10 +1,19 @@
-import { renderPosition } from './../App';
-import { IComponent } from './../typing/interfaces';
-import Registration from "../components/registration/Registration";
-import BaseComponent from "../shared/components/base-component/BaseComponent";
-import ConnectorComponent from "../shared/components/base-component/ConnectorComponent";
-import Game from '../components/game/Game';
-import Score from '../components/score/Score';
+import Registration from "../components/registration/registration";
+import ConnectorComponent from "../shared/components/base-component/connector-component";
+import Game from '../components/game/game';
+import Score from '../components/score/score';
+import BaseComponent from "src/shared/components/base-component/base-component";
+
+
+// const componentList = {
+//   registration: Registration
+// }
+// new componentList['registration'](document.createElement('div'));
+// const componentFactory = (componentName: string, componentList: any, root: HTMLElement) => {
+//   return new componentList[componentName](root);
+// }
+// const registrationInstance  = componentFactory('registration', componentList, document.createElement('div'));
+
 
 class RenderManager {
   connector: null | any;

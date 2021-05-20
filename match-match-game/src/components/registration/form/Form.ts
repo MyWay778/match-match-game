@@ -1,5 +1,4 @@
-import { sharing } from "webpack";
-import Helper from "../../common/Helper"
+import Helper from "../../common/helper"
 import s from './form.scss';
 import defaultAvatar from '../../../assets/images/avatar.webp';
 import Input from "./input/input";

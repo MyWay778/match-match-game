@@ -1,10 +1,10 @@
-import { IGameConnector, IGameResult } from './../../typing/interfaces';
-import Helper from "../common/Helper";
-import GameModal from "./game-modal/GameModal";
+import { IGameConnector, IGameResult } from '../../typing/interfaces';
+import Helper from "../common/helper";
+import GameModal from "./game-modal/game-modal";
 import s from './game.scss';
-import Timer from "./timer/Timer";
-import ConnectorComponent from '../../shared/components/base-component/ConnectorComponent';
-import CardField from './card-field/CardField';
+import Timer from "./timer/timer";
+import ConnectorComponent from '../../shared/components/base-component/connector-component';
+import CardField from './card-field/card-field';
 
 
 class Game extends ConnectorComponent {

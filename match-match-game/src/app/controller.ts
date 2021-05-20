@@ -1,11 +1,11 @@
-import { renderPosition } from './../App';
+import { renderPosition } from '../app';
 import { IGameConnector, IHeadConnector, IRegistrationConnector, IScoreConnector, ISubscriber } from '../typing/interfaces';
-import RenderManager from '../app/RenderManager';
-import Store from '../store/Store';
-import { IGameResult, IUser } from './../typing/interfaces';
-import Header from '../components/header/Header';
-import Game from '../components/game/Game';
-import Score from '../components/score/Score';
+import RenderManager from './render-manager';
+import Store from './store';
+import { IGameResult, IUser } from '../typing/interfaces';
+import Header from '../components/header/header';
+import Game from '../components/game/game';
+import Score from '../components/score/score';
 
 
 interface IConnector {

@@ -1,8 +1,8 @@
-import BaseComponent from '../../shared/components/base-component/BaseComponent';
-import ConnectorComponent from '../../shared/components/base-component/ConnectorComponent';
+import BaseComponent from '../../shared/components/base-component/base-component';
+import ConnectorComponent from '../../shared/components/base-component/connector-component';
 import { IRegistrationConnector } from '../../typing/interfaces';
-import Helper from '../common/Helper';
-import Form from './form/Form';
+import Helper from '../common/helper';
+import Form from './form/form';
 import s from './registration.scss';
 
 class Registration extends ConnectorComponent{

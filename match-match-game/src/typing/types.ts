@@ -1,6 +1,6 @@
-import About from "../components/about/About"
-import Registration from "../components/registration/Registration"
-import BaseComponent from "../shared/components/base-component/BaseComponent";
+import About from "../components/about/about"
+import Registration from "../components/registration/registration"
+import BaseComponent from "../shared/components/base-component/base-component";
 
 
 export type validate = {

@@ -1,5 +1,5 @@
 import imageBack from '../../../assets/images/back-card-image.jpg';
-import Helper from '../../common/Helper';
+import Helper from '../../common/helper';
 import s from './card.scss';
 
 

@@ -1,7 +1,7 @@
-import Game from '../components/game/Game';
-import Header from '../components/header/Header';
-import Score from '../components/score/Score';
-import BaseComponent from '../shared/components/base-component/BaseComponent';
+import Game from '../components/game/game';
+import Header from '../components/header/header';
+import Score from '../components/score/score';
+import BaseComponent from '../shared/components/base-component/base-component';
 
 export interface IUserData {
   userImage: string | null;

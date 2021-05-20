@@ -1,5 +1,5 @@
-import Helper from "../../../components/common/Helper";
-import BaseComponent from "../base-component/BaseComponent";
+import Helper from "../../../components/common/helper";
+import BaseComponent from "../base-component/base-component";
 import style from './modal.scss';
 
 class Modal extends BaseComponent {

@@ -1,5 +1,5 @@
-import Helper from '../../common/Helper';
-import Card from '../card/Card';
+import Helper from '../../common/helper';
+import Card from '../card/card';
 import s from './card-field.scss';
 
 class CardField {

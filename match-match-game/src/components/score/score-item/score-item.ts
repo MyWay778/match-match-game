@@ -1,5 +1,5 @@
-import BaseComponent from '../../../shared/components/base-component/BaseComponent';
-import Helper from '../../common/Helper';
+import BaseComponent from '../../../shared/components/base-component/base-component';
+import Helper from '../../common/helper';
 import style from './score-item.scss';
 import defaultImage from '../../../assets/images/avatar.webp';
 

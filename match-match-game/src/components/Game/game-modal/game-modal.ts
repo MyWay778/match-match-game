@@ -1,6 +1,6 @@
-import Button from "../../../shared/components/button-t1/Button";
-import Modal from "../../../shared/components/modal/Modal";
-import Helper from "../../common/Helper";
+import Button from "../../../shared/components/button-t1/button";
+import Modal from "../../../shared/components/modal/modal";
+import Helper from "../../common/helper";
 import style from "./game-modal.scss";
 
 class GameModal extends Modal {

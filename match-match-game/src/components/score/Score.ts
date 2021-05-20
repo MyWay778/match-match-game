@@ -1,10 +1,10 @@
-import BaseComponent from '../../shared/components/base-component/BaseComponent';
-import ConnectorComponent from '../../shared/components/base-component/ConnectorComponent';
-import Container from '../../shared/components/container/Container';
-import PageTitle from '../../shared/components/page-title/PageTitle';
+import BaseComponent from '../../shared/components/base-component/base-component';
+import ConnectorComponent from '../../shared/components/base-component/connector-component';
+import Container from '../../shared/components/container/container';
+import PageTitle from '../../shared/components/page-title/page-title';
 import { IScoreConnector } from '../../typing/interfaces';
-import Helper from '../common/Helper';
-import ScoreItem from './score-item/ScoreItem';
+import Helper from '../common/helper';
+import ScoreItem from './score-item/score-item';
 import style from './score.scss';
 
 class Score extends ConnectorComponent {

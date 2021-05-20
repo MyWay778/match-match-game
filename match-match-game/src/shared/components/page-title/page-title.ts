@@ -1,4 +1,4 @@
-import BaseComponent from '../base-component/BaseComponent';
+import BaseComponent from '../base-component/base-component';
 import style from './page-title.scss';
 
 class PageTitle extends BaseComponent {

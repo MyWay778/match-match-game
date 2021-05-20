@@ -1,5 +1,5 @@
 import { container } from 'webpack';
-import BaseComponent from '../base-component/BaseComponent';
+import BaseComponent from '../base-component/base-component';
 import style from './container.scss';
 
 class Container extends BaseComponent {

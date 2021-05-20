@@ -1,9 +1,9 @@
-import Router, { IRoute } from "./lib/Router";
-import Controller from "./controllers/Controller";
-import Header from "./components/header/Header";
-import About from "./components/about/About";
-import Store from "./store/Store";
-import RenderManager from "./app/RenderManager";
+import Router, { IRoute } from "./lib/router";
+import Controller from "./app/controller";
+import Header from "./components/header/header";
+import About from "./components/about/about";
+import Store from "./app/store";
+import RenderManager from "./app/render-manager";
 
 const routes:IRoute[] = [
   {name: 'about', hash: '#about'},

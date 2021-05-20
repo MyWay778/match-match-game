@@ -1,9 +1,9 @@
-import ConnectorComponent from '../../shared/components/base-component/ConnectorComponent';
+import ConnectorComponent from '../../shared/components/base-component/connector-component';
 import { IHeadConnector, IUserData } from '../../typing/interfaces';
 import s from './Header.scss';
-import Logo from './logo/Logo';
-import NavMenu from './nav-menu/NavMenu';
-import UserPanel from './user-panel/UserPanel';
+import Logo from './logo/logo';
+import NavMenu from './nav-menu/nav-menu';
+import UserPanel from './user-panel/user-panel';
 
 const user = {
   registered: true,

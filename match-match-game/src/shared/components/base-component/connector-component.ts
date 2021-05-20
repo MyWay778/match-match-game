@@ -1,5 +1,5 @@
-import { IConnector } from './../../../typing/interfaces';
-import BaseComponent from "./BaseComponent";
+import { IConnector } from '../../../typing/interfaces';
+import BaseComponent from "./base-component";
 
 class ConnectorComponent extends BaseComponent {
   constructor(tagName: keyof HTMLElementTagNameMap, className: string, parent?: HTMLElement) {

@@ -1,8 +1,8 @@
-import Helper from '../../common/Helper';
+import Helper from '../../common/helper';
 import s from './user-panel.scss';
 import defaultUserImage from '../../../assets/images/avatar.webp';
 import { IUserData, IUserPanelConnector } from '../../../typing/interfaces';
-import ConnectorComponent from '../../../shared/components/base-component/ConnectorComponent';
+import ConnectorComponent from '../../../shared/components/base-component/connector-component';
 
 class UserPanel extends ConnectorComponent {
   element: HTMLElement;

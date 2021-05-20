@@ -1,4 +1,4 @@
-import Helper from '../../../common/Helper';
+import Helper from '../../../common/helper';
 import s from './input.scss';
 
 export interface IValidate {
