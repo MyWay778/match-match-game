@@ -1,6 +1,6 @@
 import ConnectorComponent from '../../shared/components/base-component/connector-component';
 import { IHeadConnector, IUserData } from '../../typing/interfaces';
-import s from './Header.scss';
+import './header.scss';
 import Logo from './logo/logo';
 import NavMenu from './nav-menu/nav-menu';
 import UserPanel from './user-panel/user-panel';
@@ -15,10 +15,10 @@ class Header extends ConnectorComponent {
   private navMenu: NavMenu;
 
   constructor(parent: HTMLElement) {
-    super('header', s.header, parent);
+    super('header', "header", parent);
 
     const container = document.createElement('div');
-    container.classList.add(s.container);
+    container.classList.add('header__container');
 
     const logo = new Logo();
     this.navMenu = new NavMenu();

@@ -12,9 +12,9 @@ export interface IGameResult {
   time: number;
 }
 
-export interface IGameConnector {
-  gameEndHandler: (result: IGameResult) => void;
-}
+// export interface IGameConnector {
+//   gameEndHandler: (result: IGameResult) => void;
+// }
 
 export interface IUser {
   firstName: string;
@@ -23,10 +23,10 @@ export interface IUser {
   image: null;
 }
 
-export interface IRegistrationConnector {
-  closeHandler: () => void;
-  registerUser: (newUser: IUser) => void;
-}
+// export interface IRegistrationConnector {
+//   closeHandler: () => void;
+//   registerUser: (newUser: IUser) => void;
+// }
 
 export interface IComponent {
   name: string;
@@ -37,6 +37,7 @@ export interface ISubscriber {
   update: (newRoute: string) => void;
 }
 
+// tslint:disable-next-line
 export interface IConnector {}
 
 export interface IHeadConnector extends IConnector {
@@ -56,4 +57,18 @@ export interface IGameConnector extends IConnector {
 export interface IScoreConnector extends IConnector {
   getData: () => Promise<any>;
   connect: (score: Score) => void;
+}
+
+export interface IScoreEntry {
+  user: null | IUser;
+  score: number;
+}
+
+export interface IState {
+  user: null | IUser;
+  score: null | number;
+  bestScores: IScoreEntry[];
+  gameSettings: {
+    difficult: string;
+  };
 }

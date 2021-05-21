@@ -1,24 +1,20 @@
-import BaseComponent from '../../shared/components/base-component/base-component';
 import ConnectorComponent from '../../shared/components/base-component/connector-component';
 import { IRegistrationConnector } from '../../typing/interfaces';
 import Helper from '../common/helper';
 import Form from './form/form';
-import s from './registration.scss';
+import './registration.scss';
 
 class Registration extends ConnectorComponent{
-  element: HTMLElement
   background: HTMLElement
   form: Form
 
   constructor(parent: HTMLElement) {
-    super('aside', s.registration, parent);
-    this.element = Helper.createElement('aside', s.registration);
-
-    this.background = Helper.createElement('div', s.background);
+    super('aside', 'registration', parent);
+    this.background = Helper.createElement('div', 'registration__background');
     
 
-    const modal = Helper.createElement('div', s.modal);
-    const title =  Helper.createTextElement('h2', s.title, 'Register new Player');
+    const modal = Helper.createElement('div', "registration-modal");
+    const title =  Helper.createTextElement('h2', "registration-modal__title", 'Register new Player');
     this.form = new Form();
 
     

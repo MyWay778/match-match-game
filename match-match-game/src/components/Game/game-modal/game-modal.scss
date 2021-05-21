@@ -1,13 +1,13 @@
 @use '../../../styles/variables' as *;
 
-.message {
+.modal-game__message {
   color: $modal-text;
   font-size: 14px;
   line-height: 20px;
   max-width: 328px;
 }
 
-.buttonContainer {
+.modal-game__button-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;

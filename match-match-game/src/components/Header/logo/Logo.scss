@@ -1,16 +1,6 @@
 @use 'variables' as *;
 @use 'classes';
 
-.logo {
-    @extend %flx-fdc-jcc-aic;
-    max-width: 80px;
-    text-transform: uppercase;
-    font-size: 11px;
-}
-.link {
-    text-decoration: none;
-}
-
 %title-size {
     width: 80px;
     height: 20px;
@@ -23,16 +13,36 @@
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.firstLine {
-    @extend %line;
-    color: $white-color;
-    width: 80px;
-    height: 20px;
+
+.logo {
+    @extend %flx-fdc-jcc-aic;
+    max-width: 80px;
+    text-transform: uppercase;
+    font-size: 11px;
+
+    &__link {
+        text-decoration: none;
+    }
+
+    &__first-line {
+        @extend %line;
+        color: $white-color;
+        width: 80px;
+        height: 20px;
+    }
+
+    &__second-line {
+        @extend %line;
+        color: $primary-color;
+        background-color: $white-color;
+        box-shadow: 0px 1px 2px 0px #000;
+        font-weight: 500;
+    }
 }
-.secondLine {
-    @extend %line;
-    color: $primary-color;
-    background-color: $white-color;
-    box-shadow: 0px 1px 2px 0px #000;
-    font-weight: 500;
-}
+
+
+
+
+
+
+

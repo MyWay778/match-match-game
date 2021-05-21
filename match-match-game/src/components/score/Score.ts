@@ -1,11 +1,12 @@
-import BaseComponent from '../../shared/components/base-component/base-component';
+// eslint-disable-next-line import/no-cycle
 import ConnectorComponent from '../../shared/components/base-component/connector-component';
 import Container from '../../shared/components/container/container';
 import PageTitle from '../../shared/components/page-title/page-title';
-import { IScoreConnector } from '../../typing/interfaces';
+// eslint-disable-next-line import/no-cycle
+import { IScoreConnector, IScoreEntry } from '../../typing/interfaces';
 import Helper from '../common/helper';
 import ScoreItem from './score-item/score-item';
-import style from './score.scss';
+import './score.scss';
 
 class Score extends ConnectorComponent {
   playerList: HTMLElement;
@@ -13,42 +14,41 @@ class Score extends ConnectorComponent {
   placeholder: HTMLElement;
 
   constructor(parent: HTMLElement) {
-    super('main', style.score, parent);
+    super('main', 'score', parent);
     const container = new Container();
 
     const title = new PageTitle('Best players');
     title.setParent(container.element);
     title.render();
 
-    this.playerList = Helper.createElement('ul', style.playerList);
-    this.placeholder = Helper.createElement('p', style.placeholder);
+    this.playerList = Helper.createElement('ul', 'score__player-list');
+    this.placeholder = Helper.createElement('p', 'score__placeholder');
 
     container.addContent(this.playerList);
     container.setParent(this.element);
     container.render();
   }
 
-  connect = (connector: IScoreConnector) => {
+  connect = (connector: IScoreConnector): void => {
     this.connector = connector;
     this.connector.connect(this);
   };
 
-  setData(data: any) {
-    console.log(data);
+  setData(data: IScoreEntry[]): void {
     if (!data.length) {
       this.playerList.replaceWith(
         Helper.createTextElement(
           'p',
-          style.placeholder,
+          'score__placeholder',
           'There are no best score yet, please register and start the game.'
         )
       );
       return;
     }
 
-    data.forEach((userData: any) => {
+    data.forEach((userData: IScoreEntry) => {
       const item = new ScoreItem(
-        userData.user?.firstName + ' ' + userData.user?.lastName,
+        `${userData.user?.firstName} ${userData.user?.lastName}`,
         userData.user?.email,
         userData?.score
       );

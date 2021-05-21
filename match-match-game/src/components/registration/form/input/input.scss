@@ -1,10 +1,11 @@
 @use '../../../../styles/variables' as *;
 
-.inputContainer {
+.register-input__container {
   position: relative;
+  margin-top: 16px;
 }
 
-.input {
+.register-input {
   position: relative;
   height: 56px;
   background-color: $input-color;
@@ -23,7 +24,7 @@
   transition: background-color .3s;
 }
 
-.label {
+.register-input__label {
   position: absolute;
   top: 6px;
   left: 52px;
@@ -32,11 +33,11 @@
   z-index: 1;
 }
 
-.input:focus {
+.register-input:focus {
   background-color: $white-color;
 }
 
-.validMarker {
+.register-input__valid-marker {
   position: absolute;
   top: 15px;
   right: 16px;
@@ -47,7 +48,7 @@
   box-shadow: 0 0 10px 5px $valid-shadow;
 }
 
-.validMarker::after {
+.register-input__valid-marker::after {
   content: '';
   position: absolute;
   top: 10px;
@@ -57,7 +58,7 @@
   background-color: $white-color;
   transform: rotate(-49deg);
 }
-.validMarker::before {
+.register-input__valid-marker::before {
   content: '';
   position: absolute;
   top: 13px;

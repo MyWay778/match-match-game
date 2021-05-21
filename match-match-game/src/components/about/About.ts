@@ -1,5 +1,5 @@
 import Helper from "../common/helper";
-import s from './about.scss';
+import './about.scss';
 
 import firstImg from '../../assets/images/first-item.webp';
 import secondImg from '../../assets/images/second-item.webp';
@@ -7,9 +7,9 @@ import thirdImg from '../../assets/images/third-item.webp';
 import BaseComponent from "../../shared/components/base-component/base-component";
 
 function createCard(itemNumber: string, cardText: string) {
-  const card = Helper.createElement('section', s.card);
-  const item  = Helper.createTextElement('span', s.item, itemNumber);
-  const text = Helper.createTextElement('p', s.text, cardText);
+  const card = Helper.createElement('section', 'about-card');
+  const item  = Helper.createTextElement('span', 'about-card__item', itemNumber);
+  const text = Helper.createTextElement('p', 'about-card__text', cardText);
   card.append(item, text);
   return card;
 }
@@ -19,10 +19,10 @@ class About extends BaseComponent {
   card: HTMLElement | null;
 
   constructor(root: HTMLElement) {
-    super('main', s.about, root)
+    super('main', 'about', root)
 
     this.card = null;
-    const container = Helper.createElement('div', s.container);
+    const container = Helper.createElement('div', 'about__container');
     const title = Helper.createTextElement('h2', '', 'How to play?');
 
     // first item
@@ -30,10 +30,10 @@ class About extends BaseComponent {
     const firstCard = createCard('1', firstCardText);
 
     const firstRowImage =  new Image();
-    firstRowImage.classList.add(s.img);
+    firstRowImage.classList.add('about-card__image');
     firstRowImage.src = firstImg;
 
-    const firstRow = Helper.createElement('div', s.row);
+    const firstRow = Helper.createElement('div', 'about-row');
     firstRow.append(firstCard, firstRowImage);
 
     // second item
@@ -41,10 +41,10 @@ class About extends BaseComponent {
     const secondCard = createCard('2', secondCardText);
 
     const secondRowImage =  new Image();
-    secondRowImage.classList.add(s.img);
+    secondRowImage.classList.add('about-card__image');
     secondRowImage.src = secondImg;
 
-    const secondRow = Helper.createElement('div', s.row);
+    const secondRow = Helper.createElement('div', 'about-row');
     secondRow.append(secondCard, secondRowImage);
 
     // third item
@@ -52,10 +52,10 @@ class About extends BaseComponent {
     const thirdCard = createCard('3', thirdCardText); 
 
     const thirdRowImage = new Image();
-    thirdRowImage.classList.add(s.img);
+    thirdRowImage.classList.add('about-card__image');
     thirdRowImage.src = thirdImg;
 
-    const thirdRow = Helper.createElement('div', s.row);
+    const thirdRow = Helper.createElement('div', 'about-row');
     thirdRow.append(thirdCard, thirdRowImage);
 
     // assembly

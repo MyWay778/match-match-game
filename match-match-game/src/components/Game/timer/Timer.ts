@@ -1,5 +1,5 @@
 import Helper from "../../common/helper";
-import s from './timer.scss';
+import './timer.scss';
 
 class Timer {
   element:HTMLElement
@@ -11,15 +11,15 @@ class Timer {
   private interval:number
   private callback: null | ( () => void )
 
-  constructor(countdown = 30) {
-    this.element = Helper.createElement('section', s.timer);
+  constructor() {
+    this.element = Helper.createElement('section', "timer");
     this.interval = 0;
     this.callback = null;
     this.minutes = 0;
     this.seconds = 0;
 
-    this.minutesElement = Helper.createTextElement('span', s.number, '00');
-    this.secondsElement = Helper.createTextElement('span', s.number, '00');
+    this.minutesElement = Helper.createTextElement('span', "timer__number", '00');
+    this.secondsElement = Helper.createTextElement('span', "timer__number", '00');
   
 
     const colon = document.createTextNode(':');
@@ -29,7 +29,7 @@ class Timer {
   }
 
   start(): void {
-   this.interval = window.setInterval(this.tick, 1000);
+    this.interval = window.setInterval(this.tick, 1000);
   }
 
   stop():number {
@@ -37,7 +37,7 @@ class Timer {
     return (this.minutes * 60) + this.seconds;
   }
  
-  countdown(seconds = 30, callback?: ()=> void) {
+  countdown(seconds = 30, callback?: ()=> void): void {
     this.seconds = seconds;
 
     if (callback) {

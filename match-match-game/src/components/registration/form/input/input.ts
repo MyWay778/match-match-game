@@ -1,5 +1,5 @@
 import Helper from '../../../common/helper';
-import s from './input.scss';
+import './input.scss';
 
 export interface IValidate {
   required?: boolean;
@@ -12,13 +12,13 @@ class Input {
   private input: HTMLInputElement;
 
   constructor(labelText = 'name', type = 'text', validate?: IValidate) {
-    this.element = Helper.createElement('div', s.inputContainer);
+    this.element = Helper.createElement('div', "register-input__container");
 
-    const label = Helper.createElement('label', s.label);
+    const label = Helper.createElement('label', "register-input__label");
     label.innerText = labelText;
 
     this.input = document.createElement('input');
-    this.input.classList.add(s.input);
+    this.input.classList.add("register-input");
     this.input.type = type;
 
     if (validate) {
@@ -29,12 +29,12 @@ class Input {
       if (validate.pattern) {
         this.input.pattern = validate.pattern;
       }
-      if (validate.maxLength){
+      if (validate.maxLength) {
         this.input.maxLength = validate.maxLength;
-      } 
+      }
     }
 
-    const validMarker = Helper.createElement('figure', s.validMarker);
+    const validMarker = Helper.createElement('figure', 'register-input__valid-marker');
 
     this.element.append(label, this.input, validMarker);
   }

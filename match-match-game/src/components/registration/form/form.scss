@@ -1,6 +1,6 @@
 @use '../../../styles/variables' as *;
 
-.form {
+.register-form {
   display: flex;
   justify-content: space-between;
   background-color: $form-background;
@@ -9,17 +9,14 @@
   border-radius: 0 0 5px 5px;
 }
 
-.firstContainer {
+.register-form__first-container {
   display: flex;
   width: 100%;
   max-width: 328px;
   flex-direction: column;
 }
 
-.firstContainer > div:nth-child(n+2) {
-  margin-top: 16px;
-}
-.secondContainer {
+.register-form__second-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,14 +24,14 @@
   flex-grow: 1;
 }
 
-.btnContainer {
+.register-form__button-container {
   width: 100%;
   display: flex;
   justify-content: end;
   column-gap: 17px;
 }
 
-.button {
+.register__button {
   padding: 10px 16px;
   border: none;
   border-radius: 5px;
@@ -47,12 +44,12 @@
   cursor: pointer;
 }
 
-.addBtn {
+.register__button_add {
   background-color: $primary-color;
   color: $white-color;
 }
 
-.cancelBtn {
+.register__button_cancel {
   background-color: $secondary-button;
   color: $primary-color;
 }

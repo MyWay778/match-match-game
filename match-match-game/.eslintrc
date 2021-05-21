@@ -11,7 +11,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "./match-match-game/tsconfig.json",
   },
   "plugins": [
     "@typescript-eslint"
@@ -38,6 +38,6 @@
     "@typescript-eslint/lines-between-class-members": ["error", {
       "fields": "never",
       "methods": "always"
-    }],
+    }]
   }
 }

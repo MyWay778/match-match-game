@@ -1,36 +1,45 @@
 @use "../../../styles/variables" as *;
-.user_panel{
+
+.user-panel {
     margin-left: auto;
-}
-.link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 16px;
-    background-color: $light-color;
-    cursor: pointer;
-    color: $primary-color;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 4px;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 1px 18px rgba(0, 0, 0, 0.12), 0px 6px 10px rgba(0, 0, 0, 0.14);
-    letter-spacing: 1.25px;
-    font-weight: 500;
+
+    &__link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 16px;
+        background-color: $light-color;
+        cursor: pointer;
+        color: $primary-color;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 4px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 1px 18px rgba(0, 0, 0, 0.12), 0px 6px 10px rgba(0, 0, 0, 0.14);
+        letter-spacing: 1.25px;
+        font-weight: 500;
+    }
+
+    &__button {
+        @extend .user-panel__link;
+        font-family: 'Roboto', sans-serif;
+        border: none;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 30px;
+    }
+
+    &__user-image {
+        background-color: $white-color;
+        border-radius: 50%;
+    }
 }
 
-.button {
-    @extend .link;
-    font-family: 'Roboto', sans-serif;
-    border: none;
-}
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    column-gap: 30px;
-}
 
-.userImage {
-    background-color: $white-color;
-    border-radius: 50%;
-}
+
+
+
+

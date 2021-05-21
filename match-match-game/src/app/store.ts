@@ -1,45 +1,27 @@
-import { IGameResult, IUser } from "../typing/interfaces";
-
-interface IScoreEntry {
-  user:  null | IUser;
-  score: number;
-}
-
-interface IState {
-  user: null | IUser
-  score: null | number
-  bestScores: IScoreEntry[]
-  gameSettings: {
-    difficult: string
-  }
-}
-
+import { IGameResult, IScoreEntry, IState, IUser } from '../typing/interfaces';
 
 class Store {
-  private state: IState
+  private state: IState;
   constructor(state?: IState) {
+    this.state = {
+      user: null,
+      score: null,
+      bestScores: [],
+      gameSettings: {
+        difficult: '3x4',
+      },
+    };
 
-   this.state = {
-    user: null,
-    score: null,
-    bestScores: [],
-    gameSettings: {
-      difficult: '3x4'
+    if (state) {
+      this.state = state;
     }
-   }
-
-   if (state) {
-    this.state = state;
-   }
-
   }
 
   saveUser(user: IUser): void {
     this.state = {
       ...this.state,
-      user
-    }
-    console.log('Store',this.state);
+      user,
+    };
   }
 
   isUserRegister(): boolean {
@@ -47,19 +29,23 @@ class Store {
   }
 
   saveResult(result: IGameResult): void {
-   const score = ((6 - result.mistakes) * 100) - (result.time * 10);
-   this.state.score = score;
+    const score = (6 - result.mistakes) * 100 - result.time * 10;
+    this.state.score = score;
 
-   const scoreBestEntry: IScoreEntry = {user: this.state.user, score: this.state.score};
-   this.state.bestScores?.push(scoreBestEntry);
-   console.log('Store',this.state);
+    const scoreBestEntry: IScoreEntry = {
+      user: this.state.user,
+      score: this.state.score,
+    };
+    this.state.bestScores?.push(scoreBestEntry);
   }
 
-  getBestScore() {
-    return new Promise<any>((resolve, reject) => {
-      const sortedBestScore = this.state.bestScores.sort((a, b) => b.score - a.score);
+  getBestScore(): Promise<IScoreEntry[]> {
+    return new Promise<IScoreEntry[]>((resolve) => {
+      const sortedBestScore = this.state.bestScores.sort(
+        (a, b) => b.score - a.score
+      );
       resolve(sortedBestScore);
-    }) 
+    });
   }
 }
 

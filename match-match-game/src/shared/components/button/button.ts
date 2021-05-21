@@ -1,9 +1,9 @@
 import BaseComponent from "../base-component/base-component";
-import style from './button.scss';
+import './button.scss';
 
 class Button extends BaseComponent {
   constructor(title: string, callback: (e: MouseEvent) => void) {
-    super('button', style.button);
+    super('button', "button-component");
     this.element.textContent = title;
     this.element.addEventListener('click', callback);
   }

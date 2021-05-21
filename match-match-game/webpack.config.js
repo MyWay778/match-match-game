@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -9,13 +10,13 @@ const devServer = (isDev) =>
   !isDev
     ? {}
     : {
-        devServer: {
-          open: false,
-          hot: true,
-          port: 3000,
-          contentBase: path.join(__dirname, 'public'),
-        },
-      };
+      devServer: {
+        open: false,
+        hot: true,
+        port: 3000,
+        contentBase: path.join(__dirname, 'public'),
+      },
+    };
 
 const esLintPlugin = (isDev) =>
   isDev ? [] : [new ESLintPlugin({ extensions: ['ts', 'js'] })];
@@ -54,9 +55,7 @@ module.exports = ({ development }) => ({
         test: /\.s[ac]ss$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          { loader: 'css-loader', options: { modules: {
-            localIdentName: "[local]--[hash:base64:5]",
-          } } },
+          { loader: 'css-loader' },
           {
             loader: 'sass-loader',
             options: {

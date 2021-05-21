@@ -1,42 +1,42 @@
 @use "../../../styles/variables" as *;
 
-.item {
+.score-item {
   width: 100%;
   max-width: 846px;
   display: flex;
   justify-content: space-between;
 }
 
-.leftPart {
+.score-item-left-part {
   display: flex;
   align-items: center;
   column-gap: 16px;
 }
 
-.userBlock {
+.score-item-left-part-user-block {
   display: flex;
   flex-direction: column;
   row-gap: 2px;
 }
 
-.userName {
+.score-item-left-part-user-block__user-name {
   font-weight: 500;
   letter-spacing: 0.1px;
 }
 
-.userEmail {
+.score-item-left-part-user-block__user-email {
   font-size: 12px;
   letter-spacing: 0.4px;
 }
-.rightPart {
+.score-item-right-part {
   display: flex;
   align-items: center;
   letter-spacing: 0.15px;
   font-weight: 500;
 }
-.score{
+.score-item-right-part__score {
   margin-right: 5px;
 }
-.scoreValue {
+.score-item-right-part__value {
   color: $primary-color;
 }

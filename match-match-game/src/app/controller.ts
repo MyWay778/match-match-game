@@ -1,19 +1,27 @@
+// eslint-disable-next-line import/no-cycle
 import { renderPosition } from '../app';
-import { IGameConnector, IHeadConnector, IRegistrationConnector, IScoreConnector, ISubscriber } from '../typing/interfaces';
+import {
+  IGameConnector,
+  IHeadConnector,
+  IRegistrationConnector,
+  IScoreConnector,
+  ISubscriber,
+  IGameResult,
+  IUser,
+  IScoreEntry,
+} from '../typing/interfaces';
 import RenderManager from './render-manager';
 import Store from './store';
-import { IGameResult, IUser } from '../typing/interfaces';
 import Header from '../components/header/header';
 import Game from '../components/game/game';
 import Score from '../components/score/score';
 
-
 interface IConnector {
-  router: ISubscriber,
-  header: IHeadConnector,
-  registration: IRegistrationConnector,
-  game: IGameConnector,
-  score: IScoreConnector
+  router: ISubscriber;
+  header: IHeadConnector;
+  registration: IRegistrationConnector;
+  game: IGameConnector;
+  score: IScoreConnector;
 }
 
 class Controller {
@@ -22,93 +30,91 @@ class Controller {
   game: Game | null = null;
   score: Score | null = null;
 
-  constructor(private readonly renderManager: RenderManager, private readonly store: Store) {
-
+  constructor(
+    private readonly renderManager: RenderManager,
+    private readonly store: Store
+  ) {
     this.connector = {
       router: {
         update: this.updateRoute,
       },
       header: {
         openRegister: this.openRegister,
-        connect: this.connectHeader
+        connect: this.connectHeader,
       },
       registration: {
         closeHandler: this.closeRegistration,
-        registerUser: this.registerUser
+        registerUser: this.registerUser,
       },
       game: {
         gameEndHandler: this.gameEndHandler,
-        connect: this.connectGame
+        connect: this.connectGame,
       },
       score: {
         getData: this.getBestScore,
-        connect: this.connectScore
-      } 
+        connect: this.connectScore,
+      },
     };
   }
-  
-  connectHeader = (header: Header) => {
+
+  connectHeader = (header: Header): void => {
     this.header = header;
-  }
+  };
 
-  connectGame = (game: Game) => {
-    this.game = game
-  }
+  connectGame = (game: Game): void => {
+    this.game = game;
+  };
 
-  connectScore = (score: Score) => {
+  connectScore = (score: Score): void => {
     this.score = score;
-  }
+  };
 
   private openRegister = () => {
     this.renderManager.createComponent('registration');
-    this.renderManager.connectComponent('registration', this.connector.registration);
+    this.renderManager.connectComponent(
+      'registration',
+      this.connector.registration
+    );
     this.renderManager.addComponent('registration', renderPosition.aside);
-  }
-  updateRoute = (newRoute:string):void => {
+  };
+
+  updateRoute = (newRoute: string): void => {
     if (newRoute === 'about') {
       this.renderManager.placeComponent('about', renderPosition.main);
       this.header?.makeActiveLink(0);
-    } 
 
-    else if (newRoute === 'game') {
-      console.log('game');
+    } else if (newRoute === 'game') {
       this.renderManager.createComponent('game');
       this.renderManager.connectComponent('game', this.connector.game);
       this.renderManager.placeComponent('game', renderPosition.main);
-      this.game?.initGame({size: '3x4'});
-    }
+      this.game?.initGame();
 
-    else if (newRoute === 'score') {
+    } else if (newRoute === 'score') {
       this.renderManager.createComponent('score');
       this.renderManager.connectComponent('score', this.connector.score);
       this.renderManager.placeComponent('score', renderPosition.main);
       this.header?.makeActiveLink(1);
-      this.store.getBestScore().then(result => {
+      this.store.getBestScore().then((result) => {
         this.score?.setData(result);
-      })
+      });
     }
-  }
+  };
 
-  closeRegistration = ():void => {
+  closeRegistration = (): void => {
     this.renderManager.removeComponent('registration');
-  }
+  };
 
-  registerUser = (newUser: IUser ):void => {
-    
+  registerUser = (newUser: IUser): void => {
     this.renderManager.removeComponent('registration');
     this.store.saveUser(newUser);
-    this.header?.registerUser({userImage: null});
-  }
+    this.header?.registerUser({ userImage: null });
+  };
 
-  gameEndHandler = (result: IGameResult):void => {
-    console.log(result);
+  gameEndHandler = (result: IGameResult): void => {
     this.store.saveResult(result);
+  };
 
-  }
-
-  getBestScore = (): Promise<any> => {
-    return this.store.getBestScore();
-  }
+  getBestScore = (): Promise<IScoreEntry[]> => this.store.getBestScore();
 }
 
 export default Controller;

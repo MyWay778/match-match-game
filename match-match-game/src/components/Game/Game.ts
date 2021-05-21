@@ -1,11 +1,12 @@
+// eslint-disable-next-line import/no-cycle
 import { IGameConnector, IGameResult } from '../../typing/interfaces';
-import Helper from "../common/helper";
-import GameModal from "./game-modal/game-modal";
-import s from './game.scss';
-import Timer from "./timer/timer";
+import Helper from '../common/helper';
+import GameModal from './game-modal/game-modal';
+import './game.scss';
+import Timer from './timer/timer';
+// eslint-disable-next-line import/no-cycle
 import ConnectorComponent from '../../shared/components/base-component/connector-component';
 import CardField from './card-field/card-field';
-
 
 class Game extends ConnectorComponent {
   container: HTMLElement;
@@ -15,9 +16,9 @@ class Game extends ConnectorComponent {
   connector: null | IGameConnector = null;
 
   constructor(root: HTMLElement) {
-    super('main', s.game, root);
+    super('main', 'game', root);
 
-    this.container = Helper.createElement('div', s.container);
+    this.container = Helper.createElement('div', 'game__container');
     this.element.appendChild(this.container);
     this.cardField = null;
     this.timer = new Timer();
@@ -25,15 +26,15 @@ class Game extends ConnectorComponent {
     this.gameModal = null;
   }
 
-  connect = (connector: IGameConnector) => {
+  connect = (connector: IGameConnector): void => {
     this.connector = connector;
     this.connector.connect(this);
-  }
+  };
 
-  async initGame(config: any): Promise<void> {
-    console.log('init Game, config: ', config);
-    
-    const response = await (await fetch('./assets/images/card-images.json')).json();
+  async initGame(): Promise<void> {
+    const response = await (
+      await fetch('./assets/images/card-images.json')
+    ).json();
     this.cardField = new CardField(response.animal, this.stopGame);
     this.container.appendChild(this.cardField.element);
 
@@ -42,33 +43,33 @@ class Game extends ConnectorComponent {
         this.cardField.flipAll();
         this.timer.countdown(5, this.startGame);
       }
-    }
-    window.setTimeout(preparing ,1000) // ???
+    };
+    window.setTimeout(preparing, 1000); // ???
   }
 
-  startGame = () => {
+  startGame = (): void => {
     this.cardField?.flipAll(false);
     this.timer.start();
     this.cardField?.addClickListeners();
-  }
+  };
 
-  stopGame = (mistakeCounter: number) => {
+  stopGame = (mistakeCounter: number): void => {
     const result: IGameResult = {
       mistakes: 0,
-      time: 0
+      time: 0,
     };
 
     result.mistakes = mistakeCounter;
     result.time = this.timer.stop();
 
-    //Move to controller!!!!
+    // Move to controller!!!!
     const removeModal = () => {
       if (this.gameModal) {
         this.gameModal.element.remove();
         this.gameModal = null;
         window.location.hash = 'score';
       }
-    }
+    };
 
     this.gameModal = new GameModal(result.time, result.mistakes, removeModal);
 
@@ -79,8 +80,7 @@ class Game extends ConnectorComponent {
     }
 
     this.connector?.gameEndHandler(result);
-  }
-
-} 
+  };
+}
 
 export default Game;

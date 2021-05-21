@@ -1,6 +1,6 @@
 @use '../../../styles/variables' as *;
 
-.card {
+.game-card {
   width: 168px;
   height: 168px;
   position: relative;
@@ -25,57 +25,56 @@
   height: 100%;
 }
 
-.back {
+.game-card__back {
   @extend %cardSides;
 }
 
-.front {
+.game-card__front {
   @extend %cardSides;
   transform: rotateY(180deg) translateZ(1px);
 }
 
-.flipped {
+.game-card_flipped {
   transform: rotateY(-180deg) translateZ(-50px);
 }
 
-.match > [class^="front"]::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(10, 207, 131, 0.5);
-    transform: translateZ(0px);
-    animation: appear 1s;
-    background-image: url('../../../assets/images/match.svg');
-    background-repeat: no-repeat;
-    background-position: 90% 10%;
-    cursor: default;
+.game-card_match > .game-card__front::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 207, 131, 0.5);
+  transform: translateZ(0px);
+  animation: appear 1s;
+  background-image: url("../../../assets/images/match.svg");
+  background-repeat: no-repeat;
+  background-position: 90% 10%;
+  cursor: default;
 }
 
-.noMatch > [class^="front"]::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(242, 78, 30, 0.5);
-    transform: translateZ(0px);
-    animation: appear 0.5s;
-    background-image: url('../../../assets/images/nomatch.svg');
-    background-repeat: no-repeat;
-    background-position: 90% 10%;
-    cursor: default;
+.game-card_nomatch > .game-card__front::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(242, 78, 30, 0.5);
+  transform: translateZ(0px);
+  animation: appear 0.5s;
+  background-image: url("../../../assets/images/nomatch.svg");
+  background-repeat: no-repeat;
+  background-position: 90% 10%;
+  cursor: default;
 }
-
 
 @keyframes appear {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 100%;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
 }

@@ -1,6 +1,6 @@
 import Helper from '../../common/helper';
 import Card from '../card/card';
-import s from './card-field.scss';
+import './card-field.scss';
 
 class CardField {
   element: HTMLElement;
@@ -10,10 +10,10 @@ class CardField {
   isMatching: boolean;
   mistakeCounter: number;
   matchedCardAmount: number;
-  gameEndSubscriber: Function;
+  gameEndSubscriber: (counter: number) => void;
 
-  constructor(images: string[], gameEndSubscriber: Function) {
-    this.element = Helper.createElement('section', s.cardField);
+  constructor(images: string[], gameEndSubscriber: (counter: number) => void) {
+    this.element = Helper.createElement('section', 'card-field');
     this.cards = [];
     this.images = images;
     this.currentCard = null;
@@ -27,7 +27,7 @@ class CardField {
     this.addCards();
   }
 
-  clickCardHandler = (card: any) => {
+  clickCardHandler = (card: Card): void => {
     const { currentCard } = this;
 
     if (!currentCard) {
@@ -62,7 +62,7 @@ class CardField {
     this.currentCard = null;
   };
 
-  addClickListeners() {
+  addClickListeners(): void {
     this.cards.forEach((card) => {
       card.onclick = () => {
         if (this.isMatching) {
@@ -87,7 +87,7 @@ class CardField {
     });
   }
 
-  flipAll(isFlipped = true) {
+  flipAll(isFlipped = true): void {
     this.cards.forEach((card) => card.flip(isFlipped));
   }
 

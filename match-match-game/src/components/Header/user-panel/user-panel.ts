@@ -1,11 +1,10 @@
 import Helper from '../../common/helper';
-import s from './user-panel.scss';
+import './user-panel.scss';
 import defaultUserImage from '../../../assets/images/avatar.webp';
 import { IUserData, IUserPanelConnector } from '../../../typing/interfaces';
 import ConnectorComponent from '../../../shared/components/base-component/connector-component';
 
 class UserPanel extends ConnectorComponent {
-  element: HTMLElement;
   private registerButton:HTMLButtonElement;
   private isRegistered:boolean;
   private isGame:boolean;
@@ -15,30 +14,27 @@ class UserPanel extends ConnectorComponent {
   private avatar:HTMLImageElement;
 
   constructor(isRegistered = false) {
-    super('section', s.user_panel);
-    this.element = Helper.createElement('section', s.user_panel);
+    super('section', 'user-panel');
     this.isRegistered = isRegistered;
     this.isGame = false;
 
     this.registerButton = document.createElement('button');
     this.registerButton.textContent = 'Register new player';
-    this.registerButton.classList.add(s.button);
-    // this.registerButton.href = '#registration';
-    // this.registerButton.onclick = handler.register;
+    this.registerButton.classList.add('user-panel__button');
 
-    this.container = Helper.createElement('div', s.container);
+    this.container = Helper.createElement('div', 'user-panel__container');
     this.startGameLink = document.createElement('a');
-    this.startGameLink.classList.add(s.link);
+    this.startGameLink.classList.add('user-panel__link');
     this.startGameLink.textContent = 'Start game';
     this.startGameLink.href = '#game';
 
     this.stopGameLink = document.createElement('a');
-    this.stopGameLink.classList.add(s.link);
+    this.stopGameLink.classList.add('user-panel__link');
     this.stopGameLink.textContent = 'Stop game';
     this.stopGameLink.href = '#about';
 
     this.avatar = new Image(40, 40);
-    this.avatar.classList.add(s.userImage);
+    this.avatar.classList.add('user-panel__user-image');
     this.avatar.src = defaultUserImage;
     this.avatar.alt = 'User image';
 
