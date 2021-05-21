@@ -5,6 +5,7 @@ import './card.scss';
 class Card {
   element: HTMLElement;
   handler: null | ((e: MouseEvent) => void);
+  isDisabled = false;
 
   constructor(frontImage: string, id?: number) {
     this.element = Helper.createElement('figure', 'game-card');
@@ -20,12 +21,8 @@ class Card {
         </div>`;
   }
 
-  flip(isFlipped = true): Promise<void> {
-    if (isFlipped) {
-      this.element.classList.add('game-card_flipped');
-    } else {
-      this.element.classList.remove('game-card_flipped');
-    }
+  flipUp = (): Promise<void> => {
+    this.element.classList.add('game-card_flipped');
 
     return new Promise<void>((resolve) => {
       this.element.addEventListener(
@@ -36,7 +33,21 @@ class Card {
         { once: true }
       );
     });
-  }
+  };
+
+  flipDown = (): Promise<void> => {
+    this.element.classList.remove('game-card_flipped');
+
+    return new Promise<void>((resolve) => {
+      this.element.addEventListener(
+        'transitionend',
+        () => {
+          resolve();
+        },
+        { once: true }
+      );
+    });
+  };
 
   match(isMatch = true): Promise<void> {
     if (isMatch) {
@@ -67,7 +78,7 @@ class Card {
     return new Promise<void>((resolve) => {
       this.element.addEventListener('animationend', () => {
         resolve();
-      });
+      }, { once: true });
     });
   }
 

@@ -7,7 +7,6 @@ class CardField {
   cards: Card[];
   images: string[];
   currentCard: null | Card;
-  isMatching: boolean;
   mistakeCounter: number;
   matchedCardAmount: number;
   gameEndSubscriber: (counter: number) => void;
@@ -17,7 +16,6 @@ class CardField {
     this.cards = [];
     this.images = images;
     this.currentCard = null;
-    this.isMatching = false;
     this.mistakeCounter = 0;
     this.matchedCardAmount = 0;
     this.gameEndSubscriber = gameEndSubscriber;
@@ -27,17 +25,12 @@ class CardField {
     this.addCards();
   }
 
-  clickCardHandler = (card: Card): void => {
-    const { currentCard } = this;
-
-    if (!currentCard) {
-      return;
-    }
-    if (currentCard.element === card.element) {
-      return;
-    }
+  clickCardHandler = (currentCard: Card, card: Card): void => {
 
     if (currentCard.element.dataset.id === card.element.dataset.id) {
+      currentCard.disableOnclick();
+      card.disableOnclick();
+
       Promise.all([currentCard.match(), card.match()]).then(() => {
         this.matchedCardAmount += 1;
         if (this.matchedCardAmount >= 6) {
@@ -45,50 +38,55 @@ class CardField {
         }
       });
 
-      currentCard.disableOnclick();
-      card.disableOnclick();
     } else {
       this.mistakeCounter += 1;
-      currentCard
-        .noMatch()
-        .then(() =>
-          currentCard.flip(false).then(() => currentCard.noMatch(false))
-        );
-      card
-        .noMatch()
-        .then(() => card.flip(false).then(() => card.noMatch(false)));
-    }
 
-    this.currentCard = null;
+      currentCard.noMatch().then(() => {
+        currentCard.flipDown();
+        currentCard.noMatch(false);
+        currentCard.isDisabled = false;
+      });
+
+      card.noMatch().then(() => {
+        card.flipDown();
+        card.noMatch(false);
+        card.isDisabled = false;
+      });
+    }
   };
 
   addClickListeners(): void {
     this.cards.forEach((card) => {
       card.onclick = () => {
-        if (this.isMatching) {
+
+        if (card.isDisabled) {
           return;
         }
 
-        if (!this.currentCard) {
-          card.flip();
-          this.currentCard = card;
-        } else {
-          if (this.currentCard.element === card.element) {
-            return;
-          }
-
-          this.isMatching = true;
-          card.flip().then(() => {
-            this.clickCardHandler(card);
-            this.isMatching = false;
+        if (this.currentCard) {
+          const current = this.currentCard;
+          card.isDisabled = true;
+        
+          card.flipUp().then(() => {
+            this.clickCardHandler(current, card);
           });
+          this.currentCard = null;
+          
+        } else {
+          card.flipUp();
+          this.currentCard = card;
+          this.currentCard.isDisabled = true;
         }
       };
     });
   }
 
   flipAll(isFlipped = true): void {
-    this.cards.forEach((card) => card.flip(isFlipped));
+    if (isFlipped) {
+      this.cards.forEach((card) => card.flipUp());
+    } else {
+      this.cards.forEach((card) => card.flipDown());
+    }
   }
 
   private fillCards(): void {
