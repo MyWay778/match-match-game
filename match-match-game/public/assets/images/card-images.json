@@ -1,10 +1,22 @@
 {
   "animal": [
-    "./assets/images/animal/0.jpg",
-    "./assets/images/animal/1.jpg",
-    "./assets/images/animal/2.jpg",
-    "./assets/images/animal/3.jpg",
-    "./assets/images/animal/4.jpg",
-    "./assets/images/animal/5.jpg"
+    "./assets/images/animal/0.webp",
+    "./assets/images/animal/1.webp",
+    "./assets/images/animal/2.webp",
+    "./assets/images/animal/3.webp",
+    "./assets/images/animal/4.webp",
+    "./assets/images/animal/5.webp",
+    "./assets/images/animal/6.webp",
+    "./assets/images/animal/7.webp",
+    "./assets/images/animal/8.webp",
+    "./assets/images/animal/9.webp",
+    "./assets/images/animal/10.webp",
+    "./assets/images/animal/11.webp",
+    "./assets/images/animal/12.webp",
+    "./assets/images/animal/13.webp",
+    "./assets/images/animal/14.webp",
+    "./assets/images/animal/15.webp",
+    "./assets/images/animal/16.webp",
+    "./assets/images/animal/17.webp"
   ]
 }

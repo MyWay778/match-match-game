@@ -1,4 +1,5 @@
-import { IGameResult, IState, IUser, IUserDB } from '../typing/interfaces';
+import { TDifficulty } from '../typing/types';
+import { IGameResult, ISettings, IState, IUser, IUserDB } from '../typing/interfaces';
 import DBController from './db-controller';
 
 class Store {
@@ -12,7 +13,8 @@ class Store {
       score: null,
       bestScores: [],
       gameSettings: {
-        difficult: '3x4',
+        difficulty: '6',
+        categories: 'animal'
       },
     };
 
@@ -35,16 +37,12 @@ class Store {
     this.dbController.addPlayer(user);
   }
 
-  private getBestScoreDB = () => {
-
-  }
-
   isUserRegister(): boolean {
     return !!this.state.name;
   }
 
   saveResult(result: IGameResult): void {
-    let score = (6 - result.mistakes) * 100 - result.time * 10;
+    let score = (Number(this.state.gameSettings.difficulty) - result.mistakes) * 100 - result.time * 10;
     if (score < 0) {
       score = 0;
     }
@@ -64,6 +62,12 @@ class Store {
     this.state.bestScores = result.sort((a, b) => b.score - a.score);
     return this.state.bestScores;
   }
+
+  setGameDifficulty = (difficulty: TDifficulty): void => {
+    this.state.gameSettings.difficulty = difficulty;
+  }
+
+  getSettings = (): ISettings => this.state.gameSettings;
 }
 
 export default Store;

@@ -1,3 +1,4 @@
+import { TCardSize } from '../../../typing/card-size';
 import Helper from '../../common/helper';
 import Card from '../card/card';
 import './card-field.scss';
@@ -5,20 +6,24 @@ import './card-field.scss';
 class CardField {
   element: HTMLElement;
   cards: Card[];
-  images: string[];
   currentCard: null | Card;
   mistakeCounter: number;
   matchedCardAmount: number;
   gameEndSubscriber: (counter: number) => void;
+  private readonly difficulty: number;
 
-  constructor(images: string[], gameEndSubscriber: (counter: number) => void) {
+  constructor(
+    private readonly images: string[],
+    difficulty: string,
+    gameEndSubscriber: (counter: number) => void
+  ) {
     this.element = Helper.createElement('section', 'card-field');
     this.cards = [];
-    this.images = images;
     this.currentCard = null;
     this.mistakeCounter = 0;
     this.matchedCardAmount = 0;
     this.gameEndSubscriber = gameEndSubscriber;
+    this.difficulty = Number(difficulty);
 
     this.fillCards();
     this.shuffle();
@@ -26,18 +31,16 @@ class CardField {
   }
 
   clickCardHandler = (currentCard: Card, card: Card): void => {
-
     if (currentCard.element.dataset.id === card.element.dataset.id) {
       currentCard.disableOnclick();
       card.disableOnclick();
 
       Promise.all([currentCard.match(), card.match()]).then(() => {
         this.matchedCardAmount += 1;
-        if (this.matchedCardAmount >= 6) {
+        if (this.matchedCardAmount >= this.difficulty) {
           this.gameEndSubscriber(this.mistakeCounter);
         }
       });
-
     } else {
       this.mistakeCounter += 1;
 
@@ -58,7 +61,6 @@ class CardField {
   addClickListeners(): void {
     this.cards.forEach((card) => {
       card.onclick = () => {
-
         if (card.isDisabled) {
           return;
         }
@@ -66,12 +68,11 @@ class CardField {
         if (this.currentCard) {
           const current = this.currentCard;
           card.isDisabled = true;
-        
+
           card.flipUp().then(() => {
             this.clickCardHandler(current, card);
           });
           this.currentCard = null;
-          
         } else {
           card.flipUp();
           this.currentCard = card;
@@ -90,8 +91,17 @@ class CardField {
   }
 
   private fillCards(): void {
-    for (let i = 0; i < this.images.length; i++) {
-      this.cards.push(new Card(this.images[i], i), new Card(this.images[i], i));
+    let size: TCardSize = 'large';
+    if (this.difficulty === 8) {
+      size = 'medium';
+      this.element.classList.add('card-field_medium-gap')
+    }
+    if (this.difficulty === 16) {
+      size = 'small';
+    }
+
+    for (let i = 0; i < this.difficulty; i++) {
+      this.cards.push(new Card(this.images[i], i, size), new Card(this.images[i], i, size));
     }
   }
 

@@ -11,7 +11,12 @@
   user-select: none;
 }
 
-.card img {
+.game-card_medium {
+  width: 140px;
+  height: 140px;
+}
+
+.game-card img {
   display: inline-block;
   width: 100%;
   height: 100%;

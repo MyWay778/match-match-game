@@ -1,10 +1,11 @@
 import About from 'src/components/about/about';
 import Registration from 'src/components/registration/registration';
-import Settings from 'src/components/settings/settings';
+import Settings from '../components/settings/settings';
 import Game from '../components/game/game';
 import Header from '../components/header/header';
 import Score from '../components/score/score';
 import BaseComponent from '../shared/components/base-component/base-component';
+import { TCategories, TDifficulty } from './types';
 
 export interface IUserData {
   userImage: string | null;
@@ -27,11 +28,11 @@ export interface IUser {
 }
 
 export interface IUserDB {
-  name: string,
-  email: string,
-  score: number,
-  id?: number
-} 
+  name: string;
+  email: string;
+  score: number;
+  id?: number;
+}
 
 // export interface IRegistrationConnector {
 //   closeHandler: () => void;
@@ -46,7 +47,7 @@ export interface IComponent {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IConnector {}
 
-export interface ISubscriber extends IConnector{
+export interface ISubscriber extends IConnector {
   update: (newRoute: string) => void;
 }
 
@@ -55,7 +56,7 @@ export interface IHeadConnector extends IConnector {
   connect: (header: Header) => void;
 }
 
-export type IUserPanelConnector = IHeadConnector
+export type IUserPanelConnector = IHeadConnector;
 
 export interface IRegistrationConnector extends IConnector {
   closeHandler: () => void;
@@ -69,6 +70,11 @@ export interface IScoreConnector extends IConnector {
   getData: () => Promise<IUserDB[]>;
   connect: (score: Score) => void;
 }
+export interface ISettingsConnector extends IConnector {
+  setCardCategory: (category: any) => void;
+  setGameDifficulty: (difficulty: TDifficulty) => void;
+  connect: (settings: Settings) => void;
+}
 
 export interface IScoreEntry {
   user: null | string;
@@ -76,24 +82,26 @@ export interface IScoreEntry {
   score: number;
 }
 
+export interface ISettings {
+  difficulty: TDifficulty,
+  categories: TCategories
+}
+
 export interface IState {
   name: null | string;
   email: null | string;
   score: null | number;
   bestScores: IUserDB[];
-  gameSettings: {
-    difficult: string;
-  };
+  gameSettings: ISettings
 }
 
-
 export interface IComponents {
-  header: null | Header,
-  about: null | About,
-  registration: null | Registration,
-  game: null | Game,
-  score: null | Score,
-  settings: null | Settings
+  header: null | Header;
+  about: null | About;
+  registration: null | Registration;
+  game: null | Game;
+  score: null | Score;
+  settings: null | Settings;
 }
 
 export interface IConnectors {
@@ -102,6 +110,11 @@ export interface IConnectors {
   registration: IRegistrationConnector;
   game: IGameConnector;
   score: IScoreConnector;
+  settings: ISettingsConnector;
 }
 
-export type TConnectors = IHeadConnector & IRegistrationConnector & IGameConnector & IScoreConnector;
+export type TConnectors = IHeadConnector &
+  IRegistrationConnector &
+  IGameConnector &
+  IScoreConnector &
+  ISettingsConnector;

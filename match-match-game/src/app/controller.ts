@@ -1,3 +1,4 @@
+import { TDifficulty } from '../typing/types';
 // eslint-disable-next-line import/no-cycle
 import { renderPosition } from '../app';
 import {
@@ -6,18 +7,21 @@ import {
   IUserDB,
   IConnectors,
   TConnectors,
+  ISettings,
 } from '../typing/interfaces';
 import RenderManager from './render-manager';
 import Store from './store';
 import Header from '../components/header/header';
 import Game from '../components/game/game';
 import Score from '../components/score/score';
+import Settings from '../components/settings/settings';
 
 class Controller {
   connector: IConnectors;
   header: Header | null = null;
   game: Game | null = null;
   score: Score | null = null;
+  settings: Settings | null = null;
 
   constructor(
     private readonly renderManager: RenderManager,
@@ -43,6 +47,11 @@ class Controller {
         getData: this.getBestScore,
         connect: this.connectScore,
       },
+      settings: {
+        setCardCategory: this.setCardCategory,
+        setGameDifficulty: this.setGameDifficulty,
+        connect: this.connectSettings,
+      },
     };
 
     this.renderManager.connectComponent(
@@ -61,6 +70,10 @@ class Controller {
 
   connectScore = (score: Score): void => {
     this.score = score;
+  };
+
+  connectSettings = (settings: Settings): void => {
+    this.settings = settings;
   };
 
   private openRegister = () => {
@@ -83,7 +96,8 @@ class Controller {
         this.connector.game as TConnectors
       );
       this.renderManager.placeComponent('game', renderPosition.main);
-      this.game?.initGame();
+      const settings = this.store.getSettings();
+      this.game?.initGame(settings.difficulty);
     } else if (newRoute === 'score') {
       this.renderManager.createComponent('score');
       this.renderManager.connectComponent(
@@ -96,8 +110,13 @@ class Controller {
         this.score?.setData(result);
       });
     } else if (newRoute === 'settings') {
-      console.log('settings');
       this.renderManager.createComponent('settings');
+      this.renderManager.connectComponent(
+        'settings',
+        this.connector.settings as TConnectors
+      );
+      const settings = this.store.getSettings();
+      this.settings?.setValues(settings);
       this.renderManager.placeComponent('settings', renderPosition.main);
       this.header?.makeActiveLink(2);
     }
@@ -118,6 +137,16 @@ class Controller {
   };
 
   getBestScore = (): Promise<IUserDB[]> => this.store.getBestScore();
+
+  setCardCategory = (cardCategory: string): void => {
+    console.log('Set category ', cardCategory);
+  };
+
+  setGameDifficulty = (difficulty: TDifficulty): void => {
+    this.store.setGameDifficulty(difficulty);
+  };
+
+  getSettings = (): ISettings => this.store.getSettings();
 }
 
 export default Controller;

@@ -1,3 +1,4 @@
+import { TCardSize } from '../../../typing/card-size';
 import imageBack from '../../../assets/images/back-card-image.jpg';
 import Helper from '../../common/helper';
 import './card.scss';
@@ -7,9 +8,12 @@ class Card {
   handler: null | ((e: MouseEvent) => void);
   isDisabled = false;
 
-  constructor(frontImage: string, id?: number) {
+  constructor(frontImage: string, id?: number, size: TCardSize = 'large') {
     this.element = Helper.createElement('figure', 'game-card');
     this.element.dataset.id = String(id);
+    if (size !== 'large') {
+      this.element.classList.add(`game-card_${size}`);
+    }
     this.handler = null;
 
     this.element.innerHTML = `

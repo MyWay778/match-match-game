@@ -1,0 +1,1 @@
+export type TCardSize = 'small'| 'medium' | 'large';

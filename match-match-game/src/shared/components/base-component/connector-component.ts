@@ -9,7 +9,7 @@ class ConnectorComponent extends BaseComponent {
     this.connector = null;
   }
 
-  connect(connector: IConnector) {
+  connect(connector: IConnector): void {
     this.connector = connector;
   }
 }

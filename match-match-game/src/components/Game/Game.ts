@@ -31,11 +31,11 @@ class Game extends ConnectorComponent {
     this.connector.connect(this);
   };
 
-  async initGame(): Promise<void> {
+  async initGame(difficulty: string): Promise<void> {
     const response = await (
       await fetch('./assets/images/card-images.json')
     ).json();
-    this.cardField = new CardField(response.animal, this.stopGame);
+    this.cardField = new CardField(response.animal, difficulty, this.stopGame);
     this.container.appendChild(this.cardField.element);
 
     const preparing = () => {

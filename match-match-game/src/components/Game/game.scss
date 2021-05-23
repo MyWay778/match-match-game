@@ -9,7 +9,7 @@
 .game__container {
   width: 100%;
   max-width: 1000px;
-  height: 802px;
+  min-height: 802px;
   display: flex;
   flex-direction: column;
   justify-content: start;
