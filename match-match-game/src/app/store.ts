@@ -1,10 +1,14 @@
-import { IGameResult, IScoreEntry, IState, IUser } from '../typing/interfaces';
+import { IGameResult, IState, IUser, IUserDB } from '../typing/interfaces';
+import DBController from './db-controller';
 
 class Store {
+  dbController: DBController;
+
   private state: IState;
   constructor(state?: IState) {
     this.state = {
-      user: null,
+      name: null,
+      email: null,
       score: null,
       bestScores: [],
       gameSettings: {
@@ -15,37 +19,50 @@ class Store {
     if (state) {
       this.state = state;
     }
+
+    this.dbController = new DBController();
   }
 
   saveUser(user: IUser): void {
     this.state = {
       ...this.state,
-      user,
+      name: `${user.firstName} ${user.lastName}`,
+      email: user.email,
     };
+  }
+
+  private saveToDB(user: IUserDB): void {
+    this.dbController.addPlayer(user);
+  }
+
+  private getBestScoreDB = () => {
+
   }
 
   isUserRegister(): boolean {
-    return !!this.state.user;
+    return !!this.state.name;
   }
 
   saveResult(result: IGameResult): void {
-    const score = (6 - result.mistakes) * 100 - result.time * 10;
+    let score = (6 - result.mistakes) * 100 - result.time * 10;
+    if (score < 0) {
+      score = 0;
+    }
     this.state.score = score;
 
-    const scoreBestEntry: IScoreEntry = {
-      user: this.state.user,
+    const scoreBestEntry: IUserDB = {
+      name: this.state.name || 'noname',
+      email: this.state.email || '',
       score: this.state.score,
     };
     this.state.bestScores?.push(scoreBestEntry);
+    this.saveToDB(scoreBestEntry);
   }
 
-  getBestScore(): Promise<IScoreEntry[]> {
-    return new Promise<IScoreEntry[]>((resolve) => {
-      const sortedBestScore = this.state.bestScores.sort(
-        (a, b) => b.score - a.score
-      );
-      resolve(sortedBestScore);
-    });
+  async getBestScore(): Promise<IUserDB[]> {
+    const result = await this.dbController.getPlayersByScore();
+    this.state.bestScores = result.sort((a, b) => b.score - a.score);
+    return this.state.bestScores;
   }
 }
 

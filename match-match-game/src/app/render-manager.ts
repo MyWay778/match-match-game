@@ -1,9 +1,9 @@
-import Registration from "../components/registration/registration";
-import ConnectorComponent from "../shared/components/base-component/connector-component";
+import Registration from '../components/registration/registration';
+import ConnectorComponent from '../shared/components/base-component/connector-component';
 import Game from '../components/game/game';
 import Score from '../components/score/score';
-import BaseComponent from "src/shared/components/base-component/base-component";
-
+import { IComponents, IConnector, TConnectors, } from '../typing/interfaces';
+import BaseComponent from '../shared/components/base-component/base-component';
 
 // const componentList = {
 //   registration: Registration
@@ -14,93 +14,95 @@ import BaseComponent from "src/shared/components/base-component/base-component";
 // }
 // const registrationInstance  = componentFactory('registration', componentList, document.createElement('div'));
 
-
 class RenderManager {
-  connector: null | any;
+  private connector: null | IConnector = null;
 
-  constructor(private readonly root: HTMLElement, private readonly components: any, private readonly renderList: any[]) {
-    this.renderList.forEach(component => {
-      component.checkParent() && component.render();
-    })
+  constructor(
+    private readonly root: HTMLElement,
+    private readonly components: IComponents,
+    private readonly renderList: Array<BaseComponent | null>
+  ) {
+    this.renderList.forEach((component) => {
+      if (component?.checkParent()) {
+        component.render();
+      }
+    });
   }
-  connect(connector: any) {
+
+  connect(connector: IConnector): void {
     this.connector = connector;
+    this.renderList.forEach((component) => {
+      if (component instanceof ConnectorComponent) {
+        const componentKeys = Object.keys(this.components);
 
-    // this.components.find(component => {
-    //   this.connectComponent(component)
-    // })
-
-    this.renderList.forEach( component => {
-       if(component instanceof ConnectorComponent) {
-        for (let key in this.components) {
-          const suitableConnector = this.connector[key];
-          if (suitableConnector) {
-            component.connect(suitableConnector);
+        componentKeys.forEach((key: string) => {
+          if (this.connector) {
+            const suitableConnector = this.connector[key as keyof IConnector];
+            if (suitableConnector) {
+              component.connect(suitableConnector);
+            }
           }
-        }
-       }
-    })
+        });
+      }
+    });
   }
 
-  addComponent(componentName: string, renderPosition: number) {
+  addComponent(componentName: keyof IComponents, renderPosition: number): void {
     const component = this.components[componentName];
-   if (this.renderList[renderPosition] !== component) {
-    this.renderList[renderPosition] = component;
-    component.checkParent() && component.render()
-   }
+    if (this.renderList[renderPosition] !== component) {
+      this.renderList[renderPosition] = component;
+      if (component?.checkParent()) {
+        component.render();
+      }
+    }
   }
 
-  placeComponent(componentName: string, renderPosition: number) {
-    
+  placeComponent(
+    componentName: keyof IComponents,
+    renderPosition: number
+  ): void {
     const target = this.components[componentName];
-    if (this.renderList[renderPosition]) {
-      this.renderList[renderPosition].element.replaceWith(target.element);
+    if (this.renderList[renderPosition] && target) {
+      this.renderList[renderPosition]?.element.replaceWith(target?.element);
       this.renderList[renderPosition] = target;
-      
     } else {
-      target.checkParent() && target.render();
+      if (target?.checkParent()) {
+        target.render();
+      }
       this.renderList[renderPosition] = target;
     }
-    console.log(this)
   }
 
-  createComponent(componentName: string) {
+  createComponent(componentName: keyof IComponents): void {
     if (componentName === 'registration') {
-      const component: any =  new Registration(this.root); // any
-      this.components['registration'] = component;
-
+      const component: Registration = new Registration(this.root);
+      this.components.registration = component;
     } else if (componentName === 'game') {
-      const component: any =  new Game(this.root); // any
-      this.components['game'] = component;
-
+      const component: Game = new Game(this.root);
+      this.components.game = component;
     } else if (componentName === 'score') {
-      const component: any =  new Score(this.root); // any
-      this.components['score'] = component;
+      const component: Score = new Score(this.root);
+      this.components.score = component;
     }
   }
 
-  removeComponent(componentName: string) {
-    console.log(this);
+  removeComponent(componentName: keyof IComponents): void {
     const target = this.components[componentName];
-    const removeComponent = this.renderList.find(component => component === target);
-    removeComponent.element.remove();
-    console.log(this);
+    const removeComponent = this.renderList.find(
+      (component) => component === target
+    );
+    removeComponent?.element.remove();
   }
 
-  connectComponent(componentName: string, connector: any) {
+  connectComponent (
+    componentName: keyof IComponents,
+    connector: TConnectors
+  ): void {
     const target = this.components[componentName];
-
     if (target && target instanceof ConnectorComponent) {
-      target.connect(connector);
+      target?.connect(connector);
     }
   }
-
-  // showAbout() {
-  //   if (this.root.children[1] !== this.about.element) {
-  //     this.root.children[1].replaceWith(this.about.element);
-  //     this.header.setIsGame(false);
-  //   }
-  // }
 }
 
 export default RenderManager;

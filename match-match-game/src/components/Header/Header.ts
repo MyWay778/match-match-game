@@ -31,12 +31,13 @@ class Header extends ConnectorComponent {
     this.element.appendChild(container);
   }
 
-  connect(connector: IHeadConnector){
-    connector.connect(this);
+  connect(connector: IHeadConnector): void{
+    console.log(connector)
+    connector?.connect(this);
     this.userPanel.connect(connector);
   }
 
-  registerUser = (userData: IUserData) =>  {
+  registerUser = (userData: IUserData): void =>  {
     console.log('Header, register')
     this.userPanel.registerUser(userData);
   }

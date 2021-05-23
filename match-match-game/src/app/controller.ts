@@ -1,14 +1,11 @@
 // eslint-disable-next-line import/no-cycle
 import { renderPosition } from '../app';
 import {
-  IGameConnector,
-  IHeadConnector,
-  IRegistrationConnector,
-  IScoreConnector,
-  ISubscriber,
   IGameResult,
   IUser,
-  IScoreEntry,
+  IUserDB,
+  IConnectors,
+  TConnectors,
 } from '../typing/interfaces';
 import RenderManager from './render-manager';
 import Store from './store';
@@ -16,16 +13,8 @@ import Header from '../components/header/header';
 import Game from '../components/game/game';
 import Score from '../components/score/score';
 
-interface IConnector {
-  router: ISubscriber;
-  header: IHeadConnector;
-  registration: IRegistrationConnector;
-  game: IGameConnector;
-  score: IScoreConnector;
-}
-
 class Controller {
-  connector: IConnector;
+  connector: IConnectors;
   header: Header | null = null;
   game: Game | null = null;
   score: Score | null = null;
@@ -55,6 +44,8 @@ class Controller {
         connect: this.connectScore,
       },
     };
+
+    this.renderManager.connectComponent('header', this.connector.header as TConnectors);
   }
 
   connectHeader = (header: Header): void => {
@@ -73,7 +64,7 @@ class Controller {
     this.renderManager.createComponent('registration');
     this.renderManager.connectComponent(
       'registration',
-      this.connector.registration
+      this.connector.registration as TConnectors
     );
     this.renderManager.addComponent('registration', renderPosition.aside);
   };
@@ -82,16 +73,20 @@ class Controller {
     if (newRoute === 'about') {
       this.renderManager.placeComponent('about', renderPosition.main);
       this.header?.makeActiveLink(0);
-
     } else if (newRoute === 'game') {
       this.renderManager.createComponent('game');
-      this.renderManager.connectComponent('game', this.connector.game);
+      this.renderManager.connectComponent(
+        'game',
+        this.connector.game as TConnectors
+      );
       this.renderManager.placeComponent('game', renderPosition.main);
       this.game?.initGame();
-
     } else if (newRoute === 'score') {
       this.renderManager.createComponent('score');
-      this.renderManager.connectComponent('score', this.connector.score);
+      this.renderManager.connectComponent(
+        'score',
+        this.connector.score as TConnectors
+      );
       this.renderManager.placeComponent('score', renderPosition.main);
       this.header?.makeActiveLink(1);
       this.store.getBestScore().then((result) => {
@@ -114,7 +109,7 @@ class Controller {
     this.store.saveResult(result);
   };
 
-  getBestScore = (): Promise<IScoreEntry[]> => this.store.getBestScore();
+  getBestScore = (): Promise<IUserDB[]> => this.store.getBestScore();
 }
 
 export default Controller;

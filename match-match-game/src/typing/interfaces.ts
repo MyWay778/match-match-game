@@ -1,3 +1,5 @@
+import About from 'src/components/about/about';
+import Registration from 'src/components/registration/registration';
 import Game from '../components/game/game';
 import Header from '../components/header/header';
 import Score from '../components/score/score';
@@ -23,6 +25,13 @@ export interface IUser {
   image: null;
 }
 
+export interface IUserDB {
+  name: string,
+  email: string,
+  score: number,
+  id?: number
+} 
+
 // export interface IRegistrationConnector {
 //   closeHandler: () => void;
 //   registerUser: (newUser: IUser) => void;
@@ -33,18 +42,19 @@ export interface IComponent {
   component: null | BaseComponent;
 }
 
-export interface ISubscriber {
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface IConnector {}
+
+export interface ISubscriber extends IConnector{
   update: (newRoute: string) => void;
 }
-
-// tslint:disable-next-line
-export interface IConnector {}
 
 export interface IHeadConnector extends IConnector {
   openRegister: () => void;
   connect: (header: Header) => void;
 }
-export interface IUserPanelConnector extends IHeadConnector {}
+
+export type IUserPanelConnector = IHeadConnector
 
 export interface IRegistrationConnector extends IConnector {
   closeHandler: () => void;
@@ -55,20 +65,41 @@ export interface IGameConnector extends IConnector {
   connect: (game: Game) => void;
 }
 export interface IScoreConnector extends IConnector {
-  getData: () => Promise<any>;
+  getData: () => Promise<IUserDB[]>;
   connect: (score: Score) => void;
 }
 
 export interface IScoreEntry {
-  user: null | IUser;
+  user: null | string;
+  email: null | string;
   score: number;
 }
 
 export interface IState {
-  user: null | IUser;
+  name: null | string;
+  email: null | string;
   score: null | number;
-  bestScores: IScoreEntry[];
+  bestScores: IUserDB[];
   gameSettings: {
     difficult: string;
   };
 }
+
+
+export interface IComponents {
+  header: null | Header,
+  about: null | About,
+  registration: null | Registration,
+  game: null | Game,
+  score: null | Score
+}
+
+export interface IConnectors {
+  router: ISubscriber;
+  header: IHeadConnector;
+  registration: IRegistrationConnector;
+  game: IGameConnector;
+  score: IScoreConnector;
+}
+
+export type TConnectors = IHeadConnector & IRegistrationConnector & IGameConnector & IScoreConnector;

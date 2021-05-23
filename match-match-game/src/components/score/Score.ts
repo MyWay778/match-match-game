@@ -3,7 +3,7 @@ import ConnectorComponent from '../../shared/components/base-component/connector
 import Container from '../../shared/components/container/container';
 import PageTitle from '../../shared/components/page-title/page-title';
 // eslint-disable-next-line import/no-cycle
-import { IScoreConnector, IScoreEntry } from '../../typing/interfaces';
+import { IScoreConnector, IUserDB } from '../../typing/interfaces';
 import Helper from '../common/helper';
 import ScoreItem from './score-item/score-item';
 import './score.scss';
@@ -34,7 +34,7 @@ class Score extends ConnectorComponent {
     this.connector.connect(this);
   };
 
-  setData(data: IScoreEntry[]): void {
+  setData(data: IUserDB[]): void {
     if (!data.length) {
       this.playerList.replaceWith(
         Helper.createTextElement(
@@ -46,11 +46,11 @@ class Score extends ConnectorComponent {
       return;
     }
 
-    data.forEach((userData: IScoreEntry) => {
+    data.forEach((userData: IUserDB) => {
       const item = new ScoreItem(
-        `${userData.user?.firstName} ${userData.user?.lastName}`,
-        userData.user?.email,
-        userData?.score
+        userData.name,
+        userData.email,
+        userData.score
       );
       this.playerList.append(item.element);
     });
