@@ -4,6 +4,7 @@ import Game from '../components/game/game';
 import Score from '../components/score/score';
 import { IComponents, IConnector, TConnectors, } from '../typing/interfaces';
 import BaseComponent from '../shared/components/base-component/base-component';
+import Settings from '../components/settings/settings';
 
 // const componentList = {
 //   registration: Registration
@@ -83,6 +84,9 @@ class RenderManager {
     } else if (componentName === 'score') {
       const component: Score = new Score(this.root);
       this.components.score = component;
+    } else if (componentName === 'settings') {
+      const component: Settings = new Settings(this.root);
+      this.components.settings = component;
     }
   }
 

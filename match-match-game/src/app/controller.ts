@@ -45,7 +45,10 @@ class Controller {
       },
     };
 
-    this.renderManager.connectComponent('header', this.connector.header as TConnectors);
+    this.renderManager.connectComponent(
+      'header',
+      this.connector.header as TConnectors
+    );
   }
 
   connectHeader = (header: Header): void => {
@@ -92,6 +95,11 @@ class Controller {
       this.store.getBestScore().then((result) => {
         this.score?.setData(result);
       });
+    } else if (newRoute === 'settings') {
+      console.log('settings');
+      this.renderManager.createComponent('settings');
+      this.renderManager.placeComponent('settings', renderPosition.main);
+      this.header?.makeActiveLink(2);
     }
   };
 

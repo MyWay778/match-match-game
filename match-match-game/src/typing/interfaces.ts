@@ -1,5 +1,6 @@
 import About from 'src/components/about/about';
 import Registration from 'src/components/registration/registration';
+import Settings from 'src/components/settings/settings';
 import Game from '../components/game/game';
 import Header from '../components/header/header';
 import Score from '../components/score/score';
@@ -91,7 +92,8 @@ export interface IComponents {
   about: null | About,
   registration: null | Registration,
   game: null | Game,
-  score: null | Score
+  score: null | Score,
+  settings: null | Settings
 }
 
 export interface IConnectors {

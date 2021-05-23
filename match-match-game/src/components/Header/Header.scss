@@ -6,6 +6,7 @@
   @extend %flx-jcc;
   height: 64px;
   background-color: $primary-color;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24);
 
   &__container {
     @extend %flx-aic;

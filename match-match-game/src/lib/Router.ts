@@ -8,7 +8,7 @@ export interface IRoute {
 class Router {
   private routes:IRoute[];
   private currentHash: string | null;
-  private subscriber:any;
+  private subscriber: any;
   private readonly redirect: IRoute;
 
   constructor(routes:IRoute[], subscriber: ISubscriber, redirect: IRoute) {
