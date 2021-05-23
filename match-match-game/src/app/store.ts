@@ -1,4 +1,4 @@
-import { TDifficulty } from '../typing/types';
+import { TCategories, TDifficulty } from '../typing/types';
 import { IGameResult, ISettings, IState, IUser, IUserDB } from '../typing/interfaces';
 import DBController from './db-controller';
 
@@ -65,6 +65,10 @@ class Store {
 
   setGameDifficulty = (difficulty: TDifficulty): void => {
     this.state.gameSettings.difficulty = difficulty;
+  }
+
+  setCardCategory = (category: TCategories): void => {
+    this.state.gameSettings.categories = category;
   }
 
   getSettings = (): ISettings => this.state.gameSettings;

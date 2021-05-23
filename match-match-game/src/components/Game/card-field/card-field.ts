@@ -92,12 +92,14 @@ class CardField {
 
   private fillCards(): void {
     let size: TCardSize = 'large';
+    console.log(this.difficulty)
     if (this.difficulty === 8) {
       size = 'medium';
       this.element.classList.add('card-field_medium-gap')
     }
-    if (this.difficulty === 16) {
+    if (this.difficulty === 18) {
       size = 'small';
+      this.element.classList.add('card-field_small-gap')
     }
 
     for (let i = 0; i < this.difficulty; i++) {

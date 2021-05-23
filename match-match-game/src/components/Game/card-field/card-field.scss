@@ -7,8 +7,17 @@
     max-width: 746px;
     perspective: 5000px;
     perspective-origin: 500px;
+    margin-bottom: 80px;
 }
 
 .card-field_medium-gap {
     column-gap: 15px;
+    margin-bottom: 40px;
+}
+
+.card-field_small-gap {
+    column-gap: 10px;
+    max-width: none;
+    grid-template-columns: repeat(6, 1fr);
+    margin-bottom: 0px;
 }

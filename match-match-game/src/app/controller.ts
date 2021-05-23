@@ -1,3 +1,4 @@
+import { TCategories } from './../typing/types';
 import { TDifficulty } from '../typing/types';
 // eslint-disable-next-line import/no-cycle
 import { renderPosition } from '../app';
@@ -97,7 +98,7 @@ class Controller {
       );
       this.renderManager.placeComponent('game', renderPosition.main);
       const settings = this.store.getSettings();
-      this.game?.initGame(settings.difficulty);
+      this.game?.initGame(settings.difficulty, settings.categories);
     } else if (newRoute === 'score') {
       this.renderManager.createComponent('score');
       this.renderManager.connectComponent(
@@ -138,8 +139,9 @@ class Controller {
 
   getBestScore = (): Promise<IUserDB[]> => this.store.getBestScore();
 
-  setCardCategory = (cardCategory: string): void => {
+  setCardCategory = (cardCategory: TCategories): void => {
     console.log('Set category ', cardCategory);
+    this.store.setCardCategory(cardCategory);
   };
 
   setGameDifficulty = (difficulty: TDifficulty): void => {
