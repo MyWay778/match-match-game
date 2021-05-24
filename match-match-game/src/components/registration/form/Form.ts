@@ -4,6 +4,51 @@ import defaultAvatar from '../../../assets/images/avatar.webp';
 import Input from './input/input';
 import { IUser } from '../../../typing/interfaces';
 
+const validationCreation =
+  (
+    input: Input,
+    validate: (isValid: boolean) => void,
+    isEmail = false
+  ): ((value: string) => void) =>
+    (value: string): void => {
+      if (value === ' ') {
+        input.setValue('');
+        validate(false);
+        return;
+      }
+
+      if (/^\d+$/g.test(value)) {
+        input.invalid('Not only numbers!');
+        validate(false);
+        return;
+      }
+
+      if (value.length < 3) {
+        input.invalid('Min 3 characters!');
+        validate(false);
+        return;
+      }
+
+      if (!isEmail) {
+        const incorrectChar = value.match(/[~!@#$%*()_—+=|:;"'`<>,.?/^]/g);
+        if (incorrectChar) {
+          input.invalid(`Incorrect character: ${incorrectChar.toString()}`);
+          validate(false);
+          return;
+        }
+      }
+      if (
+        isEmail &&
+        !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value)
+      ) {
+        input.invalid(`Incorrect email address!`);
+        validate(false);
+        return;
+      }
+      input.valid();
+      validate(true);
+    };
+
 class Form {
   element: HTMLFormElement;
   firstName: Input;
@@ -28,22 +73,20 @@ class Form {
     );
 
     this.firstName = new Input('First Name', 'text', {
-      required: true,
-      pattern: "^[a-zA-Z,'.\\-\\s]*$",
       maxLength: 30,
     });
+    this.firstName.oninput(validationCreation(this.firstName, this.validate));
 
     this.lastName = new Input('LastName', 'text', {
-      required: true,
-      pattern: "^[a-zA-Z,'.\\-\\s]*$",
       maxLength: 30,
     });
+    this.lastName.oninput(validationCreation(this.lastName, this.validate));
 
     this.email = new Input('E-mail', 'email', {
-      required: true,
-      pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$',
       maxLength: 30,
     });
+    const isEmail = true;
+    this.email.oninput(validationCreation(this.email, this.validate, isEmail));
 
     // assembling first container
     firstContainer.append(
@@ -62,9 +105,14 @@ class Form {
       'register-form__button-container'
     );
     this.addBtn = document.createElement('button');
-    this.addBtn.classList.add('register__button', 'register__button_add');
+    this.addBtn.classList.add(
+      'register__button',
+      'register__button_add',
+      'register__button_disabled'
+    );
     this.addBtn.type = 'submit';
     this.addBtn.innerText = 'Add';
+    this.addBtn.disabled = true;
 
     this.cancelBtn = document.createElement('button');
     this.cancelBtn.classList.add('register__button', 'register__button_cancel');
@@ -91,6 +139,26 @@ class Form {
       handler(newUser);
     });
   }
+
+  private validate = (isValid: boolean): void => {
+    console.log('validate');
+
+    if (!isValid) {
+      if (!this.addBtn.disabled) {
+        this.addBtn.disabled = true;
+      }
+      if (!this.addBtn.classList.contains('register__button_disabled')) {
+        this.addBtn.classList.add('register__button_disabled');
+      }
+    } else if (
+      this.firstName.checkValid() &&
+      this.lastName.checkValid() &&
+      this.email.checkValid()
+    ) {
+      this.addBtn.disabled = false;
+      this.addBtn.classList.remove('register__button_disabled');
+    }
+  };
 }
 
 export default Form;
