@@ -14,7 +14,7 @@ class Store {
       bestScores: [],
       gameSettings: {
         difficulty: '6',
-        categories: 'animal'
+        categories: 'animals'
       },
     };
 

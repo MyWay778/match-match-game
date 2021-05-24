@@ -92,7 +92,6 @@ class CardField {
 
   private fillCards(): void {
     let size: TCardSize = 'large';
-    console.log(this.difficulty)
     if (this.difficulty === 8) {
       size = 'medium';
       this.element.classList.add('card-field_medium-gap')

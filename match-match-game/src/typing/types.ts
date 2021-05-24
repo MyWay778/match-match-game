@@ -12,6 +12,6 @@ export type TComponent = Registration | About | BaseComponent;
 
 export type TDifficulty = '6' | '8' | '18';
 
-export type TCategories = 'animal' | 'cars';
+export type TCategories = 'animals' | 'cars';
 
 export type TSettings = TDifficulty | TCategories;
