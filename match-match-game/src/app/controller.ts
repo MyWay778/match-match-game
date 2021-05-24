@@ -1,32 +1,30 @@
-import { TCategories } from './../typing/types';
-import { TDifficulty } from '../typing/types';
-// eslint-disable-next-line import/no-cycle
-import { renderPosition } from '../app';
-import {
-  IGameResult,
-  IUser,
-  IUserDB,
-  IConnectors,
-  TConnectors,
-  ISettings,
-} from '../typing/interfaces';
-import RenderManager from './render-manager';
-import Store from './store';
-import Header from '../components/header/header';
-import Game from '../components/game/game';
-import Score from '../components/score/score';
-import Settings from '../components/settings/settings';
+import renderPosition from "../constants/render-position";
+import IRenderManager from "../typing/interfaces/app/renderManager";
+import IStore from "../typing/interfaces/app/store";
+import IGame from "../typing/interfaces/components/game";
+import IHeader from "../typing/interfaces/components/header";
+import IScore from "../typing/interfaces/components/score";
+import ISettings from "../typing/interfaces/components/settings";
+import IConnectors from "../typing/interfaces/connectors/connectors";
+import IGameResult from "../typing/interfaces/game-result";
+import ISettingsValue from "../typing/interfaces/settings-value";
+import IUser from "../typing/interfaces/user";
+import IUserDB from "../typing/interfaces/user-db";
+import TCategories from "../typing/types/categories";
+import TConnectors from "../typing/types/connectors";
+import TDifficulty from "../typing/types/difficulty";
+
 
 class Controller {
   connector: IConnectors;
-  header: Header | null = null;
-  game: Game | null = null;
-  score: Score | null = null;
-  settings: Settings | null = null;
+  header: IHeader | null = null;
+  game: IGame | null = null;
+  score: IScore | null = null;
+  settings: ISettings | null = null;
 
   constructor(
-    private readonly renderManager: RenderManager,
-    private readonly store: Store
+    private readonly renderManager: IRenderManager,
+    private readonly store: IStore
   ) {
     this.connector = {
       router: {
@@ -61,19 +59,19 @@ class Controller {
     );
   }
 
-  connectHeader = (header: Header): void => {
+  connectHeader = (header: IHeader): void => {
     this.header = header;
   };
 
-  connectGame = (game: Game): void => {
+  connectGame = (game: IGame): void => {
     this.game = game;
   };
 
-  connectScore = (score: Score): void => {
+  connectScore = (score: IScore): void => {
     this.score = score;
   };
 
-  connectSettings = (settings: Settings): void => {
+  connectSettings = (settings: ISettings): void => {
     this.settings = settings;
   };
 
@@ -140,7 +138,6 @@ class Controller {
   getBestScore = (): Promise<IUserDB[]> => this.store.getBestScore();
 
   setCardCategory = (cardCategory: TCategories): void => {
-    console.log('Set category ', cardCategory);
     this.store.setCardCategory(cardCategory);
   };
 
@@ -148,7 +145,7 @@ class Controller {
     this.store.setGameDifficulty(difficulty);
   };
 
-  getSettings = (): ISettings => this.store.getSettings();
+  getSettings = (): ISettingsValue => this.store.getSettings();
 }
 
 export default Controller;

@@ -25,7 +25,7 @@ class NavMenu {
       const item = Helper.createElement('li', 'nav-list__item');
       item.innerHTML = `
       <a class="${'nav-list__link'}" href="${dataPart.url}">
-         <img class="${'nav-list__icon'}" src="${dataPart.icon}" alt="${dataPart.title}">
+         <img class="${'nav-list__icon'}" src="${dataPart.icon}" alt="${ dataPart.title}">
         <span class="${'nav-list__title'}">${dataPart.title}</span>
       </a>`;
 
@@ -34,14 +34,13 @@ class NavMenu {
     this.element.appendChild(this.list);
   }
 
-  makeActive(itemNumber: number) {
+  makeActive(itemNumber: number): void {
     const target = this.list.children[itemNumber];
     if (this.currentActive) {
       if (this.currentActive === target) {
         return;
-      } else {
-        this.currentActive.classList.remove('nav-list__item_active');
       }
+      this.currentActive.classList.remove('nav-list__item_active');
     }
     this.currentActive = target;
     target.classList.add('nav-list__item_active');

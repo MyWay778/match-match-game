@@ -1,11 +1,3 @@
-import Registration from '../components/registration/registration';
-import ConnectorComponent from '../shared/components/base-component/connector-component';
-import Game from '../components/game/game';
-import Score from '../components/score/score';
-import { IComponents, IConnector, TConnectors, } from '../typing/interfaces';
-import BaseComponent from '../shared/components/base-component/base-component';
-import Settings from '../components/settings/settings';
-
 // const componentList = {
 //   registration: Registration
 // }
@@ -15,13 +7,28 @@ import Settings from '../components/settings/settings';
 // }
 // const registrationInstance  = componentFactory('registration', componentList, document.createElement('div'));
 
-class RenderManager {
+import Game from "../components/game/game";
+import Registration from "../components/registration/registration";
+import Score from "../components/score/score";
+import Settings from "../components/settings/settings";
+import ConnectorComponent from "../shared/components/base-component/connector-component";
+import IRenderManager from "../typing/interfaces/app/renderManager";
+import IComponents from "../typing/interfaces/components";
+import IBaseComponent from "../typing/interfaces/components/base-component";
+import IGame from "../typing/interfaces/components/game";
+import IRegistration from "../typing/interfaces/components/registration";
+import IScore from "../typing/interfaces/components/score";
+import ISettings from "../typing/interfaces/components/settings";
+import IConnector from "../typing/interfaces/connectors/connector";
+import TConnectors from "../typing/types/connectors";
+
+class RenderManager implements IRenderManager {
   private connector: null | IConnector = null;
 
   constructor(
     private readonly root: HTMLElement,
     private readonly components: IComponents,
-    private readonly renderList: Array<BaseComponent | null>
+    private readonly renderList: Array<IBaseComponent | null>
   ) {
     this.renderList.forEach((component) => {
       if (component?.checkParent()) {
@@ -76,16 +83,16 @@ class RenderManager {
 
   createComponent(componentName: keyof IComponents): void {
     if (componentName === 'registration') {
-      const component: Registration = new Registration(this.root);
+      const component: IRegistration = new Registration(this.root);
       this.components.registration = component;
     } else if (componentName === 'game') {
-      const component: Game = new Game(this.root);
+      const component: IGame = new Game(this.root);
       this.components.game = component;
     } else if (componentName === 'score') {
-      const component: Score = new Score(this.root);
+      const component: IScore = new Score(this.root);
       this.components.score = component;
     } else if (componentName === 'settings') {
-      const component: Settings = new Settings(this.root);
+      const component: ISettings = new Settings(this.root);
       this.components.settings = component;
     }
   }
@@ -98,7 +105,7 @@ class RenderManager {
     removeComponent?.element.remove();
   }
 
-  connectComponent (
+  connectComponent(
     componentName: keyof IComponents,
     connector: TConnectors
   ): void {

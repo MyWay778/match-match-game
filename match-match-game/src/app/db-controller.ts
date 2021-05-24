@@ -1,4 +1,4 @@
-import { IUserDB } from '../typing/interfaces';
+import IUserDB from "../typing/interfaces/user-db";
 
 class DBController {
   db: null | IDBDatabase = null;
@@ -42,9 +42,8 @@ class DBController {
     const scoreIndex = objectStore.index('score');
     const scoreIndexCursor = scoreIndex.openCursor(null, 'next');
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    scoreIndexCursor.onsuccess = (evt: any) => {
-      const cursor = evt.target?.result;
+    scoreIndexCursor.onsuccess = () => {
+      const cursor = scoreIndexCursor.result;
 
       if (cursor && result.length <= 10) {
         result.push(cursor.value);
@@ -69,11 +68,11 @@ class DBController {
       .add(player);
 
     request.onerror = () => {
-      console.log('Some error.');
+      // console.log('Some error.');
     };
 
     request.onsuccess = () => {
-      console.log('Player added');
+      // console.log('Player added');
     };
   };
 }

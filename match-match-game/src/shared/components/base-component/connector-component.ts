@@ -1,4 +1,4 @@
-import { IConnector } from '../../../typing/interfaces';
+import IConnector from "../../../typing/interfaces/connectors/connector";
 import BaseComponent from "./base-component";
 
 class ConnectorComponent extends BaseComponent {

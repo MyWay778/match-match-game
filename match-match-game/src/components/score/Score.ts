@@ -1,17 +1,17 @@
-// eslint-disable-next-line import/no-cycle
 import ConnectorComponent from '../../shared/components/base-component/connector-component';
 import Container from '../../shared/components/container/container';
 import PageTitle from '../../shared/components/page-title/page-title';
-// eslint-disable-next-line import/no-cycle
-import { IScoreConnector, IUserDB } from '../../typing/interfaces';
+import IScore from '../../typing/interfaces/components/score';
+import IScoreConnector from '../../typing/interfaces/connectors/score-connector';
+import IUserDB from '../../typing/interfaces/user-db';
 import Helper from '../common/helper';
 import ScoreItem from './score-item/score-item';
 import './score.scss';
 
-class Score extends ConnectorComponent {
-  playerList: HTMLElement;
+class Score extends ConnectorComponent implements IScore {
+  private readonly playerList: HTMLElement;
   connector: null | IScoreConnector = null;
-  placeholder: HTMLElement;
+  private readonly placeholder: HTMLElement;
 
   constructor(parent: HTMLElement) {
     super('main', 'score', parent);

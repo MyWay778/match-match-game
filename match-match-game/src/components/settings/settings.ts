@@ -1,10 +1,12 @@
-import { ISettings, ISettingsConnector } from '../../typing/interfaces';
 import ConnectorComponent from '../../shared/components/base-component/connector-component';
 import Helper from '../common/helper';
 import SelectSetting from './select-setting/select-setting';
 import './settings.scss';
+import ISettings from '../../typing/interfaces/components/settings';
+import ISettingsConnector from '../../typing/interfaces/connectors/settings-connector';
+import ISettingsValue from '../../typing/interfaces/settings-value';
 
-class Settings extends ConnectorComponent {
+class Settings extends ConnectorComponent implements ISettings{
   connector: null | ISettingsConnector = null;
   private readonly gameCardsSetting: SelectSetting;
   private readonly gameDifficultySetting: SelectSetting;
@@ -41,7 +43,7 @@ class Settings extends ConnectorComponent {
     this.gameDifficultySetting.getValue(this.connector.setGameDifficulty);
   }
 
-  setValues = (settings: ISettings): void => {
+  setValues = (settings: ISettingsValue): void => {
     this.gameCardsSetting.select(settings.categories);
     this.gameDifficultySetting.select(settings.difficulty);
   }

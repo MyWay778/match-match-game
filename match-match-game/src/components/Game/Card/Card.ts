@@ -1,5 +1,5 @@
-import { TCardSize } from '../../../typing/card-size';
 import imageBack from '../../../assets/images/back-card-image.jpg';
+import TCardSize from '../../../typing/types/card-size';
 import Helper from '../../common/helper';
 import './card.scss';
 

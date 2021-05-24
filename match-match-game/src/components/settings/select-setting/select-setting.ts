@@ -1,5 +1,6 @@
-import { TSettings } from '../../../typing/types';
 import BaseComponent from '../../../shared/components/base-component/base-component';
+import TSettings from '../../../typing/types/settings';
+
 import './select-setting.scss';
 
 class SelectSetting extends BaseComponent {

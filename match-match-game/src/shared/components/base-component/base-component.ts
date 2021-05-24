@@ -1,4 +1,6 @@
-class BaseComponent {
+import IBaseComponent from "../../../typing/interfaces/components/base-component";
+
+class BaseComponent implements IBaseComponent {
   element: HTMLElement;
   private parent: HTMLElement | null;
 
@@ -8,17 +10,17 @@ class BaseComponent {
     this.parent =  parent || null;
   }
 
-  setParent(parent: HTMLElement) {
+  setParent(parent: HTMLElement): void {
     if (parent) {
       this.parent = parent;
     }
   }
   
-  checkParent() {
+  checkParent(): boolean {
     return !!this.parent;
   }
 
-  render() {
+  render(): void {
     if (this.parent) {
       this.parent.appendChild(this.element);
     }

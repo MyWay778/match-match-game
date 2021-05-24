@@ -5,6 +5,7 @@ import firstImg from '../../assets/images/first-item.webp';
 import secondImg from '../../assets/images/second-item.webp';
 import thirdImg from '../../assets/images/third-item.webp';
 import BaseComponent from "../../shared/components/base-component/base-component";
+import IAbout from "../../typing/interfaces/components/about";
 
 function createCard(itemNumber: string, cardText: string) {
   const card = Helper.createElement('section', 'about-card');
@@ -15,7 +16,7 @@ function createCard(itemNumber: string, cardText: string) {
 }
 
 
-class About extends BaseComponent {
+class About extends BaseComponent implements IAbout{
   card: HTMLElement | null;
 
   constructor(root: HTMLElement) {

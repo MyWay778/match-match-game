@@ -11,7 +11,8 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./match-match-game/tsconfig.json",
+    // "project": "./match-match-game/tsconfig.json", for VSLint
+    "project": "./tsconfig.json",
   },
   "plugins": [
     "@typescript-eslint"

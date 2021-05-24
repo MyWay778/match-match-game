@@ -1,5 +1,9 @@
 import ConnectorComponent from '../../shared/components/base-component/connector-component';
-import { IHeadConnector, IUserData } from '../../typing/interfaces';
+import IHeader from '../../typing/interfaces/components/header';
+import IHeadConnector from '../../typing/interfaces/connectors/header-connector';
+
+
+import IUserData from '../../typing/interfaces/user-data';
 import './header.scss';
 import Logo from './logo/logo';
 import NavMenu from './nav-menu/nav-menu';
@@ -10,7 +14,7 @@ const user = {
   unregistered: false
 }
 
-class Header extends ConnectorComponent {
+class Header extends ConnectorComponent implements IHeader {
   private userPanel: UserPanel;
   private navMenu: NavMenu;
 
@@ -32,21 +36,19 @@ class Header extends ConnectorComponent {
   }
 
   connect(connector: IHeadConnector): void{
-    console.log(connector)
     connector?.connect(this);
     this.userPanel.connect(connector);
   }
 
   registerUser = (userData: IUserData): void =>  {
-    console.log('Header, register')
     this.userPanel.registerUser(userData);
   }
   
-  makeActiveLink = (linkNumber: number) => {
+  makeActiveLink = (linkNumber: number): void => {
     this.navMenu.makeActive(linkNumber);
   }
 
-  setIsGame(isGame = true) {
+  setIsGame(isGame = true): void {
     this.userPanel.setIsGame(isGame);
   }
 }

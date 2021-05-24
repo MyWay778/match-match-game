@@ -1,4 +1,4 @@
-import { TCardSize } from '../../../typing/card-size';
+import TCardSize from '../../../typing/types/card-size';
 import Helper from '../../common/helper';
 import Card from '../card/card';
 import './card-field.scss';

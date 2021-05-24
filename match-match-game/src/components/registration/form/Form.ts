@@ -2,7 +2,8 @@ import Helper from '../../common/helper';
 import './form.scss';
 import defaultAvatar from '../../../assets/images/avatar.webp';
 import Input from './input/input';
-import { IUser } from '../../../typing/interfaces';
+import IForm from '../../../typing/interfaces/components/form';
+import IUser from '../../../typing/interfaces/user';
 
 const validationCreation =
   (
@@ -39,7 +40,7 @@ const validationCreation =
       }
       if (
         isEmail &&
-        !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value)
+      !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value)
       ) {
         input.invalid(`Incorrect email address!`);
         validate(false);
@@ -49,7 +50,7 @@ const validationCreation =
       validate(true);
     };
 
-class Form {
+class Form implements IForm {
   element: HTMLFormElement;
   firstName: Input;
   lastName: Input;
@@ -141,8 +142,6 @@ class Form {
   }
 
   private validate = (isValid: boolean): void => {
-    console.log('validate');
-
     if (!isValid) {
       if (!this.addBtn.disabled) {
         this.addBtn.disabled = true;

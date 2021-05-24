@@ -1,14 +1,14 @@
-// eslint-disable-next-line import/no-cycle
-import { IGameConnector, IGameResult } from '../../typing/interfaces';
 import Helper from '../common/helper';
 import GameModal from './game-modal/game-modal';
 import './game.scss';
 import Timer from './timer/timer';
-// eslint-disable-next-line import/no-cycle
 import ConnectorComponent from '../../shared/components/base-component/connector-component';
 import CardField from './card-field/card-field';
+import IGame from '../../typing/interfaces/components/game';
+import IGameConnector from '../../typing/interfaces/connectors/game-connector';
+import IGameResult from '../../typing/interfaces/game-result';
 
-class Game extends ConnectorComponent {
+class Game extends ConnectorComponent implements IGame {
   container: HTMLElement;
   cardField: CardField | null;
   timer: Timer;

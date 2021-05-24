@@ -1,8 +1,14 @@
-import { TCategories, TDifficulty } from '../typing/types';
-import { IGameResult, ISettings, IState, IUser, IUserDB } from '../typing/interfaces';
-import DBController from './db-controller';
+import IStore from "../typing/interfaces/app/store";
+import IGameResult from "../typing/interfaces/game-result";
+import ISettingsValue from "../typing/interfaces/settings-value";
+import IState from "../typing/interfaces/state";
+import IUser from "../typing/interfaces/user";
+import IUserDB from "../typing/interfaces/user-db";
+import TCategories from "../typing/types/categories";
+import TDifficulty from "../typing/types/difficulty";
+import DBController from "./db-controller";
 
-class Store {
+class Store implements IStore{
   dbController: DBController;
 
   private state: IState;
@@ -14,7 +20,7 @@ class Store {
       bestScores: [],
       gameSettings: {
         difficulty: '6',
-        categories: 'animals'
+        categories: 'animals',
       },
     };
 
@@ -42,7 +48,9 @@ class Store {
   }
 
   saveResult(result: IGameResult): void {
-    let score = (Number(this.state.gameSettings.difficulty) - result.mistakes) * 100 - result.time * 10;
+    let score =
+      (Number(this.state.gameSettings.difficulty) - result.mistakes) * 100 -
+      result.time * 10;
     if (score < 0) {
       score = 0;
     }
@@ -65,13 +73,13 @@ class Store {
 
   setGameDifficulty = (difficulty: TDifficulty): void => {
     this.state.gameSettings.difficulty = difficulty;
-  }
+  };
 
   setCardCategory = (category: TCategories): void => {
     this.state.gameSettings.categories = category;
-  }
+  };
 
-  getSettings = (): ISettings => this.state.gameSettings;
+  getSettings = (): ISettingsValue => this.state.gameSettings;
 }
 
 export default Store;

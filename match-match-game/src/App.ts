@@ -4,7 +4,8 @@ import Header from './components/header/header';
 import About from './components/about/about';
 import Store from './app/store';
 import RenderManager from './app/render-manager';
-import { IComponents } from './typing/interfaces';
+import IComponents from './typing/interfaces/components';
+
 
 const routes: IRoute[] = [
   { name: 'about', hash: '#about' },
@@ -15,35 +16,30 @@ const routes: IRoute[] = [
 
 const redirect: IRoute = routes[0];
 
-export const renderPosition = {
-  header: 0,
-  main: 1,
-  aside: 2,
-};
-
 class App {
-  controller: Controller;
-  store: Store;
-  components: IComponents;
-  router: Router;
+  private controller: Controller | null = null;
+  private store: Store | null = null;
+  private components: IComponents;
+  private router: Router | null = null;
 
-  constructor(private root: HTMLElement) {
+  constructor(private readonly root: HTMLElement) {
     this.components = {
       header: new Header(root),
       about: new About(root),
       registration: null,
       game: null,
       score: null,
-      settings: null
+      settings: null,
     };
+  }
 
+  init(): void {
     this.store = new Store();
-    const renderManager = new RenderManager(root, this.components, [
+    const renderManager = new RenderManager(this.root, this.components, [
       this.components.header,
     ]);
     this.controller = new Controller(renderManager, this.store);
 
-    // renderManager.connect(this.controller.connector);
     this.router = new Router(
       routes,
       this.controller.connector.router,
