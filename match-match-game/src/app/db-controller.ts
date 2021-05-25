@@ -5,7 +5,7 @@ class DBController {
   openRequest: IDBOpenDBRequest;
 
   constructor() {
-    this.openRequest = indexedDB.open('match-match', 1);
+    this.openRequest = indexedDB.open('myway778', 1);
 
     this.openRequest.onerror = () => {
       throw new Error('DBController error');
