@@ -86,6 +86,7 @@ class Controller {
 
   updateRoute = (newRoute: string): void => {
     if (newRoute === 'about') {
+      this.header?.setIsGame(false);
       this.renderManager.placeComponent('about', renderPosition.main);
       this.header?.makeActiveLink(0);
     } else if (newRoute === 'game') {
@@ -97,7 +98,9 @@ class Controller {
       this.renderManager.placeComponent('game', renderPosition.main);
       const settings = this.store.getSettings();
       this.game?.initGame(settings.difficulty, settings.categories);
+      this.header?.setIsGame(true);
     } else if (newRoute === 'score') {
+      this.header?.setIsGame(false);
       this.renderManager.createComponent('score');
       this.renderManager.connectComponent(
         'score',
@@ -109,6 +112,7 @@ class Controller {
         this.score?.setData(result);
       });
     } else if (newRoute === 'settings') {
+      this.header?.setIsGame(false);
       this.renderManager.createComponent('settings');
       this.renderManager.connectComponent(
         'settings',
