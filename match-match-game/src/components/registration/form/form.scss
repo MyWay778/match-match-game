@@ -58,3 +58,12 @@
   opacity: 0.3;
   cursor: default;
 }
+
+.register-image__label {
+  cursor: pointer;
+}
+
+.register-image__input {
+  visibility: hidden;
+  position: absolute;
+}

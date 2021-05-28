@@ -1,19 +1,19 @@
-import renderPosition from "../constants/render-position";
-import IRenderManager from "../typing/interfaces/app/renderManager";
-import IStore from "../typing/interfaces/app/store";
-import IGame from "../typing/interfaces/components/game";
-import IHeader from "../typing/interfaces/components/header";
-import IScore from "../typing/interfaces/components/score";
-import ISettings from "../typing/interfaces/components/settings";
-import IConnectors from "../typing/interfaces/connectors/connectors";
-import IGameResult from "../typing/interfaces/game-result";
-import ISettingsValue from "../typing/interfaces/settings-value";
-import IUser from "../typing/interfaces/user";
-import IUserDB from "../typing/interfaces/user-db";
-import TCategories from "../typing/types/categories";
-import TConnectors from "../typing/types/connectors";
-import TDifficulty from "../typing/types/difficulty";
-
+import renderPosition from '../constants/render-position';
+import IRenderManager from '../typing/interfaces/app/renderManager';
+import IStore from '../typing/interfaces/app/store';
+import IGame from '../typing/interfaces/components/game';
+import IHeader from '../typing/interfaces/components/header';
+import IScore from '../typing/interfaces/components/score';
+import ISettings from '../typing/interfaces/components/settings';
+import IConnectors from '../typing/interfaces/connectors/connectors';
+import IGameResult from '../typing/interfaces/game-result';
+import IScoreData from '../typing/interfaces/score-data';
+import ISettingsValue from '../typing/interfaces/settings-value';
+import IUser from '../typing/interfaces/user';
+import IUserDB from '../typing/interfaces/user-db';
+import TCategories from '../typing/types/categories';
+import TConnectors from '../typing/types/connectors';
+import TDifficulty from '../typing/types/difficulty';
 
 class Controller {
   connector: IConnectors;
@@ -128,14 +128,28 @@ class Controller {
   registerUser = (newUser: IUser): void => {
     this.renderManager.removeComponent('registration');
     this.store.saveUser(newUser);
-    this.header?.registerUser({ userImage: null });
+    this.header?.registerUser({
+      userImage: newUser.image
+        ? window.URL.createObjectURL(newUser.image)
+        : null,
+    });
   };
 
   gameEndHandler = (result: IGameResult): void => {
     this.store.saveResult(result);
   };
 
-  getBestScore = (): Promise<IUserDB[]> => this.store.getBestScore();
+  getBestScore = async (): Promise<IScoreData[]> => {
+    const bestScores = await this.store.getBestScore();
+    const convertedBestScores = bestScores.map<IUserDB>((score) => {
+      if (score.image) {
+        score.image = URL.createObjectURL(score.image);
+      }
+      return score;
+    });
+
+    return convertedBestScores as IScoreData[];
+  };
 
   setCardCategory = (cardCategory: TCategories): void => {
     this.store.setCardCategory(cardCategory);

@@ -17,6 +17,7 @@ class ScoreItem extends BaseComponent {
     const image = new Image(40, 40);
     image.alt = 'User image';
     image.src = userImage || defaultImage;
+    image.classList.add('score-item-left-part__image');
 
     const userBlock = Helper.createElement(
       'div',

@@ -1,9 +1,9 @@
 import Helper from '../../common/helper';
 import './form.scss';
-import defaultAvatar from '../../../assets/images/avatar.webp';
 import Input from './input/input';
 import IForm from '../../../typing/interfaces/components/form';
 import IUser from '../../../typing/interfaces/user';
+import ImageUploader from './image-uploader/image-uploader';
 
 const validationCreation =
   (
@@ -55,7 +55,7 @@ class Form implements IForm {
   firstName: Input;
   lastName: Input;
   email: Input;
-  avatar: HTMLImageElement;
+  avatar: ImageUploader;
   addBtn: HTMLButtonElement;
   cancelBtn: HTMLButtonElement;
 
@@ -96,9 +96,8 @@ class Form implements IForm {
       this.email.element
     );
 
-    // avatar
-    this.avatar = new Image();
-    this.avatar.src = defaultAvatar;
+    // // avatar
+    this.avatar = new ImageUploader();
 
     // buttons
     const btnContainer = Helper.createElement(
@@ -121,7 +120,7 @@ class Form implements IForm {
     btnContainer.append(this.addBtn, this.cancelBtn);
 
     // assembling second container
-    secondContainer.append(this.avatar, btnContainer);
+    secondContainer.append(this.avatar.element, btnContainer);
     this.element.append(firstContainer, secondContainer);
   }
 
@@ -135,7 +134,7 @@ class Form implements IForm {
         firstName: this.firstName.getValue(),
         lastName: this.lastName.getValue(),
         email: this.email.getValue(),
-        image: null,
+        image: this.avatar.getValue(),
       };
       handler(newUser);
     });

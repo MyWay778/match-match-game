@@ -1,0 +1,27 @@
+@use"../../../../styles/variables" as *;
+
+.register-image-uploader {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-image-uploader__input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.register-image-uploader__image {
+  cursor: pointer;
+  max-width: 198px;
+  max-height: 198px;
+}
+
+.register-image-uploader__label-error {
+  display: block;
+  color: $invalid-marker;
+  height: 17px;
+  font-size: 12px;
+}
