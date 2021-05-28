@@ -42,7 +42,13 @@ class Game extends ConnectorComponent<IGameConnector> implements IGame {
     const preparing = () => {
       if (this.cardField) {
         this.cardField.flipAll();
-        this.timer.countdown(5, this.startGame);
+        let countdown = 5;
+        if (difficulty === '8') {
+          countdown = 10;
+        } else if (difficulty === '18') {
+          countdown = 30;
+        }
+        this.timer.countdown(countdown, this.startGame);
       }
     };
     window.setTimeout(preparing, 1000);
