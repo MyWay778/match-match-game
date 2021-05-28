@@ -1,35 +1,27 @@
-// const componentList = {
-//   registration: Registration
-// }
-// new componentList['registration'](document.createElement('div'));
-// const componentFactory = (componentName: string, componentList: any, root: HTMLElement) => {
-//   return new componentList[componentName](root);
-// }
-// const registrationInstance  = componentFactory('registration', componentList, document.createElement('div'));
-
-import Game from "../components/game/game";
-import Registration from "../components/registration/registration";
-import Score from "../components/score/score";
-import Settings from "../components/settings/settings";
-import ConnectorComponent from "../shared/components/base-component/connector-component";
-import IRenderManager from "../typing/interfaces/app/renderManager";
-import IComponents from "../typing/interfaces/components";
-import IBaseComponent from "../typing/interfaces/components/base-component";
-import IGame from "../typing/interfaces/components/game";
-import IRegistration from "../typing/interfaces/components/registration";
-import IScore from "../typing/interfaces/components/score";
-import ISettings from "../typing/interfaces/components/settings";
-import TConnectors from "../typing/types/connectors";
-import TConnectorsOr from "../typing/types/connectors-or";
+import Game from '../components/game/game';
+import Header from '../components/header/header';
+import Registration from '../components/registration/registration';
+import Score from '../components/score/score';
+import Settings from '../components/settings/settings';
+import ConnectorComponent from '../shared/components/base-component/connector-component';
+import IRenderManager from '../typing/interfaces/app/renderManager';
+import IComponents from '../typing/interfaces/components';
+import IBaseComponent from '../typing/interfaces/components/base-component';
+import TConnectors from '../typing/types/connectors';
+import TConnectorsOr from '../typing/types/connectors-or';
+import ComponentFactory from './component-factory';
 
 class RenderManager implements IRenderManager {
   private connector: null | TConnectorsOr = null;
+  private readonly factory: ComponentFactory;
 
   constructor(
     private readonly root: HTMLElement,
-    private readonly components: IComponents,
+    private components: IComponents,
     private readonly renderList: Array<IBaseComponent | null>
   ) {
+    this.factory = new ComponentFactory();
+
     this.renderList.forEach((component) => {
       if (component?.checkParent()) {
         component.render();
@@ -45,7 +37,8 @@ class RenderManager implements IRenderManager {
 
         componentKeys.forEach((key: string) => {
           if (this.connector) {
-            const suitableConnector = this.connector[key as keyof TConnectorsOr];
+            const suitableConnector =
+              this.connector[key as keyof TConnectorsOr];
             if (suitableConnector) {
               component.connect(suitableConnector);
             }
@@ -82,18 +75,18 @@ class RenderManager implements IRenderManager {
   }
 
   createComponent(componentName: keyof IComponents): void {
-    if (componentName === 'registration') {
-      const component: IRegistration = new Registration(this.root);
-      this.components.registration = component;
-    } else if (componentName === 'game') {
-      const component: IGame = new Game(this.root);
+    const component = this.factory.getInstance(componentName, this.root);
+
+    if (component instanceof Header) {
+      this.components.header = component;
+    } else if (component instanceof Game) {
       this.components.game = component;
-    } else if (componentName === 'score') {
-      const component: IScore = new Score(this.root);
+    } else if (component instanceof Score) {
       this.components.score = component;
-    } else if (componentName === 'settings') {
-      const component: ISettings = new Settings(this.root);
+    } else if (component instanceof Settings) {
       this.components.settings = component;
+    } else if (component instanceof Registration) {
+      this.components.registration = component;
     }
   }
 

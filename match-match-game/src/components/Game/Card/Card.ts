@@ -5,7 +5,7 @@ import './card.scss';
 
 class Card {
   element: HTMLElement;
-  handler: null | ((e: MouseEvent) => void);
+  private handler: null | (() => void) = null;
   isDisabled = false;
 
   constructor(frontImage: string, id?: number, size: TCardSize = 'large') {
@@ -14,7 +14,6 @@ class Card {
     if (size !== 'large') {
       this.element.classList.add(`game-card_${size}`);
     }
-    this.handler = null;
 
     this.element.innerHTML = `
         <div class="${'game-card__front'}">
@@ -86,7 +85,7 @@ class Card {
     });
   }
 
-  set onclick(handler: (e: MouseEvent) => void) {
+  set onclick(handler: () => void) {
     this.handler = handler;
     this.element.addEventListener('click', handler);
   }

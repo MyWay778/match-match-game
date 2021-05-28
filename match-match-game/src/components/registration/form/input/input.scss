@@ -45,7 +45,7 @@
   height: 24px;
   border: 1px solid $modal-background;
   border-radius: 5px;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: background-color 0.3s, box-shadow 0.7s;
 }
 
 .register-input__valid-marker_valid {
@@ -115,11 +115,9 @@
 
 @keyframes changeValidAfter {
   from {
-    // width: 0px;
     transform: rotate(149deg);
   }
   to {
-    // width: 15px;
     transform: rotate(-49deg);
   }
 
