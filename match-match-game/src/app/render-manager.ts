@@ -19,11 +19,11 @@ import IGame from "../typing/interfaces/components/game";
 import IRegistration from "../typing/interfaces/components/registration";
 import IScore from "../typing/interfaces/components/score";
 import ISettings from "../typing/interfaces/components/settings";
-import IConnector from "../typing/interfaces/connectors/connector";
 import TConnectors from "../typing/types/connectors";
+import TConnectorsOr from "../typing/types/connectors-or";
 
 class RenderManager implements IRenderManager {
-  private connector: null | IConnector = null;
+  private connector: null | TConnectorsOr = null;
 
   constructor(
     private readonly root: HTMLElement,
@@ -37,7 +37,7 @@ class RenderManager implements IRenderManager {
     });
   }
 
-  connect(connector: IConnector): void {
+  connect(connector: TConnectorsOr): void {
     this.connector = connector;
     this.renderList.forEach((component) => {
       if (component instanceof ConnectorComponent) {
@@ -45,7 +45,7 @@ class RenderManager implements IRenderManager {
 
         componentKeys.forEach((key: string) => {
           if (this.connector) {
-            const suitableConnector = this.connector[key as keyof IConnector];
+            const suitableConnector = this.connector[key as keyof TConnectorsOr];
             if (suitableConnector) {
               component.connect(suitableConnector);
             }

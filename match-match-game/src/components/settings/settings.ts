@@ -6,7 +6,7 @@ import ISettings from '../../typing/interfaces/components/settings';
 import ISettingsConnector from '../../typing/interfaces/connectors/settings-connector';
 import ISettingsValue from '../../typing/interfaces/settings-value';
 
-class Settings extends ConnectorComponent implements ISettings{
+class Settings extends ConnectorComponent<ISettingsConnector> implements ISettings{
   connector: null | ISettingsConnector = null;
   private readonly gameCardsSetting: SelectSetting;
   private readonly gameDifficultySetting: SelectSetting;

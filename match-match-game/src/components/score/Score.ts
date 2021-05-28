@@ -8,7 +8,7 @@ import Helper from '../common/helper';
 import ScoreItem from './score-item/score-item';
 import './score.scss';
 
-class Score extends ConnectorComponent implements IScore {
+class Score extends ConnectorComponent<IScoreConnector> implements IScore {
   private readonly playerList: HTMLElement;
   connector: null | IScoreConnector = null;
   private readonly placeholder: HTMLElement;

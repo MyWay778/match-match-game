@@ -1,7 +1,8 @@
+import TConnectArguments from "../../types/connect-arguments";
 import IConnector from "../connectors/connector";
 
-interface IConnectorComponent {
-  connect(connector: IConnector): void;
+interface IConnectorComponent<T extends IConnector<TConnectArguments>> {
+  connect(connector: T): void;
 }
 
 export default IConnectorComponent;

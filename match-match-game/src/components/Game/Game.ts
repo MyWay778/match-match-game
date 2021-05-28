@@ -8,7 +8,7 @@ import IGame from '../../typing/interfaces/components/game';
 import IGameConnector from '../../typing/interfaces/connectors/game-connector';
 import IGameResult from '../../typing/interfaces/game-result';
 
-class Game extends ConnectorComponent implements IGame {
+class Game extends ConnectorComponent<IGameConnector> implements IGame {
   container: HTMLElement;
   cardField: CardField | null;
   timer: Timer;
@@ -45,7 +45,7 @@ class Game extends ConnectorComponent implements IGame {
         this.timer.countdown(5, this.startGame);
       }
     };
-    window.setTimeout(preparing, 1000); // ???
+    window.setTimeout(preparing, 1000);
   }
 
   startGame = (): void => {
@@ -63,7 +63,6 @@ class Game extends ConnectorComponent implements IGame {
     result.mistakes = mistakeCounter;
     result.time = this.timer.stop();
 
-    // Move to controller!!!!
     const removeModal = () => {
       if (this.gameModal) {
         this.gameModal.element.remove();

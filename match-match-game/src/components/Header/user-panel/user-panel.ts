@@ -7,7 +7,7 @@ import IUserPanelConnector from '../../../typing/interfaces/connectors/user-pane
 import IUserData from '../../../typing/interfaces/user-data';
 
 
-class UserPanel extends ConnectorComponent {
+class UserPanel extends ConnectorComponent<IUserPanelConnector> {
   private registerButton: HTMLButtonElement;
   private isRegistered: boolean;
   private container: HTMLElement;

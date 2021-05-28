@@ -14,7 +14,7 @@ const user = {
   unregistered: false
 }
 
-class Header extends ConnectorComponent implements IHeader {
+class Header extends ConnectorComponent<IHeadConnector> implements IHeader {
   private userPanel: UserPanel;
   private navMenu: NavMenu;
 
