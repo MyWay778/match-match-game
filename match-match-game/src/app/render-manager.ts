@@ -9,6 +9,7 @@ import IComponents from '../typing/interfaces/components';
 import IBaseComponent from '../typing/interfaces/components/base-component';
 import TConnectors from '../typing/types/connectors';
 import TConnectorsOr from '../typing/types/connectors-or';
+import TRenderPosition from '../typing/types/render-position';
 import ComponentFactory from './component-factory';
 
 class RenderManager implements IRenderManager {
@@ -17,11 +18,10 @@ class RenderManager implements IRenderManager {
 
   constructor(
     private readonly root: HTMLElement,
-    private components: IComponents,
+    private readonly components: IComponents,
     private readonly renderList: Array<IBaseComponent | null>
   ) {
     this.factory = new ComponentFactory();
-
     this.renderList.forEach((component) => {
       if (component?.checkParent()) {
         component.render();
@@ -34,21 +34,23 @@ class RenderManager implements IRenderManager {
     this.renderList.forEach((component) => {
       if (component instanceof ConnectorComponent) {
         const componentKeys = Object.keys(this.components);
-
         componentKeys.forEach((key: string) => {
-          if (this.connector) {
-            const suitableConnector =
-              this.connector[key as keyof TConnectorsOr];
-            if (suitableConnector) {
-              component.connect(suitableConnector);
-            }
+          if (!this.connector) {
+            return;
+          }
+          const suitableConnector = this.connector[key as keyof TConnectorsOr];
+          if (suitableConnector) {
+            component.connect(suitableConnector);
           }
         });
       }
     });
   }
 
-  addComponent(componentName: keyof IComponents, renderPosition: number): void {
+  addComponent(
+    componentName: keyof IComponents,
+    renderPosition: TRenderPosition
+  ): void {
     const component = this.components[componentName];
     if (this.renderList[renderPosition] !== component) {
       this.renderList[renderPosition] = component;
