@@ -1,53 +1,67 @@
 @use "../../../styles/variables" as *;
 
-.nav {
+.nav-menu {
   display: flex;
   justify-content: center;
   flex-grow: 0.4;
 }
 
-.list {
+.nav-list {
   display: flex;
   list-style-type: none;
-}
-.item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 96px;
-  height: 64px;
-  transition: background-color 0.2s;
-}
 
-.link {
-  display: flex;
-  flex-direction: column;
-  row-gap: 7px;
-  align-items: center;
-  color: $white-color;
-  text-decoration: none;
-  font-size: 12px;
-  opacity: 0.8;
-  transition: opacity 0.2s;
-}
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 96px;
+    height: 64px;
+    transition: background-color 0.2s;
 
-.link:hover {
-    opacity: 1;
-}
-.icon {
+    &_active {
+      background-color: $active-nav-item;
+    }
+
+    &_active > .nav-list__link {
+      opacity: 1;
+    }
+    
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    row-gap: 7px;
+    align-items: center;
+    color: $white-color;
+    text-decoration: none;
+    font-size: 12px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+  }
+
+  &__icon {
     display: inline-block;
     width: 20px;
     height: 20px;
     background-color: #fff;
     border-radius: 50%;
     object-fit: none;
+  }
+
 }
 
 
-.active {
-    background-color: $active-nav-item;
-}
 
-.active > .link {
-    opacity: 1;
-}
+
+
+
+
+
+
+

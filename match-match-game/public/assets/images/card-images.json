@@ -1,10 +1,42 @@
 {
-  "animal": [
-    "./assets/images/animal/0.jpg",
-    "./assets/images/animal/1.jpg",
-    "./assets/images/animal/2.jpg",
-    "./assets/images/animal/3.jpg",
-    "./assets/images/animal/4.jpg",
-    "./assets/images/animal/5.jpg"
+  "animals": [
+    "./assets/images/animals/0.webp",
+    "./assets/images/animals/1.webp",
+    "./assets/images/animals/2.webp",
+    "./assets/images/animals/3.webp",
+    "./assets/images/animals/4.webp",
+    "./assets/images/animals/5.webp",
+    "./assets/images/animals/6.webp",
+    "./assets/images/animals/7.webp",
+    "./assets/images/animals/8.webp",
+    "./assets/images/animals/9.webp",
+    "./assets/images/animals/10.webp",
+    "./assets/images/animals/11.webp",
+    "./assets/images/animals/12.webp",
+    "./assets/images/animals/13.webp",
+    "./assets/images/animals/14.webp",
+    "./assets/images/animals/15.webp",
+    "./assets/images/animals/16.webp",
+    "./assets/images/animals/17.webp"
+  ],
+  "cars": [
+    "./assets/images/cars/0.webp",
+    "./assets/images/cars/1.webp",
+    "./assets/images/cars/2.webp",
+    "./assets/images/cars/3.webp",
+    "./assets/images/cars/4.webp",
+    "./assets/images/cars/5.webp",
+    "./assets/images/cars/6.webp",
+    "./assets/images/cars/7.webp",
+    "./assets/images/cars/8.webp",
+    "./assets/images/cars/9.webp",
+    "./assets/images/cars/10.webp",
+    "./assets/images/cars/11.webp",
+    "./assets/images/cars/12.webp",
+    "./assets/images/cars/13.webp",
+    "./assets/images/cars/14.webp",
+    "./assets/images/cars/15.webp",
+    "./assets/images/cars/16.webp",
+    "./assets/images/cars/17.webp"
   ]
 }

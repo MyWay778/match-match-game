@@ -1,15 +1,16 @@
 @use 'variables' as *;
 @use 'classes';
 
+
 .header {
-    @extend %flx-jcc;
-    height: 64px;
-    background-color: $primary-color;
+  @extend %flx-jcc;
+  height: 64px;
+  background-color: $primary-color;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24);
 
-}
-
-.container {
+  &__container {
     @extend %flx-aic;
     width: 100%;
     max-width: 1400px;
+  }
 }

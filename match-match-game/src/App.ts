@@ -1,44 +1,50 @@
-import Router, { IRoute } from "./lib/Router";
-import Controller from "./controllers/Controller";
-import Header from "./components/header/Header";
-import About from "./components/about/About";
-import Store from "./store/Store";
-import RenderManager from "./app/RenderManager";
+import Router, { IRoute } from './lib/router';
+import Controller from './app/controller';
+import Header from './components/header/header';
+import About from './components/about/about';
+import Store from './app/store';
+import RenderManager from './app/render-manager';
+import IComponents from './typing/interfaces/components';
 
-const routes:IRoute[] = [
-  {name: 'about', hash: '#about'},
-  {name: 'score', hash: '#score'},
-  {name: 'game', hash: '#game'},
 
-]
+const routes: IRoute[] = [
+  { name: 'about', hash: '#about' },
+  { name: 'score', hash: '#score' },
+  { name: 'game', hash: '#game' },
+  { name: 'settings', hash: '#settings' },
+];
 
 const redirect: IRoute = routes[0];
 
-export const renderPosition = {
-  header: 0,
-  main: 1,
-  aside: 2
-}
-
 class App {
-  controller:any
-  store: Store;
-  components: any
+  private controller: Controller | null = null;
+  private store: Store | null = null;
+  private components: IComponents;
+  private router: Router | null = null;
 
-  constructor(private root:HTMLElement) {
-
+  constructor(private readonly root: HTMLElement) {
     this.components = {
       header: new Header(root),
-      about: new About(root)
-    }
-     
-    this.store = new Store();
-    const renderManager = new RenderManager(root, this.components, [this.components.header]);
-    this.controller = new Controller(renderManager, this.store); 
+      about: new About(root),
+      registration: null,
+      game: null,
+      score: null,
+      settings: null,
+    };
+  }
 
-    renderManager.connect(this.controller.connector);
-    new Router(routes, this.controller.connector.router, redirect);
-    
+  init(): void {
+    this.store = new Store();
+    const renderManager = new RenderManager(this.root, this.components, [
+      this.components.header,
+    ]);
+    this.controller = new Controller(renderManager, this.store);
+
+    this.router = new Router(
+      routes,
+      this.controller.connector.router,
+      redirect
+    );
   }
 }
 

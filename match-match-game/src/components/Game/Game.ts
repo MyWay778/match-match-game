@@ -1,13 +1,14 @@
-import { IGameConnector, IGameResult } from './../../typing/interfaces';
-import Helper from "../common/Helper";
-import GameModal from "./game-modal/GameModal";
-import s from './game.scss';
-import Timer from "./timer/Timer";
-import ConnectorComponent from '../../shared/components/base-component/ConnectorComponent';
-import CardField from './card-field/CardField';
+import Helper from '../common/helper';
+import GameModal from './game-modal/game-modal';
+import './game.scss';
+import Timer from './timer/timer';
+import ConnectorComponent from '../../shared/components/base-component/connector-component';
+import CardField from './card-field/card-field';
+import IGame from '../../typing/interfaces/components/game';
+import IGameConnector from '../../typing/interfaces/connectors/game-connector';
+import IGameResult from '../../typing/interfaces/game-result';
 
-
-class Game extends ConnectorComponent {
+class Game extends ConnectorComponent<IGameConnector> implements IGame {
   container: HTMLElement;
   cardField: CardField | null;
   timer: Timer;
@@ -15,9 +16,9 @@ class Game extends ConnectorComponent {
   connector: null | IGameConnector = null;
 
   constructor(root: HTMLElement) {
-    super('main', s.game, root);
+    super('main', 'game', root);
 
-    this.container = Helper.createElement('div', s.container);
+    this.container = Helper.createElement('div', 'game__container');
     this.element.appendChild(this.container);
     this.cardField = null;
     this.timer = new Timer();
@@ -25,50 +26,56 @@ class Game extends ConnectorComponent {
     this.gameModal = null;
   }
 
-  connect = (connector: IGameConnector) => {
+  connect = (connector: IGameConnector): void => {
     this.connector = connector;
     this.connector.connect(this);
-  }
+  };
 
-  async initGame(config: any): Promise<void> {
-    console.log('init Game, config: ', config);
-    
-    const response = await (await fetch('./assets/images/card-images.json')).json();
-    this.cardField = new CardField(response.animal, this.stopGame);
+  async initGame(difficulty: string, categories: string): Promise<void> {
+    const response = await (
+      await fetch('./assets/images/card-images.json')
+    ).json();
+    const imagesCategory = response[categories];
+    this.cardField = new CardField(imagesCategory, difficulty, this.stopGame);
     this.container.appendChild(this.cardField.element);
 
     const preparing = () => {
       if (this.cardField) {
         this.cardField.flipAll();
-        this.timer.countdown(5, this.startGame);
+        let countdown = 5;
+        if (difficulty === '8') {
+          countdown = 10;
+        } else if (difficulty === '18') {
+          countdown = 30;
+        }
+        this.timer.countdown(countdown, this.startGame);
       }
-    }
-    window.setTimeout(preparing ,1000) // ???
+    };
+    window.setTimeout(preparing, 1000);
   }
 
-  startGame = () => {
+  startGame = (): void => {
     this.cardField?.flipAll(false);
     this.timer.start();
     this.cardField?.addClickListeners();
-  }
+  };
 
-  stopGame = (mistakeCounter: number) => {
+  stopGame = (mistakeCounter: number): void => {
     const result: IGameResult = {
       mistakes: 0,
-      time: 0
+      time: 0,
     };
 
     result.mistakes = mistakeCounter;
     result.time = this.timer.stop();
 
-    //Move to controller!!!!
     const removeModal = () => {
       if (this.gameModal) {
         this.gameModal.element.remove();
         this.gameModal = null;
         window.location.hash = 'score';
       }
-    }
+    };
 
     this.gameModal = new GameModal(result.time, result.mistakes, removeModal);
 
@@ -79,8 +86,7 @@ class Game extends ConnectorComponent {
     }
 
     this.connector?.gameEndHandler(result);
-  }
-
-} 
+  };
+}
 
 export default Game;

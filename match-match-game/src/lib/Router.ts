@@ -1,4 +1,5 @@
-import { ISubscriber } from "../typing/interfaces";
+import ISubscriber from "../typing/interfaces/connectors/subscriber";
+
 
 export interface IRoute {
   name: string,
@@ -8,7 +9,7 @@ export interface IRoute {
 class Router {
   private routes:IRoute[];
   private currentHash: string | null;
-  private subscriber:any;
+  private subscriber: ISubscriber;
   private readonly redirect: IRoute;
 
   constructor(routes:IRoute[], subscriber: ISubscriber, redirect: IRoute) {

@@ -6,15 +6,15 @@
   justify-content: center;
 }
 
-.container {
+.game__container {
   width: 100%;
   max-width: 1000px;
-  height: 802px;
+  min-height: 802px;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
-  row-gap: 60px;
+  row-gap: 20px;
   background-color: $container-color;
   padding: 27px;
 }

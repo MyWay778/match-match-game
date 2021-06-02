@@ -1,79 +1,96 @@
 import imageBack from '../../../assets/images/back-card-image.jpg';
-import Helper from '../../common/Helper';
-import s from './card.scss';
-
+import TCardSize from '../../../typing/types/card-size';
+import Helper from '../../common/helper';
+import './card.scss';
 
 class Card {
   element: HTMLElement;
-  handler: null | ((e: MouseEvent) => void);
+  private handler: null | (() => void) = null;
+  isDisabled = false;
 
-  constructor(frontImage: string, id?: number) {
-    this.element = Helper.createElement('figure', s.card);
+  constructor(frontImage: string, id?: number, size: TCardSize = 'large') {
+    this.element = Helper.createElement('figure', 'game-card');
     this.element.dataset.id = String(id);
-    this.handler = null;
+    if (size !== 'large') {
+      this.element.classList.add(`game-card_${size}`);
+    }
 
     this.element.innerHTML = `
-        <div class="${s.front}">
+        <div class="${'game-card__front'}">
             <img src=${frontImage}>
         </div>
-            <div class=${s.back}>
+            <div class=${'game-card__back'}>
             <img src=${imageBack}>
-        </div>`
+        </div>`;
   }
 
-  flip(isFlipped = true):Promise<void> {
-    if (isFlipped) {
-      this.element.classList.add(s.flipped);
-    } else {
-      this.element.classList.remove(s.flipped);
-    }
+  flipUp = (): Promise<void> => {
+    this.element.classList.add('game-card_flipped');
 
     return new Promise<void>((resolve) => {
-      this.element.addEventListener('transitionend', ()=>{
-        resolve();
-      }, {once: true});
-    }) 
-  }
+      this.element.addEventListener(
+        'transitionend',
+        () => {
+          resolve();
+        },
+        { once: true }
+      );
+    });
+  };
 
-  match(isMatch = true):Promise<void> {
+  flipDown = (): Promise<void> => {
+    this.element.classList.remove('game-card_flipped');
+
+    return new Promise<void>((resolve) => {
+      this.element.addEventListener(
+        'transitionend',
+        () => {
+          resolve();
+        },
+        { once: true }
+      );
+    });
+  };
+
+  match(isMatch = true): Promise<void> {
     if (isMatch) {
-      this.element.classList.add(s.match);
+      this.element.classList.add('game-card_match');
       this.disableOnclick();
     } else {
-      this.element.classList.remove(s.match);
+      this.element.classList.remove('game-card_match');
     }
 
     return new Promise<void>((resolve) => {
-      this.element.addEventListener('animationend', ()=>{
-        resolve();
-      }, {once: true});
-    }) 
+      this.element.addEventListener(
+        'animationend',
+        () => {
+          resolve();
+        },
+        { once: true }
+      );
+    });
   }
 
-
-  noMatch(isNoMatch: boolean = true): Promise<void> {
+  noMatch(isNoMatch = true): Promise<void> {
     if (isNoMatch) {
-      this.element.classList.add(s.noMatch);
+      this.element.classList.add('game-card_nomatch');
     } else {
-      this.element.classList.remove(s.noMatch);
+      this.element.classList.remove('game-card_nomatch');
     }
-    
 
-    return new Promise<void>((resolve)=> {
-      this.element.addEventListener('animationend', ()=> {
-        resolve()
-      })
-    })
+    return new Promise<void>((resolve) => {
+      this.element.addEventListener('animationend', () => {
+        resolve();
+      }, { once: true });
+    });
   }
 
-
-
-  set onclick(handler: (e: MouseEvent) => void ) {
+  set onclick(handler: () => void) {
     this.handler = handler;
     this.element.addEventListener('click', handler);
   }
 
-  disableOnclick() {
+  disableOnclick(): void {
     if (this.handler) {
       this.element.removeEventListener('click', this.handler);
     }
