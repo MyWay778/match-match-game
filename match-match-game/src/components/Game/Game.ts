@@ -7,6 +7,7 @@ import CardField from './card-field/card-field';
 import IGame from '../../typing/interfaces/components/game';
 import IGameConnector from '../../typing/interfaces/connectors/game-connector';
 import IGameResult from '../../typing/interfaces/game-result';
+import { difficulty as gameDifficulty } from '../../constants/difficulty';
 
 class Game extends ConnectorComponent<IGameConnector> implements IGame {
   container: HTMLElement;
@@ -43,9 +44,9 @@ class Game extends ConnectorComponent<IGameConnector> implements IGame {
       if (this.cardField) {
         this.cardField.flipAll();
         let countdown = 5;
-        if (difficulty === '8') {
+        if (difficulty === gameDifficulty['4x4']) {
           countdown = 10;
-        } else if (difficulty === '18') {
+        } else if (difficulty === gameDifficulty['6x6']) {
           countdown = 30;
         }
         this.timer.countdown(countdown, this.startGame);

@@ -1,3 +1,4 @@
+import { difficulty as gameDifficulty } from '../../../constants/difficulty';
 import TCardSize from '../../../typing/types/card-size';
 import Helper from '../../common/helper';
 import Card from '../card/card';
@@ -92,11 +93,11 @@ class CardField {
 
   private fillCards(): void {
     let size: TCardSize = 'large';
-    if (this.difficulty === 8) {
+    if (this.difficulty === Number(gameDifficulty['4x4'])) {
       size = 'medium';
       this.element.classList.add('card-field_medium-gap');
     }
-    if (this.difficulty === 18) {
+    if (this.difficulty === Number(gameDifficulty['6x6'])) {
       size = 'small';
       this.element.classList.add('card-field_small-gap');
     }

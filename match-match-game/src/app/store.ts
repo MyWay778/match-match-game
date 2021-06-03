@@ -1,3 +1,4 @@
+import { difficulty } from '../constants/difficulty';
 import IStore from '../typing/interfaces/app/store';
 import IGameResult from '../typing/interfaces/game-result';
 import ISettingsValue from '../typing/interfaces/settings-value';
@@ -33,7 +34,7 @@ class Store implements IStore {
       score: null,
       bestScores: [],
       gameSettings: {
-        difficulty: '6',
+        difficulty: difficulty['3x4'],
         categories: 'animals',
       },
     };
@@ -95,8 +96,8 @@ class Store implements IStore {
     return this.state.bestScores;
   }
 
-  setGameDifficulty = (difficulty: TDifficulty): void => {
-    this.state.gameSettings.difficulty = difficulty;
+  setGameDifficulty = (gameDifficulty: TDifficulty): void => {
+    this.state.gameSettings.difficulty = gameDifficulty;
   };
 
   setCardCategory = (category: TCategories): void => {
