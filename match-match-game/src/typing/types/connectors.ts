@@ -5,9 +5,9 @@ import IScoreConnector from '../interfaces/connectors/score-connector';
 import ISettingsConnector from '../interfaces/connectors/settings-connector';
 
 type TConnectors = IHeadConnector &
-IRegistrationConnector &
-IGameConnector &
-IScoreConnector &
-ISettingsConnector;
+  IRegistrationConnector &
+  IGameConnector &
+  IScoreConnector &
+  ISettingsConnector;
 
 export default TConnectors;

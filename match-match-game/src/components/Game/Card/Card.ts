@@ -5,7 +5,7 @@ import './card.scss';
 
 class Card {
   element: HTMLElement;
-  private handler: null | (() => void) = null;
+  private handler?: () => void;
   isDisabled = false;
 
   constructor(frontImage: string, id?: number, size: TCardSize = 'large') {
@@ -79,9 +79,13 @@ class Card {
     }
 
     return new Promise<void>((resolve) => {
-      this.element.addEventListener('animationend', () => {
-        resolve();
-      }, { once: true });
+      this.element.addEventListener(
+        'animationend',
+        () => {
+          resolve();
+        },
+        { once: true }
+      );
     });
   }
 

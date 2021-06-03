@@ -1,4 +1,4 @@
-import IUserDB from "../typing/interfaces/user-db";
+import IUserDB from '../typing/interfaces/user-db';
 
 class DBController {
   db: null | IDBDatabase = null;

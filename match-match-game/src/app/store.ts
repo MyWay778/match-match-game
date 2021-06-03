@@ -1,3 +1,4 @@
+import { difficulty } from '../constants/difficulty';
 import IStore from '../typing/interfaces/app/store';
 import IGameResult from '../typing/interfaces/game-result';
 import ISettingsValue from '../typing/interfaces/settings-value';
@@ -27,13 +28,9 @@ class Store implements IStore {
   private state: IState;
   constructor(state?: IState) {
     this.state = {
-      name: null,
-      email: null,
-      image: null,
-      score: null,
       bestScores: [],
       gameSettings: {
-        difficulty: '6',
+        difficulty: difficulty['3x4'],
         categories: 'animals',
       },
     };
@@ -74,7 +71,9 @@ class Store implements IStore {
     const scoreBestEntry: IUserDB = {
       name: this.state.name || 'noname',
       email: this.state.email || '',
-      image: this.state.image ? await convertToBinaryString(this.state.image) : '',
+      image: this.state.image
+        ? await convertToBinaryString(this.state.image)
+        : '',
       score: this.state.score || 0,
     };
     this.state.bestScores?.push(scoreBestEntry);
@@ -93,8 +92,8 @@ class Store implements IStore {
     return this.state.bestScores;
   }
 
-  setGameDifficulty = (difficulty: TDifficulty): void => {
-    this.state.gameSettings.difficulty = difficulty;
+  setGameDifficulty = (gameDifficulty: TDifficulty): void => {
+    this.state.gameSettings.difficulty = gameDifficulty;
   };
 
   setCardCategory = (category: TCategories): void => {

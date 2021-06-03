@@ -6,7 +6,6 @@ import ConnectorComponent from '../../../shared/components/base-component/connec
 import IUserPanelConnector from '../../../typing/interfaces/connectors/user-panel-connector';
 import IUserData from '../../../typing/interfaces/user-data';
 
-
 class UserPanel extends ConnectorComponent<IUserPanelConnector> {
   private registerButton: HTMLButtonElement;
   private isRegistered: boolean;

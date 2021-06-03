@@ -1,7 +1,6 @@
 @use 'variables' as *;
 @use 'classes';
 
-
 .header {
   @extend %flx-jcc;
   height: 64px;

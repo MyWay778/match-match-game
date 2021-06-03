@@ -1,4 +1,4 @@
-import IBaseComponent from "./components/base-component";
+import IBaseComponent from './components/base-component';
 
 interface IComponent {
   name: string;

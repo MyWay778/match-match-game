@@ -1,8 +1,8 @@
-import ISettingsValue from "../settings-value";
-import IBaseComponent from "./base-component";
+import ISettingsValue from '../settings-value';
+import IBaseComponent from './base-component';
 
 interface ISettings extends IBaseComponent {
-  setValues(settings: ISettingsValue): void 
+  setValues(settings: ISettingsValue): void;
 }
 
 export default ISettings;

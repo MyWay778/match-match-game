@@ -1,17 +1,17 @@
-import IAbout from "./components/about";
-import IGame from "./components/game";
-import IHeader from "./components/header";
-import IRegistration from "./components/registration";
-import IScore from "./components/score";
-import ISettings from "./components/settings";
+import IAbout from './components/about';
+import IGame from './components/game';
+import IHeader from './components/header';
+import IRegistration from './components/registration';
+import IScore from './components/score';
+import ISettings from './components/settings';
 
 interface IComponents {
-  header: null | IHeader;
-  about: null | IAbout;
-  registration: null | IRegistration;
-  game: null | IGame;
-  score: null | IScore;
-  settings: null | ISettings;
+  header: IHeader;
+  about: IAbout;
+  registration?: IRegistration;
+  game?: IGame;
+  score?: IScore;
+  settings?: ISettings;
 }
 
 export default IComponents;

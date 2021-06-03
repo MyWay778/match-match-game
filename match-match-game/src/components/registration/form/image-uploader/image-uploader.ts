@@ -27,12 +27,12 @@ class ImageUploader extends BaseComponent {
     this.onInput();
   }
 
-  getValue(): File | null {
+  getValue(): File | undefined {
     const value = this.input.files;
     if (value) {
       return value[0];
     }
-    return null;
+    return undefined;
   }
 
   private onInput(): void {

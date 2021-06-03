@@ -15,12 +15,18 @@ import TCategories from '../typing/types/categories';
 import TConnectors from '../typing/types/connectors';
 import TDifficulty from '../typing/types/difficulty';
 
+const navMenuLinks = {
+  about: 0,
+  score: 1,
+  settings: 2,
+};
+
 class Controller {
   connector: IConnectors;
-  header: IHeader | null = null;
-  game: IGame | null = null;
-  score: IScore | null = null;
-  settings: ISettings | null = null;
+  header?: IHeader;
+  game?: IGame;
+  score?: IScore;
+  settings?: ISettings;
 
   constructor(
     private readonly renderManager: IRenderManager,
@@ -88,7 +94,7 @@ class Controller {
     if (newRoute === 'about') {
       this.header?.setIsGame(false);
       this.renderManager.placeComponent('about', renderPosition.main);
-      this.header?.makeActiveLink(0);
+      this.header?.makeActiveLink(navMenuLinks.about);
     } else if (newRoute === 'game') {
       this.renderManager.createComponent('game');
       this.renderManager.connectComponent(
@@ -107,7 +113,7 @@ class Controller {
         this.connector.score as TConnectors
       );
       this.renderManager.placeComponent('score', renderPosition.main);
-      this.header?.makeActiveLink(1);
+      this.header?.makeActiveLink(navMenuLinks.score);
       this.store.getBestScore().then((result) => {
         this.score?.setData(result);
       });
@@ -121,7 +127,7 @@ class Controller {
       const settings = this.store.getSettings();
       this.settings?.setValues(settings);
       this.renderManager.placeComponent('settings', renderPosition.main);
-      this.header?.makeActiveLink(2);
+      this.header?.makeActiveLink(navMenuLinks.settings);
     }
   };
 

@@ -6,4 +6,4 @@ interface IUserDB {
   id?: number;
 }
 
-export default IUserDB
+export default IUserDB;

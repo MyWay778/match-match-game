@@ -11,44 +11,44 @@ const validationCreation =
     validate: (isValid: boolean) => void,
     isEmail = false
   ): ((value: string) => void) =>
-    (value: string): void => {
-      if (value === ' ') {
-        input.setValue('');
+  (value: string): void => {
+    if (value === ' ') {
+      input.setValue('');
+      validate(false);
+      return;
+    }
+
+    if (/^\d+$/g.test(value)) {
+      input.invalid('Not only numbers!');
+      validate(false);
+      return;
+    }
+
+    if (value.length < 3) {
+      input.invalid('Min 3 characters!');
+      validate(false);
+      return;
+    }
+
+    if (!isEmail) {
+      const incorrectChar = value.match(/[~!@#$%*()_—+=|:;"'`<>,.?/^]/g);
+      if (incorrectChar) {
+        input.invalid(`Incorrect character: ${incorrectChar.toString()}`);
         validate(false);
         return;
       }
-
-      if (/^\d+$/g.test(value)) {
-        input.invalid('Not only numbers!');
-        validate(false);
-        return;
-      }
-
-      if (value.length < 3) {
-        input.invalid('Min 3 characters!');
-        validate(false);
-        return;
-      }
-
-      if (!isEmail) {
-        const incorrectChar = value.match(/[~!@#$%*()_—+=|:;"'`<>,.?/^]/g);
-        if (incorrectChar) {
-          input.invalid(`Incorrect character: ${incorrectChar.toString()}`);
-          validate(false);
-          return;
-        }
-      }
-      if (
-        isEmail &&
+    }
+    if (
+      isEmail &&
       !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value)
-      ) {
-        input.invalid(`Incorrect email address!`);
-        validate(false);
-        return;
-      }
-      input.valid();
-      validate(true);
-    };
+    ) {
+      input.invalid(`Incorrect email address!`);
+      validate(false);
+      return;
+    }
+    input.valid();
+    validate(true);
+  };
 
 class Form implements IForm {
   element: HTMLFormElement;

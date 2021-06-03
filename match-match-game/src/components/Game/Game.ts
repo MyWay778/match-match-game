@@ -7,23 +7,22 @@ import CardField from './card-field/card-field';
 import IGame from '../../typing/interfaces/components/game';
 import IGameConnector from '../../typing/interfaces/connectors/game-connector';
 import IGameResult from '../../typing/interfaces/game-result';
+import { difficulty as gameDifficulty } from '../../constants/difficulty';
 
 class Game extends ConnectorComponent<IGameConnector> implements IGame {
   container: HTMLElement;
-  cardField: CardField | null;
+  cardField?: CardField;
   timer: Timer;
-  gameModal: null | GameModal;
-  connector: null | IGameConnector = null;
+  gameModal?: GameModal;
+  connector?: IGameConnector;
 
   constructor(root: HTMLElement) {
     super('main', 'game', root);
 
     this.container = Helper.createElement('div', 'game__container');
     this.element.appendChild(this.container);
-    this.cardField = null;
     this.timer = new Timer();
     this.container.appendChild(this.timer.element);
-    this.gameModal = null;
   }
 
   connect = (connector: IGameConnector): void => {
@@ -43,9 +42,9 @@ class Game extends ConnectorComponent<IGameConnector> implements IGame {
       if (this.cardField) {
         this.cardField.flipAll();
         let countdown = 5;
-        if (difficulty === '8') {
+        if (difficulty === gameDifficulty['4x4']) {
           countdown = 10;
-        } else if (difficulty === '18') {
+        } else if (difficulty === gameDifficulty['6x6']) {
           countdown = 30;
         }
         this.timer.countdown(countdown, this.startGame);
@@ -72,7 +71,7 @@ class Game extends ConnectorComponent<IGameConnector> implements IGame {
     const removeModal = () => {
       if (this.gameModal) {
         this.gameModal.element.remove();
-        this.gameModal = null;
+        this.gameModal = undefined;
         window.location.hash = 'score';
       }
     };

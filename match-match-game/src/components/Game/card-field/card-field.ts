@@ -1,3 +1,4 @@
+import { difficulty as gameDifficulty } from '../../../constants/difficulty';
 import TCardSize from '../../../typing/types/card-size';
 import Helper from '../../common/helper';
 import Card from '../card/card';
@@ -6,7 +7,7 @@ import './card-field.scss';
 class CardField {
   element: HTMLElement;
   cards: Card[];
-  currentCard: null | Card;
+  currentCard?: Card | null;
   mistakeCounter: number;
   matchedCardAmount: number;
   gameEndSubscriber: (counter: number) => void;
@@ -19,7 +20,6 @@ class CardField {
   ) {
     this.element = Helper.createElement('section', 'card-field');
     this.cards = [];
-    this.currentCard = null;
     this.mistakeCounter = 0;
     this.matchedCardAmount = 0;
     this.gameEndSubscriber = gameEndSubscriber;
@@ -92,17 +92,20 @@ class CardField {
 
   private fillCards(): void {
     let size: TCardSize = 'large';
-    if (this.difficulty === 8) {
+    if (this.difficulty === Number(gameDifficulty['4x4'])) {
       size = 'medium';
-      this.element.classList.add('card-field_medium-gap')
+      this.element.classList.add('card-field_medium-gap');
     }
-    if (this.difficulty === 18) {
+    if (this.difficulty === Number(gameDifficulty['6x6'])) {
       size = 'small';
-      this.element.classList.add('card-field_small-gap')
+      this.element.classList.add('card-field_small-gap');
     }
 
     for (let i = 0; i < this.difficulty; i++) {
-      this.cards.push(new Card(this.images[i], i, size), new Card(this.images[i], i, size));
+      this.cards.push(
+        new Card(this.images[i], i, size),
+        new Card(this.images[i], i, size)
+      );
     }
   }
 

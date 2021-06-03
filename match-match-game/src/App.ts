@@ -6,7 +6,6 @@ import Store from './app/store';
 import RenderManager from './app/render-manager';
 import IComponents from './typing/interfaces/components';
 
-
 const routes: IRoute[] = [
   { name: 'about', hash: '#about' },
   { name: 'score', hash: '#score' },
@@ -17,19 +16,15 @@ const routes: IRoute[] = [
 const redirect: IRoute = routes[0];
 
 class App {
-  private controller: Controller | null = null;
-  private store: Store | null = null;
+  private controller?: Controller;
+  private store?: Store;
   private components: IComponents;
-  private router: Router | null = null;
+  private router?: Router;
 
   constructor(private readonly root: HTMLElement) {
     this.components = {
       header: new Header(root),
       about: new About(root),
-      registration: null,
-      game: null,
-      score: null,
-      settings: null,
     };
   }
 

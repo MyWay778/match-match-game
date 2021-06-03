@@ -1,4 +1,4 @@
-import IHeadConnector from "./header-connector";
+import IHeadConnector from './header-connector';
 
 type IUserPanelConnector = IHeadConnector;
 

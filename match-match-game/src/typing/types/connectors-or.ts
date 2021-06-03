@@ -11,4 +11,4 @@ type TConnectorsOr =
   | IScoreConnector
   | ISettingsConnector;
 
-export default TConnectorsOr
+export default TConnectorsOr;
