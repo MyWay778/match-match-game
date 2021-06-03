@@ -1,5 +1,5 @@
-import TCategories from "./categories";
-import TDifficulty from "./difficulty";
+import TCategories from './categories';
+import TDifficulty from './difficulty';
 
 type TSettings = TDifficulty | TCategories;
 

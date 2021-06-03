@@ -6,7 +6,10 @@ import ISettings from '../../typing/interfaces/components/settings';
 import ISettingsConnector from '../../typing/interfaces/connectors/settings-connector';
 import ISettingsValue from '../../typing/interfaces/settings-value';
 
-class Settings extends ConnectorComponent<ISettingsConnector> implements ISettings{
+class Settings
+  extends ConnectorComponent<ISettingsConnector>
+  implements ISettings
+{
   connector: null | ISettingsConnector = null;
   private readonly gameCardsSetting: SelectSetting;
   private readonly gameDifficultySetting: SelectSetting;
@@ -31,7 +34,10 @@ class Settings extends ConnectorComponent<ISettingsConnector> implements ISettin
     this.gameDifficultySetting.addItem('4X4', '8');
     this.gameDifficultySetting.addItem('6X6', '18');
 
-    container.append(this.gameCardsSetting.element, this.gameDifficultySetting.element);
+    container.append(
+      this.gameCardsSetting.element,
+      this.gameDifficultySetting.element
+    );
     this.element.append(container);
   }
 
@@ -46,7 +52,7 @@ class Settings extends ConnectorComponent<ISettingsConnector> implements ISettin
   setValues = (settings: ISettingsValue): void => {
     this.gameCardsSetting.select(settings.categories);
     this.gameDifficultySetting.select(settings.difficulty);
-  }
+  };
 }
 
 export default Settings;

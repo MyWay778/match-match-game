@@ -1,3 +1,3 @@
-type TCardSize = 'small'| 'medium' | 'large';
+type TCardSize = 'small' | 'medium' | 'large';
 
 export default TCardSize;

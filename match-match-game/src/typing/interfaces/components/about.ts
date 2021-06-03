@@ -1,7 +1,6 @@
-import IBaseComponent from "./base-component";
+import IBaseComponent from './base-component';
 
-
-interface IAbout extends IBaseComponent { 
+interface IAbout extends IBaseComponent {
   card: HTMLElement | null;
 }
 

@@ -1,4 +1,4 @@
-import ISettingsConnector from "../interfaces/connectors/settings-connector";
+import ISettingsConnector from '../interfaces/connectors/settings-connector';
 
 type TSettingsConnector = ISettingsConnector;
 

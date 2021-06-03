@@ -1,26 +1,33 @@
-import Helper from "../../common/helper";
+import Helper from '../../common/helper';
 import './timer.scss';
 
 class Timer {
-  element:HTMLElement
-  private secondsElement:HTMLElement
-  private minutesElement:HTMLElement
-  private seconds:number
-  private minutes:number
+  element: HTMLElement;
+  private secondsElement: HTMLElement;
+  private minutesElement: HTMLElement;
+  private seconds: number;
+  private minutes: number;
 
-  private interval:number
-  private callback: null | ( () => void )
+  private interval: number;
+  private callback: null | (() => void);
 
   constructor() {
-    this.element = Helper.createElement('section', "timer");
+    this.element = Helper.createElement('section', 'timer');
     this.interval = 0;
     this.callback = null;
     this.minutes = 0;
     this.seconds = 0;
 
-    this.minutesElement = Helper.createTextElement('span', "timer__number", '00');
-    this.secondsElement = Helper.createTextElement('span', "timer__number", '00');
-  
+    this.minutesElement = Helper.createTextElement(
+      'span',
+      'timer__number',
+      '00'
+    );
+    this.secondsElement = Helper.createTextElement(
+      'span',
+      'timer__number',
+      '00'
+    );
 
     const colon = document.createTextNode(':');
     this.element.append(this.minutesElement, colon, this.secondsElement);
@@ -32,12 +39,12 @@ class Timer {
     this.interval = window.setInterval(this.tick, 1000);
   }
 
-  stop():number {
+  stop(): number {
     clearInterval(this.interval);
-    return (this.minutes * 60) + this.seconds;
+    return this.minutes * 60 + this.seconds;
   }
- 
-  countdown(seconds = 30, callback?: ()=> void): void {
+
+  countdown(seconds = 30, callback?: () => void): void {
     this.seconds = seconds;
 
     if (callback) {
@@ -57,11 +64,11 @@ class Timer {
   private reverseTick = () => {
     if (this.seconds === 0) {
       this.stopInterval();
-    }else {
+    } else {
       this.seconds -= 1;
     }
     this.passValue();
-  }
+  };
 
   private tick(): void {
     this.seconds += 1;
@@ -73,8 +80,10 @@ class Timer {
   }
 
   private passValue(): void {
-    this.secondsElement.innerText = this.seconds < 10 ? `0${this.seconds}`: `${this.seconds}`;
-    this.minutesElement.innerText = this.minutes < 10 ? `0${this.minutes}`: `${this.minutes}`;
+    this.secondsElement.innerText =
+      this.seconds < 10 ? `0${this.seconds}` : `${this.seconds}`;
+    this.minutesElement.innerText =
+      this.minutes < 10 ? `0${this.minutes}` : `${this.minutes}`;
   }
 }
 

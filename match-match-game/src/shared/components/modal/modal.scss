@@ -1,4 +1,4 @@
-@use"../../../styles/variables" as *;
+@use "../../../styles/variables" as *;
 
 .modal-component {
   position: fixed;
@@ -26,5 +26,6 @@
   padding: 20px 16px 7px;
   background-color: $white-color;
   border-radius: 5px;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12),
+    0px 2px 4px rgba(0, 0, 0, 0.14);
 }

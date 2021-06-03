@@ -1,9 +1,9 @@
-import TCategories from "../../types/categories";
-import TDifficulty from "../../types/difficulty";
-import IGameResult from "../game-result";
-import ISettingsValue from "../settings-value";
-import IUser from "../user";
-import IUserDB from "../user-db";
+import TCategories from '../../types/categories';
+import TDifficulty from '../../types/difficulty';
+import IGameResult from '../game-result';
+import ISettingsValue from '../settings-value';
+import IUser from '../user';
+import IUserDB from '../user-db';
 
 interface IStore {
   saveUser(user: IUser): void;

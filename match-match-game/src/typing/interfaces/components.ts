@@ -1,9 +1,9 @@
-import IAbout from "./components/about";
-import IGame from "./components/game";
-import IHeader from "./components/header";
-import IRegistration from "./components/registration";
-import IScore from "./components/score";
-import ISettings from "./components/settings";
+import IAbout from './components/about';
+import IGame from './components/game';
+import IHeader from './components/header';
+import IRegistration from './components/registration';
+import IScore from './components/score';
+import ISettings from './components/settings';
 
 interface IComponents {
   header: null | IHeader;

@@ -1,13 +1,17 @@
-import IBaseComponent from "../../../typing/interfaces/components/base-component";
+import IBaseComponent from '../../../typing/interfaces/components/base-component';
 
 class BaseComponent implements IBaseComponent {
   element: HTMLElement;
   private parent: HTMLElement | null;
 
-  constructor(tagName: keyof HTMLElementTagNameMap, className: string, parent?: HTMLElement) {
+  constructor(
+    tagName: keyof HTMLElementTagNameMap,
+    className: string,
+    parent?: HTMLElement
+  ) {
     this.element = document.createElement(tagName);
     this.element.classList.add(className);
-    this.parent =  parent || null;
+    this.parent = parent || null;
   }
 
   setParent(parent: HTMLElement): void {
@@ -15,7 +19,7 @@ class BaseComponent implements IBaseComponent {
       this.parent = parent;
     }
   }
-  
+
   checkParent(): boolean {
     return !!this.parent;
   }

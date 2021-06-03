@@ -94,15 +94,18 @@ class CardField {
     let size: TCardSize = 'large';
     if (this.difficulty === 8) {
       size = 'medium';
-      this.element.classList.add('card-field_medium-gap')
+      this.element.classList.add('card-field_medium-gap');
     }
     if (this.difficulty === 18) {
       size = 'small';
-      this.element.classList.add('card-field_small-gap')
+      this.element.classList.add('card-field_small-gap');
     }
 
     for (let i = 0; i < this.difficulty; i++) {
-      this.cards.push(new Card(this.images[i], i, size), new Card(this.images[i], i, size));
+      this.cards.push(
+        new Card(this.images[i], i, size),
+        new Card(this.images[i], i, size)
+      );
     }
   }
 

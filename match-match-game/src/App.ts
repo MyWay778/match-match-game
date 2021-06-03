@@ -6,7 +6,6 @@ import Store from './app/store';
 import RenderManager from './app/render-manager';
 import IComponents from './typing/interfaces/components';
 
-
 const routes: IRoute[] = [
   { name: 'about', hash: '#about' },
   { name: 'score', hash: '#score' },

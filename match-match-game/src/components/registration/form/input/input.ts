@@ -78,7 +78,8 @@ class Input {
     this.input.value = value;
   };
 
-  checkValid = (): boolean => this.validMarker.classList.contains('register-input__valid-marker_valid');
+  checkValid = (): boolean =>
+    this.validMarker.classList.contains('register-input__valid-marker_valid');
 }
 
 export default Input;

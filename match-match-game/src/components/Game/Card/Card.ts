@@ -79,9 +79,13 @@ class Card {
     }
 
     return new Promise<void>((resolve) => {
-      this.element.addEventListener('animationend', () => {
-        resolve();
-      }, { once: true });
+      this.element.addEventListener(
+        'animationend',
+        () => {
+          resolve();
+        },
+        { once: true }
+      );
     });
   }
 

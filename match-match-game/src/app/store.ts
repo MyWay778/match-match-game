@@ -74,7 +74,9 @@ class Store implements IStore {
     const scoreBestEntry: IUserDB = {
       name: this.state.name || 'noname',
       email: this.state.email || '',
-      image: this.state.image ? await convertToBinaryString(this.state.image) : '',
+      image: this.state.image
+        ? await convertToBinaryString(this.state.image)
+        : '',
       score: this.state.score || 0,
     };
     this.state.bestScores?.push(scoreBestEntry);

@@ -1,42 +1,42 @@
 @use './variables' as *;
 
 %flx {
-    display: flex;
+  display: flex;
 }
 
 %flx-fdc {
-    @extend %flx;
-    flex-direction: column;
+  @extend %flx;
+  flex-direction: column;
 }
 
 %flx-fdc-jcc {
-    @extend %flx-fdc;
-    justify-content: center;
+  @extend %flx-fdc;
+  justify-content: center;
 }
 
 %flx-fdc-jcc-aic {
-    @extend %flx-fdc-jcc;
-    align-items: center;
+  @extend %flx-fdc-jcc;
+  align-items: center;
 }
 
 %flx-jcc {
-    @extend %flx;
-    justify-content: center;
+  @extend %flx;
+  justify-content: center;
 }
 %flx-jcsb {
-    @extend %flx;
-    justify-content: space-between;
+  @extend %flx;
+  justify-content: space-between;
 }
 
 %flx-aic {
-    @extend %flx;
-    align-items: center; 
+  @extend %flx;
+  align-items: center;
 }
 
 %h2 {
-    font-size: 20px;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 0.87);
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 %input {
@@ -48,7 +48,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.6);
   border-radius: 5px 5px 0 0;
   padding: 22px 50px 10px 52px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 0.15px;

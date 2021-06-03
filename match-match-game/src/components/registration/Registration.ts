@@ -5,7 +5,10 @@ import Helper from '../common/helper';
 import Form from './form/form';
 import './registration.scss';
 
-class Registration extends ConnectorComponent<IRegistrationConnector> implements IRegistration {
+class Registration
+  extends ConnectorComponent<IRegistrationConnector>
+  implements IRegistration
+{
   private readonly background: HTMLElement;
   form: Form;
 

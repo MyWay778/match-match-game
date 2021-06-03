@@ -1,19 +1,18 @@
-import ISubscriber from "../typing/interfaces/connectors/subscriber";
-
+import ISubscriber from '../typing/interfaces/connectors/subscriber';
 
 export interface IRoute {
-  name: string,
-  hash: string
+  name: string;
+  hash: string;
 }
 
 class Router {
-  private routes:IRoute[];
+  private routes: IRoute[];
   private currentHash: string | null;
   private subscriber: ISubscriber;
   private readonly redirect: IRoute;
 
-  constructor(routes:IRoute[], subscriber: ISubscriber, redirect: IRoute) {
-    this.routes = routes; 
+  constructor(routes: IRoute[], subscriber: ISubscriber, redirect: IRoute) {
+    this.routes = routes;
     this.currentHash = null;
     this.subscriber = subscriber;
     this.redirect = redirect;
@@ -24,10 +23,10 @@ class Router {
     window.addEventListener('DOMContentLoaded', this.hashChange);
   }
 
-  hashChange():void {
+  hashChange(): void {
     const { hash } = window.location;
     if (hash !== this.currentHash) {
-      const newRoute = this.routes.find(route => route.hash.match(hash));
+      const newRoute = this.routes.find((route) => route.hash.match(hash));
       if (newRoute) {
         this.subscriber.update(newRoute.name);
         this.currentHash = newRoute.hash;

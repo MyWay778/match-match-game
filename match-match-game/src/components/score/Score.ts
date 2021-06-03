@@ -45,7 +45,7 @@ class Score extends ConnectorComponent<IScoreConnector> implements IScore {
       );
       return;
     }
-    
+
     data.forEach((userData: IScoreData) => {
       const item = new ScoreItem(
         userData.name,

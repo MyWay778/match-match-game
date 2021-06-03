@@ -1,5 +1,5 @@
-import ISettingsValue from "./settings-value";
-import IUserDB from "./user-db";
+import ISettingsValue from './settings-value';
+import IUserDB from './user-db';
 
 interface IState {
   name: null | string;
@@ -7,7 +7,7 @@ interface IState {
   image: null | File;
   score: null | number;
   bestScores: IUserDB[];
-  gameSettings: ISettingsValue
+  gameSettings: ISettingsValue;
 }
 
 export default IState;
