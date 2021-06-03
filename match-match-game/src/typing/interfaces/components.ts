@@ -6,12 +6,12 @@ import IScore from './components/score';
 import ISettings from './components/settings';
 
 interface IComponents {
-  header: null | IHeader;
-  about: null | IAbout;
-  registration: null | IRegistration;
-  game: null | IGame;
-  score: null | IScore;
-  settings: null | ISettings;
+  header: IHeader;
+  about: IAbout;
+  registration?: IRegistration;
+  game?: IGame;
+  score?: IScore;
+  settings?: ISettings;
 }
 
 export default IComponents;

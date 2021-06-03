@@ -11,20 +11,18 @@ import { difficulty as gameDifficulty } from '../../constants/difficulty';
 
 class Game extends ConnectorComponent<IGameConnector> implements IGame {
   container: HTMLElement;
-  cardField: CardField | null;
+  cardField?: CardField;
   timer: Timer;
-  gameModal: null | GameModal;
-  connector: null | IGameConnector = null;
+  gameModal?: GameModal;
+  connector?: IGameConnector;
 
   constructor(root: HTMLElement) {
     super('main', 'game', root);
 
     this.container = Helper.createElement('div', 'game__container');
     this.element.appendChild(this.container);
-    this.cardField = null;
     this.timer = new Timer();
     this.container.appendChild(this.timer.element);
-    this.gameModal = null;
   }
 
   connect = (connector: IGameConnector): void => {
@@ -73,7 +71,7 @@ class Game extends ConnectorComponent<IGameConnector> implements IGame {
     const removeModal = () => {
       if (this.gameModal) {
         this.gameModal.element.remove();
-        this.gameModal = null;
+        this.gameModal = undefined;
         window.location.hash = 'score';
       }
     };

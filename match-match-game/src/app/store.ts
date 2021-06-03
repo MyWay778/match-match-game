@@ -28,10 +28,6 @@ class Store implements IStore {
   private state: IState;
   constructor(state?: IState) {
     this.state = {
-      name: null,
-      email: null,
-      image: null,
-      score: null,
       bestScores: [],
       gameSettings: {
         difficulty: difficulty['3x4'],

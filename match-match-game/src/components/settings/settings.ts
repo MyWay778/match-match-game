@@ -10,10 +10,10 @@ class Settings
   extends ConnectorComponent<ISettingsConnector>
   implements ISettings
 {
-  connector: null | ISettingsConnector = null;
+  connector?: ISettingsConnector;
   private readonly gameCardsSetting: SelectSetting;
   private readonly gameDifficultySetting: SelectSetting;
-  private settings: ISettings | null = null;
+  private settings?: ISettings;
 
   constructor(root: HTMLElement) {
     super('main', 'game-settings', root);

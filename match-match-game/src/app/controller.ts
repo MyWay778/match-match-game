@@ -23,10 +23,10 @@ const navMenuLinks = {
 
 class Controller {
   connector: IConnectors;
-  header: IHeader | null = null;
-  game: IGame | null = null;
-  score: IScore | null = null;
-  settings: ISettings | null = null;
+  header?: IHeader;
+  game?: IGame;
+  score?: IScore;
+  settings?: ISettings;
 
   constructor(
     private readonly renderManager: IRenderManager,

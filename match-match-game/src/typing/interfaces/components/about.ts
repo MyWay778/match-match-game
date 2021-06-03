@@ -1,7 +1,7 @@
 import IBaseComponent from './base-component';
 
 interface IAbout extends IBaseComponent {
-  card: HTMLElement | null;
+  card?: HTMLElement;
 }
 
 export default IAbout;

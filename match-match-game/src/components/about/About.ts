@@ -16,12 +16,10 @@ function createCard(itemNumber: string, cardText: string) {
 }
 
 class About extends BaseComponent implements IAbout {
-  card: HTMLElement | null;
+  card?: HTMLElement;
 
   constructor(root: HTMLElement) {
     super('main', 'about', root);
-
-    this.card = null;
     const container = Helper.createElement('div', 'about__container');
     const title = Helper.createTextElement('h2', '', 'How to play?');
 

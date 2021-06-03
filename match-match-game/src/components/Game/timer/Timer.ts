@@ -9,12 +9,11 @@ class Timer {
   private minutes: number;
 
   private interval: number;
-  private callback: null | (() => void);
+  private callback?: () => void;
 
   constructor() {
     this.element = Helper.createElement('section', 'timer');
     this.interval = 0;
-    this.callback = null;
     this.minutes = 0;
     this.seconds = 0;
 

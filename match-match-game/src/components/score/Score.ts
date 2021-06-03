@@ -10,7 +10,7 @@ import './score.scss';
 
 class Score extends ConnectorComponent<IScoreConnector> implements IScore {
   private readonly playerList: HTMLElement;
-  connector: null | IScoreConnector = null;
+  connector?: IScoreConnector;
   private readonly placeholder: HTMLElement;
 
   constructor(parent: HTMLElement) {

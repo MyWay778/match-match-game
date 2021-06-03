@@ -19,7 +19,7 @@ class RenderManager implements IRenderManager {
   constructor(
     private readonly root: HTMLElement,
     private readonly components: IComponents,
-    private readonly renderList: Array<IBaseComponent | null>
+    private readonly renderList: Array<IBaseComponent | undefined>
   ) {
     this.factory = new ComponentFactory();
     this.renderList.forEach((component) => {

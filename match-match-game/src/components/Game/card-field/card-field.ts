@@ -7,7 +7,7 @@ import './card-field.scss';
 class CardField {
   element: HTMLElement;
   cards: Card[];
-  currentCard: null | Card;
+  currentCard?: Card | null;
   mistakeCounter: number;
   matchedCardAmount: number;
   gameEndSubscriber: (counter: number) => void;
@@ -20,7 +20,6 @@ class CardField {
   ) {
     this.element = Helper.createElement('section', 'card-field');
     this.cards = [];
-    this.currentCard = null;
     this.mistakeCounter = 0;
     this.matchedCardAmount = 0;
     this.gameEndSubscriber = gameEndSubscriber;
